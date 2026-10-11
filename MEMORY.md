@@ -38,3 +38,4 @@ Decisions that constrain new code, corrections received, gotchas. Rewritten as s
 - `logs/` and every committed file are deployed by Netlify — the repo root is the publish directory.
 - `songs.md` carries an uncommitted edit from before 2026-09-16; not mine to commit.
 - `CLAUDE.md` is a symlink to `AGENTS.md`; edit `AGENTS.md`.
+- GitHub repo is `moralec/Personal-Guitar` since 2026-10-11 (was `guitar-practice`; GitHub redirects). Netlify site `guitarp` still lists the old repo URL in its build settings but deploys from pushes regardless. `README.md` follows the estate template; keep it under ~150 lines.
