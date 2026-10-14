@@ -4,9 +4,15 @@ Single-file HTML guitar practice tool for one user (Carlos). Open `index.html` d
 
 Member of the Memory Palace: `.palace` declares `local-tool` / `personal`. Open a session with `memory brief`; law lives in the Palace's `CANON.md`, not here. Decisions and gotchas are in `MEMORY.md`, pending work in `BACKLOG.md`, session history in `logs/`.
 
+## Library (home screen)
+
+The app opens on the library (`#/`): a **Today** card resuming the learning song furthest into today's session, a practice streak with 14-day calendar and repertoire goal, a **Repertoire** board (Up next → Learning, max 2 → Can play end to end, with a "due a run-through" nudge after 14 days), and the full song **Library**: search, status / level / style filters, and the three tracks as **Paths**. Every song in `TRACKS` and `CANDIDATES` is in it. A song opens at `#/song/<slug-of-title>`.
+
+Progress lives in one localStorage key, `guitarProgress`, behind the `Progress` object in `index.html`: board state per song, steps marked done today, last run-through, practice days, goal. It is per browser and does not sync between devices.
+
 ## Session structure
 
-Three tracks (Beginner, Intermediate, Advanced) × 10 weeks. Each built week has 5 steps:
+Three tracks (Beginner, Intermediate, Advanced) × 10 weeks, plus `CANDIDATES` (in the library but not in a track; they open as "Coming soon"). Each built week has 5 steps, each with a **Mark done** toggle that feeds the streak:
 
 1. **Warmup** — YouTube thumbnail, click-to-embed
 2. **Full Song Lesson** — YouTube embed + tab/chord links (Marty Music preferred)
@@ -18,7 +24,7 @@ Header toggle **Guitar / Guitarlele** transposes steps 4 and 5 a 4th down (see `
 
 ## Adding or building a week
 
-Edit the session object under `TRACKS.<track>.sessions[<week>]` in `index.html`. A stub has `coming: true`; a built week has:
+Edit the session object under `TRACKS.<track>.sessions[<week>]` in `index.html`. A stub has `coming: true`; a built week has (every session also carries `tags: [...]` from songs.md, used by the library filters):
 
 ```javascript
 1: {
@@ -37,7 +43,7 @@ Edit the session object under `TRACKS.<track>.sessions[<week>]` in `index.html`.
 
 - Every chord name in `bars` needs an entry in `CHORD_SHAPES`, **and** its counterpart a 4th down (Cadd9 → Gadd9), or the guitarlele diagram is silently missing.
 - `parse-chords.js` turns an Ultimate Guitar chord chart + keymap JSON into the `bars` arrays: `node parse-chords.js song.txt keymap.json`.
-- `songs.md` is the candidate list with difficulty ratings that feeds track/week placement.
+- `songs.md` is the candidate list with difficulty ratings that feeds track/week placement. Pool songs not in a track are the `CANDIDATES` array; moving one into `TRACKS` schedules it. Don't rename a song's title once it's in use: its slug is the key for its progress.
 
 ## Files
 

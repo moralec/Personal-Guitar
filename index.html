@@ -9,25 +9,20 @@
   body {
     background: #0f0f0f; color: #e0e0e0;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    padding: 40px 20px 80px; max-width: 720px; margin: 0 auto;
+    padding: 0 20px 80px;
   }
-
-  /* Track selector */
-  .track-selector {
-    display: flex; gap: 4px; margin-bottom: 16px;
-    background: #141414; border: 1px solid #1e1e1e;
-    border-radius: 10px; padding: 4px;
-  }
-  .track-btn {
-    flex: 1; background: transparent; border: none; border-radius: 7px;
-    color: #555; font-size: 13px; font-weight: 600; padding: 10px;
-    cursor: pointer; transition: all 0.15s;
-  }
-  .track-btn:hover { color: #aaa; }
-  .track-btn.active { background: #f5a623; color: #000; }
+  .view { max-width: 720px; margin: 0 auto; }
+  #libraryView { max-width: 1100px; }
 
   /* Instrument toggle */
-  .instrument-row { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .topbar { display: flex; align-items: center; gap: 8px; padding: 22px 0 26px; flex-wrap: wrap; }
+  .topbar .grow { flex: 1; }
+  .back-link { color: #888; text-decoration: none; font-size: 13px; font-weight: 600; }
+  .back-link:hover { color: #f5a623; }
+  .brand { font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: #f5a623; font-weight: 600; }
+  .trainer-link { background: #141414; border: 1px solid #2a2a2a; border-radius: 8px; color: #777; font-size: 12px; font-weight: 600; padding: 7px 12px; text-decoration: none; margin-right: 8px; }
+  .trainer-link:hover { border-color: #555; color: #bbb; }
+  .instrument-row { display: flex; align-items: center; gap: 8px; }
   .instrument-row .instrument-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #444; }
   .instrument-toggle { display: inline-flex; gap: 2px; background: #141414; border: 1px solid #1e1e1e; border-radius: 8px; padding: 3px; }
   .instrument-btn {
@@ -38,20 +33,6 @@
   .instrument-btn:hover { color: #aaa; }
   .instrument-btn.active { background: #2a2a2a; color: #f5a623; }
   .shapes-note { color: #f5a623; }
-
-  /* Week selector */
-  .week-selector {
-    display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap;
-  }
-  .week-btn {
-    background: #141414; border: 1px solid #2a2a2a; border-radius: 8px;
-    color: #555; font-size: 13px; font-weight: 600; padding: 8px 18px;
-    cursor: pointer; transition: all 0.15s;
-  }
-  .week-btn:hover { border-color: #555; color: #aaa; }
-  .week-btn.active { background: #f5a623; border-color: #f5a623; color: #000; }
-  .week-btn.coming { opacity: 0.35; }
-  .week-btn.coming:hover { opacity: 0.55; border-color: #444; color: #888; }
 
   /* Header */
   header { margin-bottom: 48px; }
@@ -66,6 +47,16 @@
   .song-meta span strong { color: #f5a623; }
   .diff-dots { letter-spacing: 1px; color: #f5a623; font-size: 11px; }
   .diff-dots .off { color: #333; }
+
+  .rep-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 14px; font-size: 12px; color: #666; }
+  .step-label { display: flex; align-items: center; gap: 10px; }
+  .step-done {
+    margin-left: auto; background: transparent; border: 1px solid #2a2a2a; border-radius: 12px;
+    color: #555; font-size: 11px; font-weight: 600; padding: 3px 10px; cursor: pointer; letter-spacing: 0; text-transform: none;
+  }
+  .step-done:hover { border-color: #4caf7a; color: #4caf7a; }
+  .step-done.on { background: #4caf7a; border-color: #4caf7a; color: #04150b; }
+  .step.is-done .step-num { border-color: #4caf7a; color: #4caf7a; }
 
   /* Coming soon */
   #comingSoon {
@@ -260,21 +251,200 @@
   .bar-repeat-wrap { display: flex; align-items: flex-start; gap: 10px; }
   .bar-repeat-wrap .chord-bar-grid { flex: 1; }
   .bar-repeat { font-size: 13px; font-weight: 700; color: #444; align-self: center; white-space: nowrap; }
+
+  /* ── Library ── */
+  .lib-h1 { font-size: 32px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+  .lib-sub { margin-top: 4px; font-size: 15px; color: #666; margin-bottom: 28px; }
+  .lib-section { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 0 0 14px; }
+  .lib-section h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #888; font-weight: 600; }
+  .lib-note { font-size: 12px; color: #555; line-height: 1.6; }
+  .lib-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: #f5a623; color: #000; border: 1px solid #f5a623; border-radius: 8px;
+    font-size: 13px; font-weight: 700; padding: 10px 18px; cursor: pointer; text-decoration: none; white-space: nowrap;
+  }
+  .lib-btn:hover { filter: brightness(1.08); }
+  .lib-btn.ghost { background: transparent; color: #aaa; border-color: #333; }
+  .lib-btn.ghost:hover { border-color: #f5a623; color: #f5a623; }
+  .lib-btn.sm { font-size: 12px; padding: 6px 12px; }
+  .lib-btn:disabled { opacity: .35; cursor: default; filter: none; }
+  .mini { background: #1d1d1d; border: 1px solid #2c2c2c; color: #999; border-radius: 6px; font-size: 11px; padding: 4px 8px; cursor: pointer; white-space: nowrap; }
+  .mini:hover { border-color: #f5a623; color: #f5a623; }
+  .mini:disabled { opacity: .3; cursor: default; border-color: #2c2c2c; color: #999; }
+
+  .thumb { position: relative; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; background: #111; }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumb .art { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 10px 12px; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; color: rgba(255,255,255,.85); line-height: 1; }
+
+  .tag-status { display: inline-flex; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; padding: 3px 7px; white-space: nowrap; }
+  .tag-status.ready { background: rgba(76,175,122,.15); color: #4caf7a; }
+  .tag-status.queued { background: rgba(245,166,35,.12); color: #f5a623; }
+  .tag-status.candidate { background: #1e1e1e; color: #777; }
+  .tag-rep { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; padding: 3px 7px; white-space: nowrap; }
+  .tag-rep.playable { background: #4caf7a; color: #04150b; }
+  .tag-rep.learning { background: #5b9bd5; color: #06121f; }
+  .tag-rep.next { background: #2a2a2a; color: #ccc; }
+
+  /* Today + practice */
+  .today { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; margin-bottom: 36px; }
+  .hero { border-radius: 14px; overflow: hidden; border: 1px solid #222; background: #141414; display: grid; grid-template-columns: 220px 1fr; }
+  .hero .thumb { border-radius: 0; height: 100%; aspect-ratio: auto; min-height: 140px; }
+  .hero .body { padding: 20px 22px; display: flex; flex-direction: column; }
+  .hero h2 { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -.4px; margin-top: 4px; }
+  .hero .artist { font-size: 13px; color: #666; margin-top: 2px; }
+  .hero .actions { margin-top: auto; padding-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .hero.empty-hero { grid-template-columns: 1fr; }
+  .stepper { display: flex; gap: 4px; margin: 18px 0 6px; }
+  .stepper i { flex: 1; height: 5px; border-radius: 3px; background: #262626; }
+  .stepper i.done { background: #f5a623; }
+  .step-now { font-size: 12px; color: #888; }
+  .step-now strong { color: #fff; }
+  .habit { background: #141414; border: 1px solid #222; border-radius: 14px; padding: 18px 20px; }
+  .habit h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #888; font-weight: 600; }
+  .streak { font-size: 34px; font-weight: 800; color: #fff; margin-top: 10px; letter-spacing: -1px; }
+  .streak small { font-size: 13px; font-weight: 400; color: #666; letter-spacing: 0; margin-left: 6px; }
+  .cal { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; margin: 14px 0 6px; }
+  .cal i { aspect-ratio: 1; border-radius: 3px; background: #1f1f1f; }
+  .cal i.full { background: #f5a623; }
+  .cal i.part { background: rgba(245,166,35,.4); }
+  .cal i.is-today { outline: 1px solid #666; outline-offset: 1px; }
+  .goal { margin-top: 14px; font-size: 12px; color: #888; }
+  .goal input { width: 44px; background: #1d1d1d; border: 1px solid #2c2c2c; border-radius: 5px; color: #fff; font-size: 12px; padding: 2px 4px; text-align: center; }
+  .goal .gbar { height: 6px; background: #222; border-radius: 3px; margin-top: 6px; overflow: hidden; }
+  .goal .gbar span { display: block; height: 100%; background: #4caf7a; }
+
+  /* Board */
+  .board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 40px; }
+  .col { background: #121212; border: 1px solid #1c1c1c; border-radius: 12px; padding: 12px; min-height: 140px; }
+  .col-h { display: flex; justify-content: space-between; align-items: center; padding: 2px 4px 6px; }
+  .col-h b { font-size: 13px; color: #fff; }
+  .col-h span { font-size: 11px; color: #666; }
+  .col-h .limit { color: #f5a623; }
+  .col-h .limit.full { color: #e5683b; }
+  .col .hint { font-size: 11px; color: #555; padding: 0 4px 10px; line-height: 1.5; }
+  .col .col-empty { padding: 22px 10px; font-size: 12px; color: #444; text-align: center; border: 1px dashed #222; border-radius: 9px; }
+  .item { display: grid; grid-template-columns: 56px 1fr auto; gap: 10px; align-items: center; background: #141414; border: 1px solid #222; border-radius: 9px; padding: 8px; margin-bottom: 8px; }
+  .item .thumb { border-radius: 5px; cursor: pointer; }
+  .item .thumb .art { font-size: 11px; padding: 4px 6px; }
+  .item .t { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.25; cursor: pointer; }
+  .item .t:hover { color: #f5a623; }
+  .item .m { font-size: 11px; color: #666; margin-top: 3px; }
+  .item .m.warn { color: #e5683b; }
+  .item .acts { display: flex; flex-direction: column; gap: 4px; }
+
+  /* Add songs */
+  .lib-search {
+    width: 100%; background: #141414; border: 1px solid #222; border-radius: 10px; color: #fff; font-size: 15px;
+    padding: 13px 16px 13px 42px; outline: none; font-family: inherit;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23666' stroke-width='2'%3E%3Ccircle cx='7' cy='7' r='5'/%3E%3Cpath d='M11 11l4 4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: 15px center;
+  }
+  .lib-search:focus { border-color: #444; }
+  .lib-search::placeholder { color: #444; }
+  .search-row { display: flex; gap: 10px; margin-bottom: 18px; }
+  .search-row select { background: #141414; border: 1px solid #222; border-radius: 10px; color: #aaa; font-size: 13px; padding: 0 12px; outline: none; }
+  .paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px; }
+  .path { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 14px 16px; cursor: pointer; text-align: left; color: inherit; font-family: inherit; transition: border-color .15s; }
+  .path:hover { border-color: #444; }
+  .path.on { border-color: #f5a623; }
+  .path h3 { font-size: 15px; color: #fff; font-weight: 700; }
+  .path .meta { font-size: 12px; color: #666; margin-top: 3px; }
+  .path .pbar { height: 4px; background: #222; border-radius: 2px; margin-top: 10px; overflow: hidden; }
+  .path .pbar span { display: block; height: 100%; background: #f5a623; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+  .filters .sep { width: 1px; height: 20px; background: #2a2a2a; margin: 0 4px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; background: #141414; border: 1px solid #2a2a2a; border-radius: 20px; color: #777; font-size: 12px; font-weight: 600; padding: 6px 12px; cursor: pointer; transition: all .15s; white-space: nowrap; font-family: inherit; }
+  .chip:hover { border-color: #555; color: #bbb; }
+  .chip.on { background: #f5a623; border-color: #f5a623; color: #000; }
+  .chip .n { font-weight: 400; opacity: .6; }
+  .chip.tag { font-weight: 400; }
+  .lib-count { font-size: 12px; color: #666; margin: 14px 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 22px 16px; }
+  .song-card { cursor: pointer; position: relative; }
+  .song-card .thumb { border: 1px solid #1e1e1e; transition: transform .15s, border-color .15s; }
+  .song-card:hover .thumb { transform: translateY(-2px); border-color: #3a3a3a; }
+  .song-card.candidate .thumb { opacity: .55; }
+  .song-card .badges { position: absolute; top: 8px; left: 8px; right: 8px; display: flex; justify-content: space-between; gap: 6px; }
+  .song-card .badges .tag-status { background-color: rgba(0,0,0,.65); }
+  .song-card h3 { font-size: 14px; font-weight: 700; color: #fff; margin-top: 10px; line-height: 1.3; }
+  .song-card .by { font-size: 12px; color: #666; margin-top: 2px; }
+  .song-card .row { display: flex; align-items: center; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .song-card .add { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.7); border-color: #444; color: #ddd; }
+  .pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: #888; background: #1c1c1c; border: 1px solid #2a2a2a; border-radius: 5px; padding: 2px 7px; white-space: nowrap; }
+  .pill strong { color: #f5a623; font-weight: 600; }
+  .lib-empty { padding: 50px 20px; text-align: center; color: #444; font-size: 14px; border: 1px dashed #222; border-radius: 12px; grid-column: 1 / -1; }
+
+  @media (max-width: 900px) {
+    .today, .board { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    body { padding: 0 16px 80px; }
+    .lib-h1 { font-size: 26px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero .thumb { aspect-ratio: 16/9; }
+    .paths { grid-template-columns: 1fr; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 18px 12px; }
+    .filters .sep { display: none; }
+    .search-row select { max-width: 110px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ── Instrument toggle ── -->
-<div class="instrument-row">
-  <span class="instrument-label">Instrument</span>
-  <div class="instrument-toggle" id="instrumentToggle"></div>
+<!-- ── Top bar: back link (session view), trainer, instrument ── -->
+<div class="view topbar" id="topbar">
+  <span class="brand" id="brand">Guitar Practice</span>
+  <a class="back-link" id="backLink" href="#/">← Library</a>
+  <span class="grow"></span>
+  <a class="trainer-link" href="strumming.html">🥁 Trainer</a>
+  <div class="instrument-row">
+    <span class="instrument-label">Instrument</span>
+    <div class="instrument-toggle" id="instrumentToggle"></div>
+  </div>
 </div>
 
-<!-- ── Track selector ── -->
-<div class="track-selector" id="trackSelector"></div>
+<!-- ══ Library view (home) ══ -->
+<div class="view" id="libraryView">
+  <div class="lib-h1">Play songs, end to end</div>
+  <div class="lib-sub" id="libSub"></div>
 
-<!-- ── Week selector ── -->
-<div class="week-selector" id="weekSelector"></div>
+  <div class="today">
+    <div class="hero" id="hero"></div>
+    <div class="habit">
+      <h3>Practice</h3>
+      <div class="streak" id="streak"></div>
+      <div class="cal" id="cal"></div>
+      <div class="lib-note">Last 14 days · <span style="color:#f5a623">■</span> all 5 steps · <span style="color:rgba(245,166,35,.6)">■</span> some practice</div>
+      <div class="goal" id="goal"></div>
+    </div>
+  </div>
+
+  <div class="lib-section">
+    <h2>Repertoire</h2>
+    <span class="lib-note">Two songs in Learning at a time. Finish one before starting another.</span>
+  </div>
+  <div class="board" id="board"></div>
+
+  <div class="lib-section"><h2>Library</h2><span class="lib-note" id="libCount"></span></div>
+  <div class="search-row">
+    <input class="lib-search" id="libQ" placeholder="Search songs, artists, keys, styles…" autocomplete="off">
+    <select id="libSort">
+      <option value="easiest">Easiest first</option>
+      <option value="hardest">Hardest first</option>
+      <option value="title">A–Z</option>
+      <option value="artist">Artist</option>
+      <option value="year">Year</option>
+    </select>
+  </div>
+  <div class="paths" id="paths"></div>
+  <div class="filters" id="libFilters"></div>
+  <div class="filters" id="libTags"></div>
+  <div class="lib-count" id="libShown"></div>
+  <div class="grid" id="libGrid"></div>
+</div>
+
+<!-- ══ Session view: one song's 5 steps ══ -->
+<div class="view" id="sessionView">
 
 <!-- ── Header ── -->
 <header>
@@ -286,13 +456,14 @@
     <span>Difficulty: <strong id="hDiff"></strong> <span class="diff-dots" id="hDiffDots"></span></span>
     <span><span id="hKeyLabel">Key</span>: <strong id="hKey"></strong></span>
   </div>
+  <div class="rep-row" id="repRow"></div>
 </header>
 
 <!-- ── Coming soon ── -->
 <div id="comingSoon">
   <div class="coming-icon">🎸</div>
   <div class="coming-title">Session coming soon</div>
-  <div class="coming-sub">This week is being prepared.<br>Keep practicing — sessions are added in order.</div>
+  <div class="coming-sub" id="comingSub"></div>
 </div>
 
 <!-- ── Steps (hidden when coming soon) ── -->
@@ -302,7 +473,7 @@
   <div class="step">
     <div class="step-num">1</div>
     <div class="step-body">
-      <div class="step-label">Warmup · 5 min</div>
+      <div class="step-label"><span>Warmup · 5 min</span><button class="step-done" data-step="0" onclick="toggleStep(0)">Mark done</button></div>
       <div class="step-title" id="warmupTitle">Pentatonic Scale</div>
       <div class="step-meta" id="warmupMeta"></div>
       <a class="yt-thumb" id="warmupThumb" href="#" target="_blank"></a>
@@ -313,7 +484,7 @@
   <div class="step">
     <div class="step-num">2</div>
     <div class="step-body">
-      <div class="step-label">Full Song Lesson · ~10 min</div>
+      <div class="step-label"><span>Full Song Lesson · ~10 min</span><button class="step-done" data-step="1" onclick="toggleStep(1)">Mark done</button></div>
       <div class="step-title" id="lessonTitle">Full Song Lesson</div>
       <div class="step-meta">Watch once to understand the structure, then play along section by section</div>
       <a class="yt-thumb" id="lessonThumb" href="#" target="_blank"></a>
@@ -325,7 +496,7 @@
   <div class="step">
     <div class="step-num">3</div>
     <div class="step-body">
-      <div class="step-label">Strumming Pattern · 5 min</div>
+      <div class="step-label"><span>Strumming Pattern · 5 min</span><button class="step-done" data-step="2" onclick="toggleStep(2)">Mark done</button></div>
       <div class="step-title">Strumming Pattern</div>
       <div class="step-meta">Beat = pulse · Strum = strumming pattern · lock in the rhythm before adding chords</div>
       <div class="card">
@@ -354,7 +525,7 @@
   <div class="step">
     <div class="step-num">4</div>
     <div class="step-body">
-      <div class="step-label">Chords · 5 min</div>
+      <div class="step-label"><span>Chords · 5 min</span><button class="step-done" data-step="3" onclick="toggleStep(3)">Mark done</button></div>
       <div class="step-title">Chords</div>
       <div class="step-meta" id="chordsMeta">Learn the shapes · play through each section using the pattern above</div>
       <div class="card">
@@ -367,7 +538,7 @@
   <div class="step">
     <div class="step-num">5</div>
     <div class="step-body">
-      <div class="step-label">Play Along · 10 min</div>
+      <div class="step-label"><span>Play Along · 10 min</span><button class="step-done" data-step="4" onclick="toggleStep(4)">Mark done</button></div>
       <div class="step-title">Play Along</div>
       <div class="step-meta">Load the song from your library. Loop a section or play through in full.</div>
 
@@ -427,6 +598,8 @@
 
 </div><!-- #stepsSection -->
 
+</div><!-- #sessionView -->
+
 <script>
 // ── Chord shape library ────────────────────────────────
 // frets: [lowE, A, D, G, B, highE] — -1=muted, 0=open, N=fret
@@ -475,7 +648,7 @@ const TRACKS = {
     label: 'Beginner',
     sessions: {
       1: {
-        title: "Every Rose Has Its Thorn", rating: { chords: 1, licks: 2, timing: 1 }, artist: "Poison", year: 1988, bpm: 88, key: "G major", defaultPitch: 1,
+        title: "Every Rose Has Its Thorn", rating: { chords: 1, licks: 2, timing: 1 }, tags: ["power ballad", "80s"], artist: "Poison", year: 1988, bpm: 88, key: "G major", defaultPitch: 1,
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0.4,0, 1,0,0.4,1, 0,1,0,0, 1,1,1,1] },
         warmup: { videoId: "BIsrKOXyi6U", label: "Pentatonic Scale · YouTube", title: "Pentatonic Scale", meta: "Foundation of every rock song · A minor box shape, 5th fret, slow and clean" },
         lesson: { videoId: "oYpguG4KxdQ", label: "Marty Music · YouTube" },
@@ -536,7 +709,7 @@ const TRACKS = {
         }
       },
       2: {
-        title: "Knockin' on Heaven's Door", rating: { chords: 1, licks: 1, timing: 1 }, artist: "Guns N' Roses", year: 1990, bpm: 64, key: "G major", defaultPitch: 1,
+        title: "Knockin' on Heaven's Door", rating: { chords: 1, licks: 1, timing: 1 }, tags: ["power ballad", "80s"], artist: "Guns N' Roses", year: 1990, bpm: 64, key: "G major", defaultPitch: 1,
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,1,1, 1,0,0,0, 1,0,1,1] },
         warmup: { videoId: "CjM5fyXoV8w", label: "Strumming Patterns · YouTube", title: "Strumming Patterns", meta: "This song lives and dies on feel and rhythm · lock in your strum before you play a chord" },
         lesson: { videoId: "mMnla7_Ipr4", label: "Marty Music · YouTube" },
@@ -589,11 +762,11 @@ const TRACKS = {
           ],
         }
       },
-      3: { title: "Smoke on the Water", rating: { chords: 1, licks: 2, timing: 1 }, artist: "Deep Purple", year: 1972, bpm: 112, key: "G minor", coming: true, backing: STUB },
-      4: { title: "With or Without You", rating: { chords: 1, licks: 1, timing: 2 }, artist: "U2", year: 1987, bpm: 80, key: "D major", coming: true, backing: STUB },
-      5: { title: "Free Fallin'", rating: { chords: 1, licks: 1, timing: 2 }, artist: "Tom Petty", year: 1989, bpm: 85, key: "F major", coming: true, backing: STUB },
+      3: { title: "Smoke on the Water", rating: { chords: 1, licks: 2, timing: 1 }, tags: ["classic rock", "beginner"], artist: "Deep Purple", year: 1972, bpm: 112, key: "G minor", coming: true, backing: STUB },
+      4: { title: "With or Without You", rating: { chords: 1, licks: 1, timing: 2 }, tags: ["80s", "beginner"], artist: "U2", year: 1987, bpm: 80, key: "D major", coming: true, backing: STUB },
+      5: { title: "Free Fallin'", rating: { chords: 1, licks: 1, timing: 2 }, tags: ["rock", "beginner"], artist: "Tom Petty", year: 1989, bpm: 85, key: "F major", coming: true, backing: STUB },
       6: {
-        title: "Summer of '69", rating: { chords: 1, licks: 2, timing: 2 }, artist: "Bryan Adams", year: 1985, bpm: 144, key: "D major",
+        title: "Summer of '69", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["80s rock"], artist: "Bryan Adams", year: 1985, bpm: 144, key: "D major",
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,0,1, 0,1,0,0, 1,1,1,1] },
         warmup: { videoId: "vMt8T5Jqf10", label: "Strumming Exercise · YouTube", title: "Rhythm & Strumming", meta: "Summer of '69 is about driving energy · get the right hand loose before you hit those downstrokes" },
         lesson: { videoId: "owPLZdGkNFs", label: "JustinGuitar · YouTube" },
@@ -606,11 +779,11 @@ const TRACKS = {
           { label: "Chorus", prog: ["G","D","A"] },
         ]}
       },
-      7: { title: "Here I Go Again", rating: { chords: 1, licks: 2, timing: 1 }, artist: "Whitesnake", year: 1987, bpm: 86, key: "C major", coming: true, backing: STUB },
-      8: { title: "Wonderwall", rating: { chords: 2, licks: 1, timing: 2 }, artist: "Oasis", year: 1995, bpm: 87, key: "F# minor", coming: true, backing: STUB },
-      9: { title: "Good Riddance (Time of Your Life)", rating: { chords: 2, licks: 1, timing: 2 }, artist: "Green Day", year: 1997, bpm: 80, key: "G major", coming: true, backing: STUB },
+      7: { title: "Here I Go Again", rating: { chords: 1, licks: 2, timing: 1 }, tags: ["power ballad", "80s"], artist: "Whitesnake", year: 1987, bpm: 86, key: "C major", coming: true, backing: STUB },
+      8: { title: "Wonderwall", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["90s", "beginner"], artist: "Oasis", year: 1995, bpm: 87, key: "F# minor", coming: true, backing: STUB },
+      9: { title: "Good Riddance (Time of Your Life)", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["90s", "fingerpicking"], artist: "Green Day", year: 1997, bpm: 80, key: "G major", coming: true, backing: STUB },
       10: {
-        title: "Wish You Were Here", rating: { chords: 2, licks: 2, timing: 2 }, artist: "Pink Floyd", year: 1975, bpm: 60, key: "G major",
+        title: "Wish You Were Here", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["classic rock", "fingerpicking"], artist: "Pink Floyd", year: 1975, bpm: 60, key: "G major",
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,0,1, 0,1,0,0, 1,1,1,1] },
         warmup: { videoId: "4SIqf6ktnYg", label: "Fingerpicking Exercise · YouTube", title: "Fingerpicking Pattern", meta: "This song is all about the right hand · warm up the picking fingers before anything else" },
         lesson: { videoId: "IzxMeQgtyYE", label: "Marty Music · YouTube" },
@@ -629,10 +802,10 @@ const TRACKS = {
   intermediate: {
     label: 'Intermediate',
     sessions: {
-      1: { title: "Don't Stop Believin'", rating: { chords: 2, licks: 2, timing: 2 }, artist: "Journey", year: 1981, bpm: 119, key: "E major", coming: true, backing: STUB },
-      2: { title: "Patience", rating: { chords: 2, licks: 2, timing: 2 }, artist: "Guns N' Roses", year: 1988, bpm: 76, key: "G major", coming: true, backing: STUB },
+      1: { title: "Don't Stop Believin'", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["80s", "beginner"], artist: "Journey", year: 1981, bpm: 119, key: "E major", coming: true, backing: STUB },
+      2: { title: "Patience", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["power ballad", "80s"], artist: "Guns N' Roses", year: 1988, bpm: 76, key: "G major", coming: true, backing: STUB },
       3: {
-        title: "You Give Love a Bad Name", rating: { chords: 2, licks: 3, timing: 2 }, artist: "Bon Jovi", year: 1986, bpm: 123, key: "C minor",
+        title: "You Give Love a Bad Name", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["80s rock"], artist: "Bon Jovi", year: 1986, bpm: 123, key: "C minor",
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,0,1, 0,1,0,0, 1,1,1,1] },
         warmup: { videoId: "AXg6T0Tq6Hs", label: "Palm Muting Guide · YouTube", title: "Palm Muting", meta: "That iconic intro punch comes entirely from palm muting · nail the technique before the riff" },
         lesson: { videoId: "pVnlPaw8Pvk", label: "Marty Music · YouTube" },
@@ -644,9 +817,9 @@ const TRACKS = {
           { label: "Verse / Chorus", prog: ["Cm","Ab","Eb","Bb"] },
         ]}
       },
-      4: { title: "Enter Sandman", rating: { chords: 2, licks: 3, timing: 2 }, artist: "Metallica", year: 1991, bpm: 123, key: "E minor", coming: true, backing: STUB },
+      4: { title: "Enter Sandman", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["heavy metal", "90s"], artist: "Metallica", year: 1991, bpm: 123, key: "E minor", coming: true, backing: STUB },
       5: {
-        title: "More Than Words", rating: { chords: 3, licks: 2, timing: 3 }, artist: "Extreme", year: 1990, bpm: 97, key: "G major",
+        title: "More Than Words", rating: { chords: 3, licks: 2, timing: 3 }, tags: ["80s", "fingerpicking"], artist: "Extreme", year: 1990, bpm: 97, key: "G major",
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,0,1, 0,1,0,0, 1,1,1,1] },
         warmup: { videoId: "4SIqf6ktnYg", label: "Fingerpicking Exercise · YouTube", title: "Fingerpicking & Chord Melody", meta: "More Than Words blends chords and melody in the same hand · focus on clean individual note separation" },
         lesson: { videoId: "T0XzFYChv18", label: "Marty Music · YouTube" },
@@ -660,7 +833,7 @@ const TRACKS = {
         ]}
       },
       6: {
-        title: "Money for Nothing", rating: { chords: 2, licks: 4, timing: 2 }, artist: "Dire Straits", year: 1985, bpm: 136, key: "G minor",
+        title: "Money for Nothing", rating: { chords: 2, licks: 4, timing: 2 }, tags: ["80s", "riff"], artist: "Dire Straits", year: 1985, bpm: 136, key: "G minor",
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,0,1, 0,1,0,0, 1,1,1,1] },
         warmup: { videoId: "YU0uHsobGmg", label: "Blues Scale Exercises · YouTube", title: "Blues Scale", meta: "Minor pentatonic + the flat 5 blue note · the exact scale behind this riff" },
         lesson: { videoId: "uIwzFBCPVso", label: "Marty Music · YouTube" },
@@ -673,10 +846,10 @@ const TRACKS = {
           { label: "Verse",  prog: ["Gm","Bb","C"] },
         ]}
       },
-      7: { title: "Nothing Else Matters", rating: { chords: 2, licks: 3, timing: 3 }, artist: "Metallica", year: 1991, bpm: 69, key: "E minor", coming: true, backing: STUB },
-      8: { title: "Paradise City", rating: { chords: 2, licks: 3, timing: 3 }, artist: "Guns N' Roses", year: 1987, bpm: 100, key: "G major", coming: true, backing: STUB },
+      7: { title: "Nothing Else Matters", rating: { chords: 2, licks: 3, timing: 3 }, tags: ["metal", "fingerpicking"], artist: "Metallica", year: 1991, bpm: 69, key: "E minor", coming: true, backing: STUB },
+      8: { title: "Paradise City", rating: { chords: 2, licks: 3, timing: 3 }, tags: ["80s rock"], artist: "Guns N' Roses", year: 1987, bpm: 100, key: "G major", coming: true, backing: STUB },
       9: {
-        title: "Message in a Bottle", rating: { chords: 3, licks: 2, timing: 3 }, artist: "The Police", year: 1979, bpm: 150, key: "C# minor",
+        title: "Message in a Bottle", rating: { chords: 3, licks: 2, timing: 3 }, tags: ["new wave", "arpeggio"], artist: "The Police", year: 1979, bpm: 150, key: "C# minor",
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,0,1, 0,1,0,0, 1,1,1,1] },
         warmup: { videoId: "GYwdxHH9Y_k", label: "Arpeggio Exercises · YouTube", title: "Arpeggio Picking", meta: "Root → 5th → 9th on every chord at 150 BPM · get that picking hand precise before you start" },
         lesson: { videoId: "kZ-BVTKUVJM", label: "Marty Music · YouTube" },
@@ -689,7 +862,7 @@ const TRACKS = {
         ]}
       },
       10: {
-        title: "Tears in Heaven", rating: { chords: 3, licks: 3, timing: 3 }, artist: "Eric Clapton", year: 1992, bpm: 80, key: "A major",
+        title: "Tears in Heaven", rating: { chords: 3, licks: 3, timing: 3 }, tags: ["fingerpicking", "90s"], artist: "Eric Clapton", year: 1992, bpm: 80, key: "A major",
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,0,1, 0,1,0,0, 1,1,1,1] },
         warmup: { videoId: "4SIqf6ktnYg", label: "Fingerpicking Exercise · YouTube", title: "Travis Picking", meta: "Tears in Heaven uses Travis-style alternating bass fingerpicking · slow it down and isolate the pattern" },
         lesson: { videoId: "iS9kWyI1dxw", label: "Marty Music · YouTube" },
@@ -708,13 +881,13 @@ const TRACKS = {
   advanced: {
     label: 'Advanced',
     sessions: {
-      1: { title: "Layla", rating: { chords: 3, licks: 4, timing: 2 }, artist: "Eric Clapton", year: 1970, bpm: 92, key: "D minor", coming: true, backing: STUB },
-      2: { title: "Sweet Child O' Mine", rating: { chords: 2, licks: 5, timing: 2 }, artist: "Guns N' Roses", year: 1987, bpm: 125, key: "D major", coming: true, backing: STUB },
-      3: { title: "Crazy Train", rating: { chords: 3, licks: 4, timing: 2 }, artist: "Ozzy Osbourne", year: 1980, bpm: 138, key: "A minor", coming: true, backing: STUB },
-      4: { title: "November Rain", rating: { chords: 3, licks: 4, timing: 3 }, artist: "Guns N' Roses", year: 1991, bpm: 74, key: "G major", coming: true, backing: STUB },
-      5: { title: "Purple Rain", rating: { chords: 3, licks: 4, timing: 3 }, artist: "Prince", year: 1984, bpm: 113, key: "Bb major", coming: true, backing: STUB },
+      1: { title: "Layla", rating: { chords: 3, licks: 4, timing: 2 }, tags: ["classic rock", "blues"], artist: "Eric Clapton", year: 1970, bpm: 92, key: "D minor", coming: true, backing: STUB },
+      2: { title: "Sweet Child O' Mine", rating: { chords: 2, licks: 5, timing: 2 }, tags: ["80s", "iconic riff"], artist: "Guns N' Roses", year: 1987, bpm: 125, key: "D major", coming: true, backing: STUB },
+      3: { title: "Crazy Train", rating: { chords: 3, licks: 4, timing: 2 }, tags: ["heavy metal", "80s"], artist: "Ozzy Osbourne", year: 1980, bpm: 138, key: "A minor", coming: true, backing: STUB },
+      4: { title: "November Rain", rating: { chords: 3, licks: 4, timing: 3 }, tags: ["power ballad", "80s"], artist: "Guns N' Roses", year: 1991, bpm: 74, key: "G major", coming: true, backing: STUB },
+      5: { title: "Purple Rain", rating: { chords: 3, licks: 4, timing: 3 }, tags: ["80s", "soul", "blues"], artist: "Prince", year: 1984, bpm: 113, key: "Bb major", coming: true, backing: STUB },
       6: {
-        title: "Hotel California", rating: { chords: 3, licks: 4, timing: 3 }, artist: "Eagles", year: 1977, bpm: 75, key: "B minor",
+        title: "Hotel California", rating: { chords: 3, licks: 4, timing: 3 }, tags: ["classic rock", "arpeggio"], artist: "Eagles", year: 1977, bpm: 75, key: "B minor",
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,0,1, 0,1,0,0, 1,1,1,1] },
         warmup: { videoId: "GYwdxHH9Y_k", label: "Arpeggio Exercises · YouTube", title: "Arpeggio Patterns", meta: "The intro is a beautiful Bm arpeggio descent · warm up slow picking patterns before tackling it" },
         lesson: { videoId: "JIDdI-AtK-Q", label: "Marty Music · YouTube" },
@@ -727,22 +900,143 @@ const TRACKS = {
           { label: "Chorus", prog: ["G","D","F#","Bm"] },
         ]}
       },
-      7: { title: "Blackbird", rating: { chords: 3, licks: 3, timing: 4 }, artist: "The Beatles", year: 1968, bpm: 96, key: "G major", coming: true, backing: STUB },
-      8: { title: "Comfortably Numb", rating: { chords: 3, licks: 5, timing: 3 }, artist: "Pink Floyd", year: 1979, bpm: 63, key: "Bb major", coming: true, backing: STUB },
-      9: { title: "Sultans of Swing", rating: { chords: 3, licks: 5, timing: 3 }, artist: "Dire Straits", year: 1978, bpm: 149, key: "D minor", coming: true, backing: STUB },
-      10: { title: "Stairway to Heaven", rating: { chords: 3, licks: 4, timing: 4 }, artist: "Led Zeppelin", year: 1971, bpm: 72, key: "A minor", coming: true, backing: STUB },
+      7: { title: "Blackbird", rating: { chords: 3, licks: 3, timing: 4 }, tags: ["classic", "fingerpicking"], artist: "The Beatles", year: 1968, bpm: 96, key: "G major", coming: true, backing: STUB },
+      8: { title: "Comfortably Numb", rating: { chords: 3, licks: 5, timing: 3 }, tags: ["classic rock", "solo"], artist: "Pink Floyd", year: 1979, bpm: 63, key: "Bb major", coming: true, backing: STUB },
+      9: { title: "Sultans of Swing", rating: { chords: 3, licks: 5, timing: 3 }, tags: ["classic rock", "advanced"], artist: "Dire Straits", year: 1978, bpm: 149, key: "D minor", coming: true, backing: STUB },
+      10: { title: "Stairway to Heaven", rating: { chords: 3, licks: 4, timing: 4 }, tags: ["classic rock", "epic"], artist: "Led Zeppelin", year: 1971, bpm: 72, key: "A minor", coming: true, backing: STUB },
     }
   }
 };
 
+// ── Candidates ─────────────────────────────────────────
+// Songs from the songs.md candidate pool that are not in a track yet. Same fields as a stub;
+// they show in the library and open as "Coming soon". Move one into TRACKS to schedule it.
+const CANDIDATES = [
+  { title: "Horse With No Name", artist: "America", year: 1971, key: "E minor", rating: { chords: 1, licks: 1, timing: 1 }, tags: ["folk rock", "beginner"] },
+  { title: "Stand By Me", artist: "Ben E. King", year: 1961, key: "A major", rating: { chords: 1, licks: 1, timing: 1 }, tags: ["classic", "beginner"] },
+  { title: "Brain Stew", artist: "Green Day", year: 1995, key: "G# minor", rating: { chords: 1, licks: 1, timing: 1 }, tags: ["rock", "beginner"] },
+  { title: "Come as You Are", artist: "Nirvana", year: 1991, key: "E minor", rating: { chords: 1, licks: 2, timing: 1 }, tags: ["90s", "beginner"] },
+  { title: "Brown Eyed Girl", artist: "Van Morrison", year: 1967, key: "G major", rating: { chords: 1, licks: 1, timing: 2 }, tags: ["classic", "beginner"] },
+  { title: "Highway to Hell", artist: "AC/DC", year: 1979, key: "A major", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["classic rock", "80s"] },
+  { title: "Eye of the Tiger", artist: "Survivor", year: 1982, key: "C minor", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["80s", "rock"] },
+  { title: "Faithfully", artist: "Journey", year: 1983, key: "Eb major", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["power ballad", "80s"] },
+  { title: "Wanted Dead or Alive", artist: "Bon Jovi", year: 1986, key: "D major", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["power ballad", "80s"] },
+  { title: "Wonderful Tonight", artist: "Eric Clapton", year: 1977, key: "G major", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["classic rock", "beginner"] },
+  { title: "Hallelujah", artist: "Leonard Cohen", year: 1984, key: "C major", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["folk", "fingerpicking"] },
+  { title: "Back in Black", artist: "AC/DC", year: 1980, key: "E minor", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["classic rock", "80s"] },
+  { title: "Livin' on a Prayer", artist: "Bon Jovi", year: 1986, key: "E minor", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["80s rock"] },
+  { title: "Always", artist: "Bon Jovi", year: 1994, key: "Bb major", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["power ballad", "90s"] },
+  { title: "Thunderstruck", artist: "AC/DC", year: 1990, key: "A major", rating: { chords: 1, licks: 3, timing: 2 }, tags: ["80s rock"] },
+  { title: "Home Sweet Home", artist: "Mötley Crüe", year: 1985, key: "C major", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["power ballad", "80s"] },
+  { title: "House of the Rising Sun", artist: "The Animals", year: 1964, key: "A minor", rating: { chords: 2, licks: 1, timing: 3 }, tags: ["classic", "arpeggio"] },
+  { title: "More Than a Feeling", artist: "Boston", year: 1976, key: "D major", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["classic rock"] },
+  { title: "Running Down a Dream", artist: "Tom Petty", year: 1989, key: "E major", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["rock", "80s"] },
+  { title: "The Sound of Silence", artist: "Simon & Garfunkel", year: 1964, key: "A minor", rating: { chords: 2, licks: 2, timing: 3 }, tags: ["folk", "fingerpicking"] },
+  { title: "Sunshine of Your Love", artist: "Cream", year: 1967, key: "D minor", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["classic rock", "blues"] },
+  { title: "Iron Man", artist: "Black Sabbath", year: 1970, key: "B major", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["heavy metal"] },
+  { title: "Yesterday", artist: "The Beatles", year: 1965, key: "F major", rating: { chords: 3, licks: 1, timing: 3 }, tags: ["classic", "fingerpicking"] },
+  { title: "Africa", artist: "Toto", year: 1982, key: "Bb major", rating: { chords: 3, licks: 2, timing: 3 }, tags: ["80s", "complex"] },
+  { title: "Johnny B. Goode", artist: "Chuck Berry", year: 1958, key: "Bb major", rating: { chords: 2, licks: 4, timing: 2 }, tags: ["classic rock", "blues"] },
+  { title: "Love is the Drug", artist: "Roxy Music", year: 1975, key: "D minor", rating: { chords: 2, licks: 3, timing: 3 }, tags: ["70s", "funk rock", "groove"] },
+  { title: "Dust in the Wind", artist: "Kansas", year: 1977, key: "C major", rating: { chords: 2, licks: 3, timing: 4 }, tags: ["folk rock", "fingerpicking"] },
+];
+
+// ── Songs ──────────────────────────────────────────────
+// Every song in TRACKS and CANDIDATES, flattened. Each keeps its own object, tagged with id / track / week.
+const slug = t => t.toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const SONGS = [
+  ...Object.entries(TRACKS).flatMap(([track, t]) =>
+    Object.entries(t.sessions).map(([w, s]) => Object.assign(s, { id: slug(s.title), track, week: +w }))),
+  ...CANDIDATES.map(s => Object.assign(s, { id: slug(s.title), candidate: true, coming: true, backing: STUB })),
+];
+const SONG_BY_ID = Object.fromEntries(SONGS.map(s => [s.id, s]));
+const songStatus = s => s.candidate ? 'candidate' : s.coming ? 'queued' : 'ready';
+
 // ── State ──────────────────────────────────────────────
-let currentTrack = localStorage.getItem('guitarTrack') || 'beginner';
-let currentWeek  = parseInt(localStorage.getItem('guitarWeekV2') || '1');
+// The last song opened. Before the library the app remembered a track + week (guitarTrack, guitarWeekV2).
+let currentSong = SONG_BY_ID[localStorage.getItem('guitarSong')] || (() => {
+  const t = TRACKS[localStorage.getItem('guitarTrack')];
+  return (t && t.sessions[parseInt(localStorage.getItem('guitarWeekV2') || '1')]) || TRACKS.beginner.sessions[1];
+})();
+let renderedSong = null;   // the song whose session DOM is currently built
 
-if (!TRACKS[currentTrack]) currentTrack = 'beginner';
-if (!TRACKS[currentTrack].sessions[currentWeek]) currentWeek = 1;
+function currentSession() { return currentSong; }
 
-function currentSession() { return TRACKS[currentTrack].sessions[currentWeek]; }
+// ── Practice progress ──────────────────────────────────
+// One localStorage key, guitarProgress:
+//   songs[id] = { state: 'next' | 'learning' | 'playable' | null, added, lastPlayed, steps: { date, done: [step…] } }
+//   days[YYYY-MM-DD] = 'part' | 'full'   (full = all 5 steps of one song that day)
+//   goal = repertoire target
+// Kept behind this one object so it can move off the browser later.
+const LEARNING_LIMIT = 2;
+const today = () => new Date().toLocaleDateString('en-CA');
+const daysAgo = d => Math.round((new Date(today()) - new Date(d)) / 864e5);
+
+const Progress = {
+  data: null,
+  load() {
+    try { this.data = JSON.parse(localStorage.getItem('guitarProgress')); } catch (e) { this.data = null; }
+    if (!this.data) { this.data = this.seed(); this.save(); }
+    this.data.songs = this.data.songs || {};
+    this.data.days  = this.data.days  || {};
+    this.data.goal  = this.data.goal  || 10;
+  },
+  save() { try { localStorage.setItem('guitarProgress', JSON.stringify(this.data)); } catch (e) {} },
+  // First run: Nothing Else Matters is already known (songs.md); the week in progress becomes Learning
+  // and the next two built weeks of that track become Up next.
+  seed() {
+    const songs = {}; let t = Date.now();
+    const add = (s, state) => { if (s) songs[s.id] = { state, added: t++ }; };
+    add(SONG_BY_ID['nothing-else-matters'], 'playable');
+    const track = TRACKS[localStorage.getItem('guitarTrack')] ? localStorage.getItem('guitarTrack') : 'beginner';
+    const week  = parseInt(localStorage.getItem('guitarWeekV2') || '1');
+    const built = SONGS.filter(s => s.track === track && !s.coming);
+    const cur   = built.find(s => s.week === week) || built[0];
+    add(cur, 'learning');
+    built.filter(s => s.week > cur.week).slice(0, 2).forEach(s => add(s, 'next'));
+    return { songs, days: {}, goal: 10 };
+  },
+  state(id) { const e = this.data.songs[id]; return (e && e.state) || null; },
+  list(state) {
+    return SONGS.filter(s => this.state(s.id) === state).sort((a, b) => this.data.songs[a.id].added - this.data.songs[b.id].added);
+  },
+  learningFull() { return this.list('learning').length >= LEARNING_LIMIT; },
+  setState(id, state) {
+    const e = this.data.songs[id] || {};
+    if (state === 'learning' && e.state !== 'learning' && this.learningFull()) return false;
+    if (state === 'playable' && e.state !== 'playable') e.lastPlayed = today();   // just played it end to end
+    if (state !== e.state) e.added = Date.now();
+    e.state = state;
+    if (!state && !e.steps) delete this.data.songs[id]; else this.data.songs[id] = e;
+    this.recomputeToday(); this.save();
+    return true;
+  },
+  stepsToday(id) { const e = this.data.songs[id]; return e && e.steps && e.steps.date === today() ? e.steps.done : []; },
+  toggleStep(id, i) {
+    const e = this.data.songs[id] || (this.data.songs[id] = { state: null, added: Date.now() });
+    const done = this.stepsToday(id).slice(), k = done.indexOf(i);
+    if (k >= 0) done.splice(k, 1); else done.push(i);
+    e.steps = { date: today(), done };
+    this.recomputeToday(); this.save();
+  },
+  playedToday(id) { const e = this.data.songs[id]; if (!e) return; e.lastPlayed = today(); this.recomputeToday(); this.save(); },
+  recomputeToday() {
+    const t = today(), es = Object.values(this.data.songs);
+    const stepsToday = e => e.steps && e.steps.date === t ? e.steps.done.length : 0;
+    if (es.some(e => stepsToday(e) === 5)) this.data.days[t] = 'full';
+    else if (es.some(e => stepsToday(e) > 0 || e.lastPlayed === t)) this.data.days[t] = 'part';
+    else delete this.data.days[t];
+  },
+  // Consecutive practice days ending today, or yesterday if today has nothing yet
+  streak() {
+    const d = new Date(); let n = 0;
+    if (!this.data.days[today()]) d.setDate(d.getDate() - 1);
+    while (this.data.days[d.toLocaleDateString('en-CA')]) { n++; d.setDate(d.getDate() - 1); }
+    return n;
+  },
+  setGoal(n) { this.data.goal = Math.max(1, Math.min(200, n | 0)); this.save(); },
+};
+Progress.load();
 
 // ── Instrument (guitar / guitarlele) ───────────────────
 // A guitarlele is tuned A D G C E A: a guitar capo'd at the 5th fret. Same shapes,
@@ -826,6 +1120,7 @@ function setInstrument(key) {
   const s = currentSession();
   renderInstrumentInfo(s);
   if (!s.coming) renderChordSection(s);
+  renderLibrary();
 }
 
 // Barre chords gained (or lost) when the song's shapes are transposed for the instrument
@@ -858,71 +1153,254 @@ function renderInstrumentInfo(s) {
     : 'Learn the shapes · play through each section using the pattern above';
 }
 
-// ── Track selector ─────────────────────────────────────
-function buildTrackSelector() {
-  const sel = document.getElementById('trackSelector');
-  sel.innerHTML = '';
-  Object.keys(TRACKS).forEach(key => {
-    const btn = document.createElement('button');
-    btn.className = 'track-btn' + (key === currentTrack ? ' active' : '');
-    btn.dataset.track = key;
-    btn.textContent = TRACKS[key].label;
-    btn.onclick = () => setTrack(key);
-    sel.appendChild(btn);
-  });
+// ── Library helpers ────────────────────────────────────
+const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const STATUS_LABEL = { ready: 'Ready', queued: 'Queued', candidate: 'Candidate' };
+const STEP_NAMES = ['Warmup', 'Full song lesson', 'Strumming pattern', 'Chords', 'Play along'];
+const keyShown = s => instrument === 'guitarlele' ? keyForInstrument(s.key) : s.key;
+const keyLabel = () => instrument === 'guitarlele' ? 'Shapes' : 'Key';
+const diffOf = s => difficultyFor(s) || 0;
+
+function dotsHtml(d) {
+  const n = Math.round(d);
+  return `<span class="diff-dots">${'●'.repeat(n)}<span class="off">${'●'.repeat(5 - n)}</span></span>`;
+}
+function hue(str) { let h = 0; for (const c of str) h = (h * 31 + c.charCodeAt(0)) % 360; return h; }
+// Lesson video still when there is one, otherwise a generated cover
+function thumbHtml(s) {
+  if (s.lesson) return `<div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${s.lesson.videoId}/mqdefault.jpg" alt=""></div>`;
+  const h = hue(s.artist);
+  const initials = s.title.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).slice(0, 3).map(w => w[0]).join('');
+  return `<div class="thumb" style="background:linear-gradient(135deg,hsl(${h} 35% 18%),hsl(${(h + 40) % 360} 30% 9%))"><div class="art">${initials}</div></div>`;
+}
+function repTagHtml(id) {
+  const st = Progress.state(id);
+  return st === 'playable' ? '<span class="tag-rep playable">✓ Can play</span>'
+       : st === 'learning' ? '<span class="tag-rep learning">Learning</span>'
+       : st === 'next'     ? '<span class="tag-rep next">Up next</span>' : '';
+}
+function whereLabel(s) { return s.track ? `${TRACKS[s.track].label} · Week ${s.week}` : 'Library · not in a path yet'; }
+function openSong(id) { location.hash = '#/song/' + id; }
+function move(id, state) { Progress.setState(id, state); renderLibrary(); renderRepRow(); }
+function playedToday(id) { Progress.playedToday(id); renderLibrary(); }
+
+// ── Library: today, practice, board ────────────────────
+function renderHero() {
+  const el = document.getElementById('hero');
+  // Today = the learning song furthest into today's session
+  const s = Progress.list('learning').sort((a, b) => Progress.stepsToday(b.id).length - Progress.stepsToday(a.id).length)[0];
+  el.classList.toggle('empty-hero', !s);
+  if (!s) {
+    el.innerHTML = `<div class="body"><div class="song-label">Today</div><h2>Nothing in Learning</h2>
+      <div class="artist">Start a song from Up next, or pick one from the library below.</div></div>`;
+    return;
+  }
+  const done = Progress.stepsToday(s.id);
+  const nextStep = [0, 1, 2, 3, 4].find(i => !done.includes(i));
+  const status = s.coming ? 'Session not built yet'
+    : done.length === 5 ? '<strong>All 5 steps done today</strong>'
+    : done.length ? `${done.length} of 5 done · next: <strong>${STEP_NAMES[nextStep]}</strong>`
+    : `Start with <strong>${STEP_NAMES[0]}</strong>`;
+  el.innerHTML = `<div onclick="openSong('${s.id}')" style="cursor:pointer">${thumbHtml(s)}</div>
+    <div class="body">
+      <div class="song-label">Today · ${esc(whereLabel(s))}</div>
+      <h2>${esc(s.title)}</h2>
+      <div class="artist">${esc(s.artist)} · ${keyLabel()} ${keyShown(s)}${s.bpm ? ` · ${s.bpm} BPM` : ''}</div>
+      <div class="stepper">${[0, 1, 2, 3, 4].map(i => `<i class="${done.includes(i) ? 'done' : ''}"></i>`).join('')}</div>
+      <div class="step-now">${status}</div>
+      <div class="actions">
+        <button class="lib-btn" onclick="openSong('${s.id}')">▶ ${done.length ? 'Continue' : 'Start'} session</button>
+        <button class="lib-btn ghost" onclick="move('${s.id}','playable')">I can play it end to end</button>
+      </div>
+    </div>`;
 }
 
-function setTrack(track) {
-  currentTrack = track;
-  currentWeek  = 1;
-  localStorage.setItem('guitarTrack', track);
-  localStorage.setItem('guitarWeekV2', '1');
-  document.querySelectorAll('.track-btn').forEach(b => b.classList.toggle('active', b.dataset.track === track));
+function renderPractice() {
+  const n = Progress.streak();
+  document.getElementById('streak').innerHTML = `${n} day${n === 1 ? '' : 's'}<small>current streak</small>`;
+  const cells = [];
+  for (let k = 13; k >= 0; k--) {
+    const d = new Date(); d.setDate(d.getDate() - k);
+    const key = d.toLocaleDateString('en-CA');
+    cells.push(`<i class="${Progress.data.days[key] || ''} ${k === 0 ? 'is-today' : ''}" title="${key}"></i>`);
+  }
+  document.getElementById('cal').innerHTML = cells.join('');
+  const have = Progress.list('playable').length, goal = Progress.data.goal;
+  document.getElementById('goal').innerHTML = `Repertoire: <b style="color:#fff">${have}</b> of
+    <input type="number" min="1" max="200" value="${goal}" onchange="Progress.setGoal(+this.value);renderLibrary()"> songs you can play end to end
+    <div class="gbar"><span style="width:${Math.min(100, have / goal * 100)}%"></span></div>`;
+}
+
+function itemHtml(s, actions, meta, warn) {
+  return `<div class="item"><div onclick="openSong('${s.id}')">${thumbHtml(s)}</div>
+    <div><div class="t" onclick="openSong('${s.id}')">${esc(s.title)}</div><div class="m ${warn ? 'warn' : ''}">${meta}</div></div>
+    <div class="acts">${actions}</div></div>`;
+}
+
+function renderBoard() {
+  const next = Progress.list('next'), learning = Progress.list('learning'), playable = Progress.list('playable');
+  const full = Progress.learningFull();
+  const cols = [
+    { title: 'Up next', count: next.length, hint: 'Queued in the order you add them.',
+      items: next.map(s => itemHtml(s,
+        `<button class="mini" ${full ? 'disabled title="Learning is full"' : ''} onclick="move('${s.id}','learning')">Start →</button>
+         <button class="mini" onclick="move('${s.id}',null)">Remove</button>`,
+        `${diffOf(s).toFixed(1)} difficulty${s.coming ? ' · session not built' : ''}`, s.coming)) },
+    { title: 'Learning', count: `<span class="limit ${full ? 'full' : ''}">${learning.length} / ${LEARNING_LIMIT}</span>`, hint: 'Your daily session comes from here.',
+      items: learning.map(s => {
+        const n = Progress.stepsToday(s.id).length;
+        return itemHtml(s,
+          `<button class="mini" onclick="move('${s.id}','playable')">Got it ✓</button>
+           <button class="mini" onclick="move('${s.id}','next')">← Park</button>`,
+          s.coming ? 'Session not built yet' : `${n} of 5 steps today${s.bpm ? ' · ' + s.bpm + ' BPM' : ''}`, s.coming);
+      }) },
+    { title: 'Can play end to end', count: playable.length, hint: 'Run through each one every two weeks so it stays in your hands.',
+      items: playable.map(s => {
+        const lp = Progress.data.songs[s.id].lastPlayed, d = lp ? daysAgo(lp) : null;
+        const meta = d === null ? 'Not logged yet' : d === 0 ? 'Played today' : d > 14 ? `${d} days ago · due a run-through` : `${d} day${d === 1 ? '' : 's'} ago`;
+        return itemHtml(s,
+          `<button class="mini" ${d === 0 ? 'disabled' : ''} onclick="playedToday('${s.id}')">Played today</button>
+           <button class="mini" ${full ? 'disabled title="Learning is full"' : ''} onclick="move('${s.id}','learning')">← Relearn</button>`,
+          meta, d === null || d > 14);
+      }) },
+  ];
+  document.getElementById('board').innerHTML = cols.map(c => `<div class="col">
+    <div class="col-h"><b>${c.title}</b><span>${c.count}</span></div>
+    <div class="hint">${c.hint}</div>
+    ${c.items.join('') || '<div class="col-empty">Empty</div>'}</div>`).join('');
+  document.getElementById('libSub').textContent =
+    `${playable.length} song${playable.length === 1 ? '' : 's'} you can play · ${learning.length} learning · ${next.length} up next`;
+}
+
+// ── Library: search and browse ─────────────────────────
+const lib = { q: '', status: 'all', level: 'all', tag: null, path: null, sort: 'easiest' };
+const SWEET_SPOT = [2.0, 3.3];   // songs.md notes: Carlos's current sweet spot
+const LEVELS = {
+  all: ['Any level', () => true],
+  easy: ['Easy', d => d < 2], medium: ['Medium', d => d >= 2 && d < 3], hard: ['Hard', d => d >= 3],
+  mine: [`Your level ${SWEET_SPOT[0]}–${SWEET_SPOT[1]}`, d => d >= SWEET_SPOT[0] - 1e-9 && d <= SWEET_SPOT[1] + 1e-9],
+};
+const SORTS = {
+  easiest: (a, b) => diffOf(a) - diffOf(b) || a.title.localeCompare(b.title),
+  hardest: (a, b) => diffOf(b) - diffOf(a) || a.title.localeCompare(b.title),
+  title:   (a, b) => a.title.localeCompare(b.title),
+  artist:  (a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title),
+  year:    (a, b) => a.year - b.year,
+};
+function matchesQuery(s, q) {
+  if (!q) return true;
+  q = q.toLowerCase();
+  return [s.title, s.artist, s.key, keyShown(s), String(s.year), ...(s.tags || [])].some(x => x.toLowerCase().includes(q));
+}
+function topTags(n) {
+  const c = {};
+  SONGS.forEach(s => (s.tags || []).forEach(t => c[t] = (c[t] || 0) + 1));
+  return Object.entries(c).sort((a, b) => b[1] - a[1]).slice(0, n).map(([t]) => t);
+}
+function setLib(k, v) { lib[k] = v; renderBrowse(); }
+
+function renderBrowse() {
+  document.getElementById('paths').innerHTML = Object.keys(TRACKS).map(k => {
+    const songs = SONGS.filter(s => s.track === k);
+    const ready = songs.filter(s => !s.coming).length;
+    const played = songs.filter(s => Progress.state(s.id) === 'playable').length;
+    return `<button class="path ${lib.path === k ? 'on' : ''}" onclick="setLib('path', lib.path === '${k}' ? null : '${k}')">
+      <h3>${TRACKS[k].label} path</h3>
+      <div class="meta">${songs.length} weeks · ${ready} ready · ${played} you can play</div>
+      <div class="pbar"><span style="width:${ready / songs.length * 100}%"></span></div></button>`;
+  }).join('');
+
+  const base = SONGS.filter(s => (!lib.path || s.track === lib.path) && matchesQuery(s, lib.q));
+  const count = k => base.filter(s => k === 'all' || songStatus(s) === k).length;
+  document.getElementById('libFilters').innerHTML =
+    ['all', 'ready', 'queued', 'candidate'].map(k =>
+      `<button class="chip ${lib.status === k ? 'on' : ''}" onclick="setLib('status','${k}')">${k === 'all' ? 'All' : STATUS_LABEL[k]} <span class="n">${count(k)}</span></button>`).join('') +
+    '<span class="sep"></span>' +
+    Object.entries(LEVELS).map(([k, [label]]) =>
+      `<button class="chip ${lib.level === k ? 'on' : ''}" onclick="setLib('level','${k}')">${label}</button>`).join('');
+  document.getElementById('libTags').innerHTML = topTags(10).map(t =>
+    `<button class="chip tag ${lib.tag === t ? 'on' : ''}" onclick="setLib('tag', lib.tag === '${t}' ? null : '${t}')">#${esc(t)}</button>`).join('');
+
+  let list = base.filter(s => (lib.status === 'all' || songStatus(s) === lib.status) &&
+    LEVELS[lib.level][1](diffOf(s)) && (!lib.tag || (s.tags || []).includes(lib.tag)));
+  list = lib.path && lib.sort === 'easiest' ? list.sort((a, b) => a.week - b.week) : list.sort(SORTS[lib.sort]);
+
+  document.getElementById('libCount').textContent = `${SONGS.length} songs · ${SONGS.filter(s => !s.coming).length} ready to practise`;
+  document.getElementById('libShown').textContent = `${list.length} song${list.length === 1 ? '' : 's'}${lib.path ? ` · ${TRACKS[lib.path].label} path in week order` : ''}`;
+  document.getElementById('libGrid').innerHTML = list.length ? list.map(s => {
+    const st = songStatus(s);
+    return `<div class="song-card ${st}" onclick="openSong('${s.id}')">
+      <div style="position:relative">${thumbHtml(s)}<div class="badges"><span class="tag-status ${st}">${STATUS_LABEL[st]}</span>${repTagHtml(s.id)}</div>
+        ${Progress.state(s.id) ? '' : `<button class="mini add" title="Add to Up next" onclick="event.stopPropagation();move('${s.id}','next')">+ Up next</button>`}</div>
+      <h3>${esc(s.title)}</h3>
+      <div class="by">${esc(s.artist)} · ${s.year}${s.track ? ` · ${TRACKS[s.track].label.slice(0, 3)} W${s.week}` : ''}</div>
+      <div class="row">${dotsHtml(diffOf(s))}<span class="pill">${keyLabel()} <strong>${keyShown(s)}</strong></span>${s.bpm ? `<span class="pill">${s.bpm} bpm</span>` : ''}</div>
+    </div>`;
+  }).join('') : '<div class="lib-empty">No songs match. Clear a filter.</div>';
+}
+
+function renderLibrary() {
+  renderHero(); renderPractice(); renderBoard(); renderBrowse();
+}
+
+// ── Session page: repertoire row and step ticks ────────
+function renderRepRow() {
+  const s = currentSong, st = Progress.state(s.id), full = Progress.learningFull();
+  const learnBtn = `<button class="lib-btn sm ${st ? 'ghost' : ''}" ${full ? 'disabled title="Two songs are already in Learning"' : ''} onclick="move('${s.id}','learning')">Start learning</button>`;
+  const label = { next: 'Up next', learning: 'Learning', playable: 'You can play this end to end' }[st] || 'Not in your repertoire';
+  const buttons = !st ? `${learnBtn}<button class="lib-btn sm ghost" onclick="move('${s.id}','next')">+ Up next</button>`
+    : st === 'next' ? `${learnBtn}<button class="lib-btn sm ghost" onclick="move('${s.id}',null)">Remove</button>`
+    : st === 'learning' ? `<button class="lib-btn sm" onclick="move('${s.id}','playable')">I can play it end to end ✓</button><button class="lib-btn sm ghost" onclick="move('${s.id}','next')">Park</button>`
+    : `<button class="lib-btn sm ghost" ${Progress.data.songs[s.id].lastPlayed === today() ? 'disabled' : ''} onclick="playedToday('${s.id}');renderRepRow()">Played it today</button>`;
+  document.getElementById('repRow').innerHTML = `<span>${label}</span>${buttons}`;
+}
+function renderStepDone() {
+  const done = Progress.stepsToday(currentSong.id);
+  document.querySelectorAll('.step-done').forEach(b => {
+    const on = done.includes(+b.dataset.step);
+    b.classList.toggle('on', on);
+    b.textContent = on ? '✓ Done today' : 'Mark done';
+    b.closest('.step').classList.toggle('is-done', on);
+  });
+}
+function toggleStep(i) { Progress.toggleStep(currentSong.id, i); renderStepDone(); }
+
+// ── Views and routing ──────────────────────────────────
+// #/ = library, #/song/<id> = that song's session
+function showSong(s) {
+  currentSong = s;
+  localStorage.setItem('guitarSong', s.id);
   stopBacking();
-  buildWeekSelector();
-  renderSession(currentSession());
+  renderSession(s);
   renderBtGrid();
   resetPlayer();
+  renderedSong = s;
 }
-
-// ── Week selector ──────────────────────────────────────
-function buildWeekSelector() {
-  const sel = document.getElementById('weekSelector');
-  sel.innerHTML = '';
-  const sessions = TRACKS[currentTrack].sessions;
-  Object.keys(sessions).forEach(w => {
-    const wNum = parseInt(w);
-    const s = sessions[wNum];
-    const btn = document.createElement('button');
-    let cls = 'week-btn';
-    if (wNum === currentWeek) cls += ' active';
-    if (s.coming) cls += ' coming';
-    btn.className = cls;
-    btn.dataset.week = wNum;
-    btn.title = s.title + ' — ' + s.artist;
-    btn.textContent = 'Week ' + wNum;
-    btn.onclick = () => setWeek(wNum);
-    sel.appendChild(btn);
-  });
-  const a = document.createElement('a');
-  a.href = 'strumming.html';
-  a.className = 'week-btn';
-  a.style.cssText = 'margin-left:auto; text-decoration:none; white-space:nowrap;';
-  a.textContent = '🥁 Trainer';
-  sel.appendChild(a);
-}
-
-function setWeek(w) {
-  currentWeek = w;
-  localStorage.setItem('guitarWeekV2', w);
-  document.querySelectorAll('.week-btn[data-week]').forEach(b => {
-    b.classList.toggle('active', parseInt(b.dataset.week) === w);
-  });
+function leaveSession() {
   stopBacking();
-  renderSession(currentSession());
-  renderBtGrid();
-  resetPlayer();
+  if (isPlaying) togglePlay();   // pause, keep the position
+  const s = renderedSong;          // swap any playing YouTube embed back to its thumbnail
+  if (s && !s.coming) { setThumb('warmupThumb', s.warmup.videoId, s.warmup.label); setThumb('lessonThumb', s.lesson.videoId, s.lesson.label || 'Marty Music · YouTube'); }
 }
+function route() {
+  const m = location.hash.match(/^#\/song\/([\w-]+)/);
+  const s = m && SONG_BY_ID[m[1]];
+  document.getElementById('libraryView').style.display = s ? 'none' : '';
+  document.getElementById('sessionView').style.display = s ? '' : 'none';
+  document.getElementById('topbar').style.maxWidth = s ? '720px' : '1100px';
+  document.getElementById('backLink').style.display = s ? '' : 'none';
+  document.getElementById('brand').style.display = s ? 'none' : '';
+  if (s) {
+    if (s !== renderedSong) showSong(s);
+    renderRepRow(); renderStepDone();
+    document.title = s.title + ' · Guitar Practice';
+  } else {
+    leaveSession(); renderLibrary();
+    document.title = 'Guitar Practice';
+  }
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
 
 // ── YouTube embed helper ───────────────────────────────
 function setThumb(elId, videoId, label) {
@@ -1139,17 +1617,20 @@ function renderChordSection(s) {
 
 // ── Session rendering ──────────────────────────────────
 function renderSession(s) {
-  document.getElementById('hLabel').textContent  = TRACKS[currentTrack].label + ' · Week ' + currentWeek;
+  document.getElementById('hLabel').textContent  = whereLabel(s);
   document.getElementById('hTitle').textContent  = s.title;
   document.getElementById('hArtist').textContent = s.artist + ' · ' + s.year;
-  document.getElementById('hBpm').textContent    = s.bpm;
-  document.getElementById('btBpm').value         = s.bpm;
-  document.getElementById('btBpmVal').textContent = s.bpm;
+  document.getElementById('hBpm').textContent    = s.bpm || '–';
+  document.getElementById('btBpm').value         = s.bpm || 88;
+  document.getElementById('btBpmVal').textContent = s.bpm || 88;
   renderInstrumentInfo(s);
 
   const coming = !!s.coming;
   document.getElementById('stepsSection').style.display = coming ? 'none' : '';
   document.getElementById('comingSoon').style.display   = coming ? 'flex' : 'none';
+  document.getElementById('comingSub').innerHTML = s.candidate
+    ? 'This song is in the library but not in a path yet.<br>Add it to Up next to keep it in view.'
+    : 'This week is being prepared.<br>Keep practicing — sessions are added in order.';
 
   if (!coming) {
     document.getElementById('warmupTitle').textContent = s.warmup.title;
@@ -1601,10 +2082,9 @@ function renderBtGrid() {
 
 // ── Init ───────────────────────────────────────────────
 buildInstrumentToggle();
-buildTrackSelector();
-buildWeekSelector();
-renderSession(currentSession());
-renderBtGrid();
+document.getElementById('libQ').oninput = e => setLib('q', e.target.value);
+document.getElementById('libSort').onchange = e => setLib('sort', e.target.value);
+route();
 </script>
 </body>
 </html>

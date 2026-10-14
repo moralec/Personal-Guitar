@@ -4,8 +4,10 @@
 
 ## What it does
 
-A practice app for Carlos: three tracks (Beginner, Intermediate, Advanced) of ten weekly songs each.
-Every built week walks through five steps: a warmup video, a full song lesson with tab and chord
+A practice app for Carlos, built around songs he can play end to end. It opens on a library: today's
+session, a practice streak, a repertoire board (Up next, Learning, Can play end to end) and all 57
+songs from `songs.md`, with the three 10-week tracks (Beginner, Intermediate, Advanced) as paths.
+Every built song walks through five steps: a warmup video, a full song lesson with tab and chord
 links, a strumming pattern on a 16-step grid with a metronome, chord diagrams, and a play-along player
 with A-B looping, speed and pitch shift. A header toggle switches between guitar and guitarlele and
 transposes the chords a 4th down. Weeks not yet built show "Coming soon".
@@ -53,8 +55,9 @@ Dependencies and outside services:
 ## Data and secrets
 
 - Song data (chords, backing patterns, video IDs, links) lives in `index.html`. Candidates live in `songs.md`.
-- The browser keeps your position in `localStorage` under three keys: `guitarTrack`, `guitarWeekV2`
-  and `guitarInstrument`.
+- The browser keeps your progress in `localStorage`: `guitarProgress` (repertoire board, steps done,
+  practice days, goal), `guitarSong` (last song opened) and `guitarInstrument`. It does not sync between
+  devices. `guitarTrack` / `guitarWeekV2` are only read once, to seed the board on first run.
 - Play-along audio is a file you choose in the browser each session. It is never uploaded or stored,
   and no audio is committed to the repo.
 - There are no keys, tokens or accounts.
