@@ -17,4 +17,4 @@ Carlos: "Lets go with C as you suggest" (C as home, A's search/grid for browsing
 - **Data:** `tags` added to all 30 sessions and a `CANDIDATES` array (27 songs, incl. the uncommitted Love is the Drug row in songs.md), both generated from songs.md. One `Progress` object writes `guitarProgress`.
 - **Decided without asking** (said so in chat): tracks kept as Paths; progress in localStorage, no sync.
 - **Verified** headless (extension still not connected): no console errors; scripted flow (seed, open song, mark 1 then 5 steps → part then full day and streak 1, Learning limit, Got it → playable with today's date, + Up next from a card, candidate opens Coming soon, guitarlele keys in both views, search/path/level filters, reload keeps progress). Library 375px: no overflow. Session 375px overflows by 27px, which predates this (the old page was 31px over); added to BACKLOG.
-- Not committed or deployed.
+- Committed `0ea3fc8` and pushed on Carlos's go-ahead; live on guitar.ag-insights.co.uk about 20s later, rendered headless with no errors. `songs.md` (Love is the Drug row) and `mockups/` left uncommitted.
