@@ -27,3 +27,13 @@ Carlos asked for rock en español classics plus popular Calamaro songs, then add
 - **Keys:** from LaCuerda / Ultimate Guitar chord charts (a subagent fetched 13 of them). Only Lamento boliviano's chart states a key; the rest are read from the progressions. Devuélveme a mi chica has charts in three keys (D minor used, most-voted). Mariposa tecknicolor corrected to 1994. Copa rota's year not found, left unknown. Ratings are estimates from the charts.
 - **index.html:** `CANDIDATES` regenerated from songs.md (48 candidates, 78 songs total). Year made optional; accent-insensitive search; accents folded in song ids.
 - **Verified** headless: 78 songs, no console errors, tag chips, "calamaro" finds 8, "musica ligera" / "devuelveme" match, unknown year sorts last, guitarlele keys (Copa rota → B minor shapes), all 78 ids unique.
+
+## 2026-10-14 — Pipeline: all 68 remaining songs built
+
+Carlos asked to scale building with DeepSeek subagents, then for a strumming extractor ("skip that section, not the song").
+
+- **Test** on Flaca + Wonderwall with `opencode/deepseek-v4.1-flash` (pay-per-use, ~$0.12/song; Carlos uses opencode-go and herdr, switched after). Good videos and charts, weak invented strums.
+- **`strum-from-ug.js`**: decodes UG's embedded strumming data (code table read from UG's own JS bundle). 15/16 test songs found a pattern; it agreed with the hand-entered Knockin' pattern. Found that 8 of 10 hand-built songs use one placeholder strum and 5 of their chord links 404 (both in BACKLOG, not fixed).
+- **Run**: survey 48/68 with a pattern; 4 herdr workers on `opencode-go/deepseek-v4.1-flash`, one session per song, ~2.5 h. 68/68 pass `check.js`. Incidents: editing `run-one.sh` mid-run broke the first 4 runs after their research (rechecked, fine); one agent wandered into other outputs and wrote nothing (requeued, passed; all outputs verified title-for-title).
+- **App**: generated `BUILT` block (68 songs), `stepsFor()` hides strumming when `backing: null`, Capo and "Auto-built" chips, built candidates show Ready. 83 chord shapes added (115 total), each verified note-by-note; every chord in every song has a guitar and guitarlele diagram.
+- **Verified** headless: all 78 songs open with chords, lesson and warmup thumbnails, 20 with strumming hidden, 6 capo chips, no console errors.

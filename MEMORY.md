@@ -47,6 +47,14 @@ Decisions that constrain new code, corrections received, gotchas. Rewritten as s
 - A practice day is `part` when any step is marked done or a song is logged as played, and `full` when one song has all 5 steps done. Past days are never recomputed.
 - Only Every Rose and Knockin' have a full chord bar grid (`chords.sections`); the other 8 built songs have `chords.structure` only. A library that shows "what's built" has to distinguish these.
 
+## Pipeline (2026-10-14)
+
+- **Carlos's decision:** a song with no UG strumming pattern is still built; only the strumming step is hidden (`backing: null`, `stepsFor()`). A full practice day then means all 4 of its steps.
+- UG chords pages embed `tab_view.strummings` in the `js-store` JSON. Step codes from UG's bundle: 1/2/3 down (plain/muted/accent), 101/102/103 up, 201 palm mute, 202 pause, 203 rest. Patterns belong to individual versions; most versions have none, so `--search` walks the most-voted versions. Triplet patterns don't fit the 16-step grid and count as none.
+- DeepSeek (opencode-go) is good at finding real lesson videos (oEmbed-verified) and chord charts, honest in `notes`, weak at inventing strum patterns (it missed muted strums on Flaca) — that is why strumming comes from the script. One agent drifted into other songs' output files and wrote nothing; outputs were verified title-for-title afterwards. Give each agent its own folder next time.
+- Pay-per-use `opencode/` provider cost ~$0.11–0.13 per song in the test; Carlos's runs go on `opencode-go/`.
+- Key in a BUILT entry is the chart's shape key, with `capo` shown as a chip; `defaultPitch: 1` for songs the chart marks as tuned down a semitone (GN'R etc.).
+
 ## Gotchas
 
 - Web Audio: `source.stop()` fires `onended` just like a natural end. Any restart-while-playing (speed, pitch, markers, Pause) therefore reset the player and orphaned a looping source that Stop could not reach. `stopSrc()` now detaches the handler first and `playGen` guards the async `startSrc()`. Test the pitch-at-Original path as well as the SoundTouch one; the built songs default to +1, so the plain path is easy to miss. (2026-09-16, log: stop-buttons)

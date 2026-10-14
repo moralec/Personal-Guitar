@@ -18,37 +18,37 @@ Rating scale 1–5 per dimension (guitar part only):
 |-------|------|------|--------|:-----:|--------|
 | Beginner | 1 | Every Rose Has Its Thorn | Poison | 1.3 | ✅ Built |
 | Beginner | 2 | Knockin' on Heaven's Door | Guns N' Roses | 1.0 | ✅ Built |
-| Beginner | 3 | Smoke on the Water | Deep Purple | 1.3 | 🔜 Stub |
-| Beginner | 4 | With or Without You | U2 | 1.3 | 🔜 Stub |
-| Beginner | 5 | Free Fallin' | Tom Petty | 1.3 | 🔜 Stub |
+| Beginner | 3 | Smoke on the Water | Deep Purple | 1.3 | 🤖 Auto-built |
+| Beginner | 4 | With or Without You | U2 | 1.3 | 🤖 Auto-built |
+| Beginner | 5 | Free Fallin' | Tom Petty | 1.3 | 🤖 Auto-built |
 | Beginner | 6 | Summer of '69 | Bryan Adams | 1.7 | ✅ Built |
-| Beginner | 7 | Here I Go Again | Whitesnake | 1.7 | 🔜 Stub |
-| Beginner | 8 | Wonderwall | Oasis | 1.7 | 🔜 Stub |
-| Beginner | 9 | Good Riddance (Time of Your Life) | Green Day | 1.7 | 🔜 Stub |
+| Beginner | 7 | Here I Go Again | Whitesnake | 1.7 | 🤖 Auto-built |
+| Beginner | 8 | Wonderwall | Oasis | 1.7 | 🤖 Auto-built |
+| Beginner | 9 | Good Riddance (Time of Your Life) | Green Day | 1.7 | 🤖 Auto-built |
 | Beginner | 10 | Wish You Were Here | Pink Floyd | 2.0 | ✅ Built |
-| Intermediate | 1 | Don't Stop Believin' | Journey | 2.0 | 🔜 Stub |
-| Intermediate | 2 | Patience | Guns N' Roses | 2.0 | 🔜 Stub |
+| Intermediate | 1 | Don't Stop Believin' | Journey | 2.0 | 🤖 Auto-built |
+| Intermediate | 2 | Patience | Guns N' Roses | 2.0 | 🤖 Auto-built |
 | Intermediate | 3 | You Give Love a Bad Name | Bon Jovi | 2.3 | ✅ Built |
-| Intermediate | 4 | Enter Sandman | Metallica | 2.3 | 🔜 Stub |
+| Intermediate | 4 | Enter Sandman | Metallica | 2.3 | 🤖 Auto-built |
 | Intermediate | 5 | More Than Words | Extreme | 2.7 | ✅ Built |
 | Intermediate | 6 | Money for Nothing | Dire Straits | 2.7 | ✅ Built |
-| Intermediate | 7 | Nothing Else Matters | Metallica | 2.7 | 🔜 Stub |
-| Intermediate | 8 | Paradise City | Guns N' Roses | 2.7 | 🔜 Stub |
+| Intermediate | 7 | Nothing Else Matters | Metallica | 2.7 | 🤖 Auto-built |
+| Intermediate | 8 | Paradise City | Guns N' Roses | 2.7 | 🤖 Auto-built |
 | Intermediate | 9 | Message in a Bottle | The Police | 2.7 | ✅ Built |
 | Intermediate | 10 | Tears in Heaven | Eric Clapton | 3.0 | ✅ Built |
-| Advanced | 1 | Layla | Eric Clapton | 3.0 | 🔜 Stub |
-| Advanced | 2 | Sweet Child O' Mine | Guns N' Roses | 3.0 | 🔜 Stub |
-| Advanced | 3 | Crazy Train | Ozzy Osbourne | 3.0 | 🔜 Stub |
-| Advanced | 4 | November Rain | Guns N' Roses | 3.3 | 🔜 Stub |
-| Advanced | 5 | Purple Rain | Prince | 3.3 | 🔜 Stub |
+| Advanced | 1 | Layla | Eric Clapton | 3.0 | 🤖 Auto-built |
+| Advanced | 2 | Sweet Child O' Mine | Guns N' Roses | 3.0 | 🤖 Auto-built |
+| Advanced | 3 | Crazy Train | Ozzy Osbourne | 3.0 | 🤖 Auto-built |
+| Advanced | 4 | November Rain | Guns N' Roses | 3.3 | 🤖 Auto-built |
+| Advanced | 5 | Purple Rain | Prince | 3.3 | 🤖 Auto-built |
 | Advanced | 6 | Hotel California | Eagles | 3.3 | ✅ Built |
-| Advanced | 7 | Blackbird | The Beatles | 3.3 | 🔜 Stub |
-| Advanced | 8 | Comfortably Numb | Pink Floyd | 3.7 | 🔜 Stub |
-| Advanced | 9 | Sultans of Swing | Dire Straits | 3.7 | 🔜 Stub |
-| Advanced | 10 | Stairway to Heaven | Led Zeppelin | 3.7 | 🔜 Stub |
+| Advanced | 7 | Blackbird | The Beatles | 3.3 | 🤖 Auto-built |
+| Advanced | 8 | Comfortably Numb | Pink Floyd | 3.7 | 🤖 Auto-built |
+| Advanced | 9 | Sultans of Swing | Dire Straits | 3.7 | 🤖 Auto-built |
+| Advanced | 10 | Stairway to Heaven | Led Zeppelin | 3.7 | 🤖 Auto-built |
 
-Built = warmup video, lesson video, tab links, backing pattern all filled in.
-Stub = song is queued; shows "Coming soon" in the app until filled in.
+Built = warmup video, lesson video, tab links, backing pattern all filled in by hand.
+Auto-built = researched by `pipeline/` (DeepSeek + Ultimate Guitar strumming data) on 2026-10-14; chords, timing and videos not yet checked by ear. Every candidate below is auto-built too.
 
 ---
 

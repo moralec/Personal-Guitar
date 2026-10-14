@@ -22,7 +22,17 @@ Three tracks (Beginner, Intermediate, Advanced) × 10 weeks, plus `CANDIDATES` (
 
 Header toggle **Guitar / Guitarlele** transposes steps 4 and 5 a 4th down (see `MEMORY.md`). The header shows BPM, Difficulty (songs.md score, Chords adjusted for the instrument) and one key chip: `Key` on guitar, `Shapes` on guitarlele.
 
-## Adding or building a week
+## Building songs automatically (`pipeline/`)
+
+All 68 non-hand-built songs were researched by the pipeline on 2026-10-14 and live in the generated `BUILT` block of `index.html` (merged over the TRACKS stub or CANDIDATES entry with the same id; they show an "Auto-built · check by ear" chip).
+
+1. `pipeline/survey.sh`: `strum-from-ug.js --search` finds an Ultimate Guitar chords version that carries a strumming pattern → `pipeline/strum/<slug>.json`. No pattern (or a triplet one) → the song is still built, with `backing: null`, and the session hides the strumming step.
+2. `pipeline/build.sh [N]`: queues the songs and opens a herdr tab "songs" with N panes running `worker.sh`; each song is one `opencode run` on `opencode-go/deepseek-v4.1-flash` with `pipeline/prompt.md` → `pipeline/out/<slug>.json`, then `check.js` (video ids via oEmbed, links, chord diagrams incl. guitarlele, 4-beat bars, sequence).
+3. `node pipeline/assemble.js` rewrites the `BUILT` block from every song whose check has no FAIL.
+
+Don't edit `run-one.sh` / `worker.sh` while workers run (bash reads scripts as it goes). Outputs, queue and strum data are gitignored.
+
+## Adding or building a week by hand
 
 Edit the session object under `TRACKS.<track>.sessions[<week>]` in `index.html`. A stub has `coming: true`; a built week has (every session also carries `tags: [...]` from songs.md, used by the library filters):
 
@@ -51,6 +61,8 @@ Edit the session object under `TRACKS.<track>.sessions[<week>]` in `index.html`.
 |---|---|
 | `index.html` | The whole app: HTML + CSS + JS, no build step, no CDN except SoundTouchJS for pitch shift (falls back to plain playback) |
 | `parse-chords.js` | CLI: UG chord chart → session `bars` JSON |
+| `strum-from-ug.js` | CLI: reads the strumming pattern from a UG chords page's embedded data (codes decoded from UG's own web app) → `backing` arrays; `--search` finds a version that has one |
+| `pipeline/` | Batch builder: survey, DeepSeek workers in herdr, checker, assembler (see above) |
 | `songs.md` | Candidate songs with Chords/Licks/Timing ratings |
 | `strumming.html` | Standalone mic-driven strumming trainer; needs localhost for mic access |
 | `Practice.command` | Double-click: local server on 7432 + opens the app |
