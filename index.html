@@ -910,40 +910,61 @@ const TRACKS = {
 
 // ── Candidates ─────────────────────────────────────────
 // Songs from the songs.md candidate pool that are not in a track yet. Same fields as a stub;
-// they show in the library and open as "Coming soon". Move one into TRACKS to schedule it.
+// they show in the library and open as "Coming soon". Move one into TRACKS to schedule it. year: null = unknown.
 const CANDIDATES = [
   { title: "Horse With No Name", artist: "America", year: 1971, key: "E minor", rating: { chords: 1, licks: 1, timing: 1 }, tags: ["folk rock", "beginner"] },
   { title: "Stand By Me", artist: "Ben E. King", year: 1961, key: "A major", rating: { chords: 1, licks: 1, timing: 1 }, tags: ["classic", "beginner"] },
   { title: "Brain Stew", artist: "Green Day", year: 1995, key: "G# minor", rating: { chords: 1, licks: 1, timing: 1 }, tags: ["rock", "beginner"] },
   { title: "Come as You Are", artist: "Nirvana", year: 1991, key: "E minor", rating: { chords: 1, licks: 2, timing: 1 }, tags: ["90s", "beginner"] },
   { title: "Brown Eyed Girl", artist: "Van Morrison", year: 1967, key: "G major", rating: { chords: 1, licks: 1, timing: 2 }, tags: ["classic", "beginner"] },
+  { title: "Flaca", artist: "Andrés Calamaro", year: 1997, key: "G major", rating: { chords: 1, licks: 1, timing: 2 }, tags: ["rock en español", "calamaro", "90s"] },
   { title: "Highway to Hell", artist: "AC/DC", year: 1979, key: "A major", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["classic rock", "80s"] },
   { title: "Eye of the Tiger", artist: "Survivor", year: 1982, key: "C minor", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["80s", "rock"] },
   { title: "Faithfully", artist: "Journey", year: 1983, key: "Eb major", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["power ballad", "80s"] },
   { title: "Wanted Dead or Alive", artist: "Bon Jovi", year: 1986, key: "D major", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["power ballad", "80s"] },
   { title: "Wonderful Tonight", artist: "Eric Clapton", year: 1977, key: "G major", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["classic rock", "beginner"] },
   { title: "Hallelujah", artist: "Leonard Cohen", year: 1984, key: "C major", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["folk", "fingerpicking"] },
+  { title: "Crímenes perfectos", artist: "Andrés Calamaro", year: 1999, key: "A major", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["rock en español", "calamaro", "90s"] },
+  { title: "Loco", artist: "Andrés Calamaro", year: 1997, key: "E minor", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["rock en español", "calamaro", "90s"] },
+  { title: "Te quiero igual", artist: "Andrés Calamaro", year: 1997, key: "G major", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["rock en español", "calamaro", "90s"] },
+  { title: "Estadio Azteca", artist: "Andrés Calamaro", year: 1997, key: "E minor", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["rock en español", "calamaro", "90s"] },
+  { title: "Copa rota", artist: "Andrés Calamaro", year: null, key: "E minor", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["rock en español", "calamaro", "bolero"] },
+  { title: "Eres", artist: "Café Tacvba", year: 2003, key: "A minor", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["rock en español", "00s", "ballad"] },
   { title: "Back in Black", artist: "AC/DC", year: 1980, key: "E minor", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["classic rock", "80s"] },
   { title: "Livin' on a Prayer", artist: "Bon Jovi", year: 1986, key: "E minor", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["80s rock"] },
   { title: "Always", artist: "Bon Jovi", year: 1994, key: "Bb major", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["power ballad", "90s"] },
   { title: "Thunderstruck", artist: "AC/DC", year: 1990, key: "A major", rating: { chords: 1, licks: 3, timing: 2 }, tags: ["80s rock"] },
   { title: "Home Sweet Home", artist: "Mötley Crüe", year: 1985, key: "C major", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["power ballad", "80s"] },
   { title: "House of the Rising Sun", artist: "The Animals", year: 1964, key: "A minor", rating: { chords: 2, licks: 1, timing: 3 }, tags: ["classic", "arpeggio"] },
+  { title: "Tren al sur", artist: "Los Prisioneros", year: 1990, key: "A minor", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["rock en español", "90s"] },
   { title: "More Than a Feeling", artist: "Boston", year: 1976, key: "D major", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["classic rock"] },
   { title: "Running Down a Dream", artist: "Tom Petty", year: 1989, key: "E major", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["rock", "80s"] },
   { title: "The Sound of Silence", artist: "Simon & Garfunkel", year: 1964, key: "A minor", rating: { chords: 2, licks: 2, timing: 3 }, tags: ["folk", "fingerpicking"] },
   { title: "Sunshine of Your Love", artist: "Cream", year: 1967, key: "D minor", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["classic rock", "blues"] },
   { title: "Iron Man", artist: "Black Sabbath", year: 1970, key: "B major", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["heavy metal"] },
   { title: "Yesterday", artist: "The Beatles", year: 1965, key: "F major", rating: { chords: 3, licks: 1, timing: 3 }, tags: ["classic", "fingerpicking"] },
+  { title: "Sin documentos", artist: "Los Rodríguez", year: 1993, key: "G minor", rating: { chords: 2, licks: 2, timing: 3 }, tags: ["rock en español", "calamaro", "90s", "rumba"] },
+  { title: "Mil horas", artist: "Los Abuelos de la Nada", year: 1983, key: "G minor", rating: { chords: 3, licks: 2, timing: 2 }, tags: ["rock en español", "calamaro", "80s"] },
+  { title: "De música ligera", artist: "Soda Stereo", year: 1990, key: "B minor", rating: { chords: 2, licks: 3, timing: 2 }, tags: ["rock en español", "90s", "riff"] },
+  { title: "En la ciudad de la furia", artist: "Soda Stereo", year: 1988, key: "B minor", rating: { chords: 3, licks: 2, timing: 2 }, tags: ["rock en español", "80s"] },
+  { title: "Lamento boliviano", artist: "Enanitos Verdes", year: 1994, key: "E minor", rating: { chords: 3, licks: 2, timing: 2 }, tags: ["rock en español", "90s"] },
+  { title: "Matador", artist: "Los Fabulosos Cadillacs", year: 1993, key: "A minor", rating: { chords: 1, licks: 2, timing: 4 }, tags: ["rock en español", "90s", "ska"] },
+  { title: "La negra Tomasa", artist: "Caifanes", year: 1988, key: "D minor", rating: { chords: 2, licks: 2, timing: 3 }, tags: ["rock en español", "80s", "cumbia"] },
+  { title: "Oye mi amor", artist: "Maná", year: 1992, key: "B minor", rating: { chords: 3, licks: 2, timing: 2 }, tags: ["rock en español", "90s"] },
+  { title: "Demoliendo hoteles", artist: "Charly García", year: 1984, key: "C major", rating: { chords: 3, licks: 2, timing: 2 }, tags: ["rock en español", "80s"] },
+  { title: "Mariposa tecknicolor", artist: "Fito Páez", year: 1994, key: "B major", rating: { chords: 3, licks: 2, timing: 2 }, tags: ["rock en español", "90s"] },
+  { title: "Devuélveme a mi chica", artist: "Hombres G", year: 1985, key: "D minor", rating: { chords: 3, licks: 2, timing: 2 }, tags: ["rock en español", "80s"] },
   { title: "Africa", artist: "Toto", year: 1982, key: "Bb major", rating: { chords: 3, licks: 2, timing: 3 }, tags: ["80s", "complex"] },
   { title: "Johnny B. Goode", artist: "Chuck Berry", year: 1958, key: "Bb major", rating: { chords: 2, licks: 4, timing: 2 }, tags: ["classic rock", "blues"] },
   { title: "Love is the Drug", artist: "Roxy Music", year: 1975, key: "D minor", rating: { chords: 2, licks: 3, timing: 3 }, tags: ["70s", "funk rock", "groove"] },
   { title: "Dust in the Wind", artist: "Kansas", year: 1977, key: "C major", rating: { chords: 2, licks: 3, timing: 4 }, tags: ["folk rock", "fingerpicking"] },
+  { title: "Persiana americana", artist: "Soda Stereo", year: 1986, key: "D major", rating: { chords: 3, licks: 3, timing: 3 }, tags: ["rock en español", "80s"] },
+  { title: "Entre dos tierras", artist: "Héroes del Silencio", year: 1990, key: "B minor", rating: { chords: 3, licks: 4, timing: 2 }, tags: ["rock en español", "90s", "riff"] },
 ];
 
 // ── Songs ──────────────────────────────────────────────
 // Every song in TRACKS and CANDIDATES, flattened. Each keeps its own object, tagged with id / track / week.
-const slug = t => t.toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const slug = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const SONGS = [
   ...Object.entries(TRACKS).flatMap(([track, t]) =>
     Object.entries(t.sessions).map(([w, s]) => Object.assign(s, { id: slug(s.title), track, week: +w }))),
@@ -1285,12 +1306,14 @@ const SORTS = {
   hardest: (a, b) => diffOf(b) - diffOf(a) || a.title.localeCompare(b.title),
   title:   (a, b) => a.title.localeCompare(b.title),
   artist:  (a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title),
-  year:    (a, b) => a.year - b.year,
+  year:    (a, b) => (a.year || 9999) - (b.year || 9999) || a.title.localeCompare(b.title),   // unknown year last
 };
+// Case- and accent-insensitive, so "musica" finds "Música"
+const fold = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 function matchesQuery(s, q) {
   if (!q) return true;
-  q = q.toLowerCase();
-  return [s.title, s.artist, s.key, keyShown(s), String(s.year), ...(s.tags || [])].some(x => x.toLowerCase().includes(q));
+  q = fold(q);
+  return [s.title, s.artist, s.key, keyShown(s), String(s.year || ''), ...(s.tags || [])].some(x => fold(x).includes(q));
 }
 function topTags(n) {
   const c = {};
@@ -1333,7 +1356,7 @@ function renderBrowse() {
       <div style="position:relative">${thumbHtml(s)}<div class="badges"><span class="tag-status ${st}">${STATUS_LABEL[st]}</span>${repTagHtml(s.id)}</div>
         ${Progress.state(s.id) ? '' : `<button class="mini add" title="Add to Up next" onclick="event.stopPropagation();move('${s.id}','next')">+ Up next</button>`}</div>
       <h3>${esc(s.title)}</h3>
-      <div class="by">${esc(s.artist)} · ${s.year}${s.track ? ` · ${TRACKS[s.track].label.slice(0, 3)} W${s.week}` : ''}</div>
+      <div class="by">${esc(s.artist)}${s.year ? ' · ' + s.year : ''}${s.track ? ` · ${TRACKS[s.track].label.slice(0, 3)} W${s.week}` : ''}</div>
       <div class="row">${dotsHtml(diffOf(s))}<span class="pill">${keyLabel()} <strong>${keyShown(s)}</strong></span>${s.bpm ? `<span class="pill">${s.bpm} bpm</span>` : ''}</div>
     </div>`;
   }).join('') : '<div class="lib-empty">No songs match. Clear a filter.</div>';
@@ -1619,7 +1642,7 @@ function renderChordSection(s) {
 function renderSession(s) {
   document.getElementById('hLabel').textContent  = whereLabel(s);
   document.getElementById('hTitle').textContent  = s.title;
-  document.getElementById('hArtist').textContent = s.artist + ' · ' + s.year;
+  document.getElementById('hArtist').textContent = s.artist + (s.year ? ' · ' + s.year : '');
   document.getElementById('hBpm').textContent    = s.bpm || '–';
   document.getElementById('btBpm').value         = s.bpm || 88;
   document.getElementById('btBpmVal').textContent = s.bpm || 88;

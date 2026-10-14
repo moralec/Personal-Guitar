@@ -42,6 +42,8 @@ Decisions that constrain new code, corrections received, gotchas. Rewritten as s
 
 - **Carlos's decision:** concept C (Repertoire) from `mockups/library/` became the home screen, with A's search/grid as the library section. The mockups stay for reference.
 - Defaults chosen without asking, open to change: tracks kept as Paths; progress in localStorage only (no sync); Learning capped at 2; run-through due after 14 days; goal 10; first run seeds Nothing Else Matters as playable, the stored track/week song as Learning and the next two built weeks as Up next.
+- Song ids are `slug(title)` with accents folded (`crimenes-perfectos`); library search also folds accents. `year: null` means unknown (Copa rota): shown blank, sorted last.
+- Rock en español (2026-10-14): 21 candidates at Carlos's request, tags `rock en español` and `calamaro`. **Carlos's preference:** he loves the B7 → Em pull (Flaca, Estadio Azteca, Copa rota); worth looking for in future picks.
 - A practice day is `part` when any step is marked done or a song is logged as played, and `full` when one song has all 5 steps done. Past days are never recomputed.
 - Only Every Rose and Knockin' have a full chord bar grid (`chords.sections`); the other 8 built songs have `chords.structure` only. A library that shows "what's built" has to distinguish these.
 

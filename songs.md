@@ -67,6 +67,7 @@ Stub = song is queued; shows "Coming soon" in the app until filled in.
 | Come as You Are | Nirvana | 1991 | E minor | 1 | 2 | 1 | **1.3** | | 90s, beginner |
 | Free Fallin' | Tom Petty | 1989 | F major | 1 | 1 | 2 | **1.3** | | rock, beginner |
 | Brown Eyed Girl | Van Morrison | 1967 | G major | 1 | 1 | 2 | **1.3** | | classic, beginner |
+| Flaca | Andrés Calamaro | 1997 | G major | 1 | 1 | 2 | **1.3** | | rock en español, calamaro, 90s |
 | Summer of '69 | Bryan Adams | 1985 | D major | 1 | 2 | 2 | **1.7** | 2 | 80s rock |
 | Highway to Hell | AC/DC | 1979 | A major | 1 | 2 | 2 | **1.7** | | classic rock, 80s |
 | Eye of the Tiger | Survivor | 1982 | C minor | 1 | 2 | 2 | **1.7** | | 80s, rock |
@@ -76,6 +77,12 @@ Stub = song is queued; shows "Coming soon" in the app until filled in.
 | Wonderwall | Oasis | 1995 | F# minor | 2 | 1 | 2 | **1.7** | | 90s, beginner |
 | Wonderful Tonight | Eric Clapton | 1977 | G major | 1 | 2 | 2 | **1.7** | | classic rock, beginner |
 | Hallelujah | Leonard Cohen | 1984 | C major | 2 | 1 | 2 | **1.7** | | folk, fingerpicking |
+| Crímenes perfectos | Andrés Calamaro | 1999 | A major | 2 | 1 | 2 | **1.7** | | rock en español, calamaro, 90s |
+| Loco | Andrés Calamaro | 1997 | E minor | 1 | 2 | 2 | **1.7** | | rock en español, calamaro, 90s |
+| Te quiero igual | Andrés Calamaro | 1997 | G major | 2 | 1 | 2 | **1.7** | | rock en español, calamaro, 90s |
+| Estadio Azteca | Andrés Calamaro | 1997 | E minor | 2 | 1 | 2 | **1.7** | | rock en español, calamaro, 90s |
+| Copa rota | Andrés Calamaro | ? | E minor | 2 | 1 | 2 | **1.7** | | rock en español, calamaro, bolero |
+| Eres | Café Tacvba | 2003 | A minor | 2 | 1 | 2 | **1.7** | | rock en español, 00s, ballad |
 | Wish You Were Here | Pink Floyd | 1975 | G major | 2 | 2 | 2 | **2.0** | 3 | classic rock, fingerpicking |
 | Back in Black | AC/DC | 1980 | E minor | 2 | 2 | 2 | **2.0** | | classic rock, 80s |
 | Patience | Guns N' Roses | 1988 | G major | 2 | 2 | 2 | **2.0** | | power ballad, 80s |
@@ -85,6 +92,7 @@ Stub = song is queued; shows "Coming soon" in the app until filled in.
 | Thunderstruck | AC/DC | 1990 | A major | 1 | 3 | 2 | **2.0** | | 80s rock |
 | Home Sweet Home | Mötley Crüe | 1985 | C major | 2 | 2 | 2 | **2.0** | | power ballad, 80s |
 | House of the Rising Sun | The Animals | 1964 | A minor | 2 | 1 | 3 | **2.0** | | classic, arpeggio |
+| Tren al sur | Los Prisioneros | 1990 | A minor | 2 | 2 | 2 | **2.0** | | rock en español, 90s |
 | You Give Love a Bad Name | Bon Jovi | 1986 | C minor | 2 | 3 | 2 | **2.3** | 4 | 80s rock |
 | Enter Sandman | Metallica | 1991 | E minor | 2 | 3 | 2 | **2.3** | | heavy metal, 90s |
 | More Than a Feeling | Boston | 1976 | D major | 2 | 3 | 2 | **2.3** | | classic rock |
@@ -93,6 +101,17 @@ Stub = song is queued; shows "Coming soon" in the app until filled in.
 | Sunshine of Your Love | Cream | 1967 | D minor | 2 | 3 | 2 | **2.3** | | classic rock, blues |
 | Iron Man | Black Sabbath | 1970 | B major | 2 | 3 | 2 | **2.3** | | heavy metal |
 | Yesterday | The Beatles | 1965 | F major | 3 | 1 | 3 | **2.3** | | classic, fingerpicking |
+| Sin documentos | Los Rodríguez | 1993 | G minor | 2 | 2 | 3 | **2.3** | | rock en español, calamaro, 90s, rumba |
+| Mil horas | Los Abuelos de la Nada | 1983 | G minor | 3 | 2 | 2 | **2.3** | | rock en español, calamaro, 80s |
+| De música ligera | Soda Stereo | 1990 | B minor | 2 | 3 | 2 | **2.3** | | rock en español, 90s, riff |
+| En la ciudad de la furia | Soda Stereo | 1988 | B minor | 3 | 2 | 2 | **2.3** | | rock en español, 80s |
+| Lamento boliviano | Enanitos Verdes | 1994 | E minor | 3 | 2 | 2 | **2.3** | | rock en español, 90s |
+| Matador | Los Fabulosos Cadillacs | 1993 | A minor | 1 | 2 | 4 | **2.3** | | rock en español, 90s, ska |
+| La negra Tomasa | Caifanes | 1988 | D minor | 2 | 2 | 3 | **2.3** | | rock en español, 80s, cumbia |
+| Oye mi amor | Maná | 1992 | B minor | 3 | 2 | 2 | **2.3** | | rock en español, 90s |
+| Demoliendo hoteles | Charly García | 1984 | C major | 3 | 2 | 2 | **2.3** | | rock en español, 80s |
+| Mariposa tecknicolor | Fito Páez | 1994 | B major | 3 | 2 | 2 | **2.3** | | rock en español, 90s |
+| Devuélveme a mi chica | Hombres G | 1985 | D minor | 3 | 2 | 2 | **2.3** | | rock en español, 80s |
 | More Than Words | Extreme | 1990 | G major | 3 | 2 | 3 | **2.7** | 5 | 80s, fingerpicking |
 | Money for Nothing | Dire Straits | 1985 | G minor | 2 | 4 | 2 | **2.7** | 6 | 80s, riff |
 | Message in a Bottle | The Police | 1979 | C# minor | 3 | 2 | 3 | **2.7** | 7 | new wave, arpeggio |
@@ -100,11 +119,14 @@ Stub = song is queued; shows "Coming soon" in the app until filled in.
 | Paradise City | Guns N' Roses | 1987 | G major | 2 | 3 | 3 | **2.7** | | 80s rock |
 | Africa | Toto | 1982 | Bb major | 3 | 2 | 3 | **2.7** | | 80s, complex |
 | Johnny B. Goode | Chuck Berry | 1958 | Bb major | 2 | 4 | 2 | **2.7** | | classic rock, blues |
+| Love is the Drug | Roxy Music | 1975 | D minor | 2 | 3 | 3 | **2.7** | | 70s, funk rock, groove |
 | Tears in Heaven | Eric Clapton | 1992 | A major | 3 | 3 | 3 | **3.0** | 8 | fingerpicking, 90s |
 | Sweet Child O' Mine | Guns N' Roses | 1987 | D major | 2 | 5 | 2 | **3.0** | | 80s, iconic riff |
 | Crazy Train | Ozzy Osbourne | 1980 | A minor | 3 | 4 | 2 | **3.0** | | heavy metal, 80s |
 | Layla | Eric Clapton | 1970 | D minor | 3 | 4 | 2 | **3.0** | | classic rock, blues |
 | Dust in the Wind | Kansas | 1977 | C major | 2 | 3 | 4 | **3.0** | | folk rock, fingerpicking |
+| Persiana americana | Soda Stereo | 1986 | D major | 3 | 3 | 3 | **3.0** | | rock en español, 80s |
+| Entre dos tierras | Héroes del Silencio | 1990 | B minor | 3 | 4 | 2 | **3.0** | | rock en español, 90s, riff |
 | Hotel California | Eagles | 1977 | B minor | 3 | 4 | 3 | **3.3** | 9 | classic rock, arpeggio |
 | November Rain | Guns N' Roses | 1991 | G major | 3 | 4 | 3 | **3.3** | | power ballad, 80s |
 | Purple Rain | Prince | 1984 | Bb major | 3 | 4 | 3 | **3.3** | | 80s, soul, blues |
@@ -121,3 +143,4 @@ Stub = song is queued; shows "Coming soon" in the app until filled in.
 - Songs with no Week assigned are candidates for future weeks
 - Score range: 1 (beginner) → 5 (advanced). Carlos's current sweet spot: **2.0–3.3**
 - Nothing Else Matters is already in Carlos's repertoire (knows it)
+- Rock en español (21 songs, tag `rock en español`; Calamaro's own songs plus Los Rodríguez and Los Abuelos de la Nada also tagged `calamaro`) added 2026-10-14. Keys come from LaCuerda / Ultimate Guitar chord charts; only Lamento boliviano's chart states its key, the rest are read from the progression. Ratings are estimates from the charts, not yet played. Copa rota's year is unknown (Calamaro's recent piano-tour repertoire; recording not identified). Devuélveme a mi chica has charts in B minor, C# minor and D minor; D minor is the most-voted.
