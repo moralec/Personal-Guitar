@@ -253,6 +253,17 @@
   .bar-repeat-wrap .chord-bar-grid { flex: 1; }
   .bar-repeat { font-size: 13px; font-weight: 700; color: #444; align-self: center; white-space: nowrap; }
 
+  /* Song map pop-up */
+  .map-modal { display: none; position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.72); padding: 24px 16px; overflow-y: auto; }
+  .map-modal.open { display: block; }
+  .map-box { max-width: 640px; margin: 0 auto; background: #111; border: 1px solid #262626; border-radius: 12px; padding: 20px; }
+  .map-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 18px; }
+  .map-head h3 { font-size: 20px; font-weight: 800; color: #fff; }
+  .map-head .by { font-size: 13px; color: #777; margin-top: 2px; }
+  .map-x { background: none; border: 1px solid #333; border-radius: 6px; color: #888; font-size: 14px; width: 32px; height: 32px; cursor: pointer; flex-shrink: 0; }
+  .map-x:hover { border-color: #f5a623; color: #f5a623; }
+  .map-foot { margin-top: 18px; display: flex; justify-content: flex-end; }
+
   /* ── Library ── */
   .lib-h1 { font-size: 32px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
   .lib-sub { margin-top: 4px; font-size: 15px; color: #666; margin-bottom: 28px; }
@@ -445,6 +456,8 @@
 </div>
 
 <!-- ══ Session view: one song's 5 steps ══ -->
+<div class="map-modal" id="mapModal" onclick="if (event.target === this) closeMap()"><div class="map-box" id="mapBox"></div></div>
+
 <div class="view" id="sessionView">
 
 <!-- ── Header ── -->
@@ -1420,8 +1433,8 @@ function renderPractice() {
 }
 
 function itemHtml(s, actions, meta, warn) {
-  return `<div class="item"><div onclick="openSong('${s.id}')">${thumbHtml(s)}</div>
-    <div><div class="t" onclick="openSong('${s.id}')">${esc(s.title)}</div><div class="m ${warn ? 'warn' : ''}">${meta}</div></div>
+  return `<div class="item"><div onclick="openMap('${s.id}')">${thumbHtml(s)}</div>
+    <div><div class="t" onclick="openMap('${s.id}')">${esc(s.title)}</div><div class="m ${warn ? 'warn' : ''}">${meta}</div></div>
     <div class="acts">${actions}</div></div>`;
 }
 
@@ -1519,7 +1532,7 @@ function renderBrowse() {
   document.getElementById('libShown').textContent = `${list.length} song${list.length === 1 ? '' : 's'}${lib.path ? ` · ${TRACKS[lib.path].label} path in week order` : ''}`;
   document.getElementById('libGrid').innerHTML = list.length ? list.map(s => {
     const st = songStatus(s);
-    return `<div class="song-card ${st}" onclick="openSong('${s.id}')">
+    return `<div class="song-card ${st}" onclick="openMap('${s.id}')">
       <div style="position:relative">${thumbHtml(s)}<div class="badges"><span class="tag-status ${st}">${STATUS_LABEL[st]}</span>${repTagHtml(s.id)}</div>
         ${Progress.state(s.id) ? '' : `<button class="mini add" title="Add to Up next" onclick="event.stopPropagation();move('${s.id}','next')">+ Up next</button>`}</div>
       <h3>${esc(s.title)}</h3>
@@ -1691,34 +1704,31 @@ function buildBarGrid(bars, colors) {
   return items.join('');
 }
 
-function highlightSection(key) {
-  document.querySelectorAll('.song-chip').forEach(c =>
+// Scoped to the map the chip is in: step 4 and the library pop-up each have one
+function highlightSection(chip) {
+  const map = chip.closest('.song-map'), key = chip.dataset.key;
+  map.querySelectorAll('.song-chip').forEach(c =>
     c.classList.toggle('active', c.dataset.key === key));
-  document.querySelectorAll('.chord-section-block').forEach(b =>
-    b.classList.toggle('highlighted', b.id === 'csec-' + key));
-  const el = document.getElementById('csec-' + key);
+  map.querySelectorAll('.chord-section-block').forEach(b =>
+    b.classList.toggle('highlighted', b.dataset.key === key));
+  const el = map.querySelector(`.chord-section-block[data-key="${key}"]`);
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function renderChordSection(s) {
-  const diagEl = document.getElementById('chordDiagrams');
-  const gridEl = document.getElementById('chordGrid');
+// Unique chords in order of first use → palette colour
+function chordColors(data) {
+  const all = data.sections ? Object.values(data.sections).flatMap(sec => sec.bars.flat())
+    : data.grid ? data.grid.flatMap(sec => sec.bars.flat())
+    : data.structure.flatMap(row => row.prog);
+  const colors = {};
+  all.forEach(c => { if (c && !(c in colors)) colors[c] = CHORD_PALETTE[Object.keys(colors).length % CHORD_PALETTE.length]; });
+  return colors;
+}
 
-  if (!s.chords) { diagEl.innerHTML = ''; gridEl.innerHTML = ''; return; }
-  const data = chordsForInstrument(s.chords);
-
+// Song order strip + section grids (legacy formats: their own layout). Used by step 4 and the map pop-up.
+function songMapHtml(data, colors) {
   // ── New format: sections + sequence ──
   if (data.sections && data.sequence) {
-    const allChords = Object.values(data.sections).flatMap(sec => sec.bars.flat());
-    const seen = new Set(), unique = [];
-    allChords.forEach(c => { if (c && !seen.has(c)) { seen.add(c); unique.push(c); } });
-    const colors = {};
-    unique.forEach((c, i) => { colors[c] = CHORD_PALETTE[i % CHORD_PALETTE.length]; });
-
-    diagEl.innerHTML = `<div class="chord-diagrams">${unique.map(name => {
-      const shape = CHORD_SHAPES[name]; return shape ? buildChordSVG(name, shape) : '';
-    }).join('')}</div>`;
-
     // Assign a color per unique section key
     const SEC_COLORS = ['#60a5fa','#4ade80','#f87171','#c084fc','#fb923c','#34d399','#fbbf24'];
     const secColor = {};
@@ -1748,7 +1758,7 @@ function renderChordSection(s) {
     // Song order strip (chips colored by section type)
     const chips = data.sequence.map(item => {
       const col = secColor[item.key];
-      return `<button class="song-chip" data-key="${item.key}" onclick="highlightSection('${item.key}')" style="border-color:${col}50;color:${col};background:${col}12">${item.label}</button>`;
+      return `<button class="song-chip" data-key="${item.key}" onclick="highlightSection(this)" style="border-color:${col}50;color:${col};background:${col}12">${item.label}</button>`;
     }).join('');
     const strip = `<div class="song-order-strip"><div class="song-order-title">Song Order</div><div class="song-order-chips">${chips}</div></div>`;
 
@@ -1764,46 +1774,65 @@ function renderChordSection(s) {
       const inner = count > 1
         ? `<div class="bar-repeat-wrap">${gridHtml}<span class="bar-repeat">×${count}</span></div>`
         : gridHtml;
-      return `<div class="chord-section-block" id="csec-${key}">` +
+      return `<div class="chord-section-block" data-key="${key}">` +
         `<div class="chord-section-header" style="color:${col}">${sec.label}${badges}</div>` +
         inner + `</div>`;
     }).join('');
 
-    gridEl.innerHTML = strip + grids;
-    return;
+    return `<div class="song-map">${strip}${grids}</div>`;
   }
 
   // ── Legacy formats ──
-  const allChords = data.grid
-    ? data.grid.flatMap(sec => sec.bars.flat())
-    : data.structure.flatMap(row => row.prog);
-  const seen = new Set(), unique = [];
-  allChords.forEach(c => { if (c && !seen.has(c)) { seen.add(c); unique.push(c); } });
-  const colors = {};
-  unique.forEach((c, i) => { colors[c] = CHORD_PALETTE[i % CHORD_PALETTE.length]; });
-
-  diagEl.innerHTML = `<div class="chord-diagrams">${unique.map(name => {
-    const shape = CHORD_SHAPES[name]; return shape ? buildChordSVG(name, shape) : '';
-  }).join('')}</div>`;
-
-  let body = '';
   if (data.grid) {
-    body = data.grid.map(sec =>
+    return data.grid.map(sec =>
       `<div class="chord-section-header">${sec.section}</div>` +
       `<div class="chord-bar-grid">${buildBarGrid(sec.bars, colors)}</div>`
     ).join('');
-  } else {
-    body = '<div class="chord-structure">' +
-      data.structure.map(row =>
-        `<div class="chord-prog-row"><span class="section-name">${row.label}</span>` +
-        `<div class="chord-pills">${row.prog.map((c, i) =>
-          `<span class="chord-pill" style="color:${colors[c]||'#f5a623'}">${c}</span>` +
-          (i < row.prog.length - 1 ? '<span class="chord-arrow">→</span>' : '')
-        ).join('')}</div></div>`
-      ).join('') + '</div>';
   }
-  gridEl.innerHTML = body;
+  return '<div class="chord-structure">' +
+    data.structure.map(row =>
+      `<div class="chord-prog-row"><span class="section-name">${row.label}</span>` +
+      `<div class="chord-pills">${row.prog.map((c, i) =>
+        `<span class="chord-pill" style="color:${colors[c]||'#f5a623'}">${c}</span>` +
+        (i < row.prog.length - 1 ? '<span class="chord-arrow">→</span>' : '')
+      ).join('')}</div></div>`
+    ).join('') + '</div>';
 }
+
+function renderChordSection(s) {
+  const diagEl = document.getElementById('chordDiagrams');
+  const gridEl = document.getElementById('chordGrid');
+
+  if (!s.chords) { diagEl.innerHTML = ''; gridEl.innerHTML = ''; return; }
+  const data = chordsForInstrument(s.chords);
+  const colors = chordColors(data);
+  diagEl.innerHTML = `<div class="chord-diagrams">${Object.keys(colors).map(name => {
+    const shape = CHORD_SHAPES[name]; return shape ? buildChordSVG(name, shape) : '';
+  }).join('')}</div>`;
+  gridEl.innerHTML = songMapHtml(data, colors);
+}
+
+// ── Song map pop-up (library) ──────────────────────────
+// A jamming cheat sheet for songs you already know: order + grids, nothing to mark done
+function openMap(id) {
+  const s = SONG_BY_ID[id];
+  if (!s.chords) { openSong(id); return; }   // nothing to show: "Coming soon" opens as before
+  const data = chordsForInstrument(s.chords);
+  document.getElementById('mapBox').innerHTML = `
+    <div class="map-head">
+      <div><h3>${esc(s.title)}</h3><div class="by">${esc(s.artist)}</div></div>
+      <button class="map-x" onclick="closeMap()" title="Close (Esc)">✕</button>
+    </div>
+    ${songMapHtml(data, chordColors(data))}
+    <div class="map-foot"><button class="lib-btn" onclick="closeMap();openSong('${s.id}')">▶ Start practice</button></div>`;
+  document.getElementById('mapModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMap() {
+  document.getElementById('mapModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMap(); });
 
 // ── Session rendering ──────────────────────────────────
 function renderSession(s) {
