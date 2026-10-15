@@ -386,15 +386,58 @@
   .pill strong { color: #f5a623; font-weight: 600; }
   .lib-empty { padding: 50px 20px; text-align: center; color: #444; font-size: 14px; border: 1px dashed #222; border-radius: 12px; grid-column: 1 / -1; }
 
+  /* Chord loops: library paths, loop page, song page line */
+  .paths-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+  .paths-title { font-size: 13px; font-weight: 700; color: #fff; }
+  .seg { display: inline-flex; gap: 2px; background: #141414; border: 1px solid #1e1e1e; border-radius: 8px; padding: 3px; }
+  .seg-btn { background: transparent; border: none; border-radius: 6px; color: #777; font-size: 12px; font-weight: 600; padding: 6px 12px; cursor: pointer; font-family: inherit; }
+  .seg-btn:hover { color: #bbb; }
+  .seg-btn.on { background: #2a2a2a; color: #f5a623; }
+  .paths.loops { grid-template-columns: repeat(4, 1fr); }
+  .path .loop-n { font-size: 19px; font-weight: 800; color: #f5a623; letter-spacing: -.3px; margin-bottom: 5px; }
+  .path .loop-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 10px; font-size: 11px; color: #777; }
+  .path.more { display: flex; align-items: center; justify-content: center; color: #999; font-size: 13px; font-weight: 600; border-style: dashed; }
+  .lib-count a, .loop-page a { color: #f5a623; text-decoration: none; font-weight: 600; }
+  .loop-lines { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid #1e1e1e; }
+  .loop-line { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 12px; color: #777; }
+  .loop-k { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #888; font-weight: 600; }
+  .loop-steps { display: inline-flex; gap: 5px; flex-wrap: wrap; }
+  .loop-step { display: inline-flex; align-items: baseline; gap: 6px; background: #1b1b1b; border: 1px solid #2a2a2a; border-radius: 6px; padding: 4px 9px; color: #ccc; }
+  .loop-step b { color: #f5a623; font-size: 14px; }
+  .loop-page header { margin-bottom: 32px; }
+  .loop-page h1 { font-size: 40px; }
+  .loop-boxes { display: flex; gap: 8px; margin: 14px 0 12px; }
+  .loop-box { flex: 1; background: #1b1b1b; border: 1px solid #2c2c2c; border-radius: 9px; padding: 14px 0; text-align: center; transition: border-color .1s, background .1s; }
+  .loop-box b { display: block; font-size: 28px; font-weight: 800; color: #f5a623; }
+  .loop-box span { display: block; font-size: 14px; color: #ddd; margin-top: 2px; }
+  .loop-box.on { border-color: #f5a623; background: rgba(245,166,35,.08); }
+  .loop-pick { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: #888; }
+  .loop-pick select { background: #1d1d1d; border: 1px solid #2c2c2c; border-radius: 8px; color: #fff; font-size: 13px; padding: 7px 8px; max-width: 300px; font-family: inherit; }
+  .loop-table { border: 1px solid #222; border-radius: 12px; overflow: hidden; margin-bottom: 28px; }
+  .loop-row { display: grid; grid-template-columns: 24px minmax(0, 1fr) 96px 130px 60px; gap: 12px; align-items: center; width: 100%; padding: 12px 16px; background: #141414; border: none; border-top: 1px solid #1e1e1e; color: inherit; font-family: inherit; text-align: left; cursor: pointer; }
+  .loop-row:first-child { border-top: none; }
+  .loop-row:hover { background: #181818; }
+  .loop-row .n { font-size: 13px; font-weight: 700; color: #f5a623; }
+  .loop-row .t b { display: block; font-size: 14px; color: #fff; font-weight: 600; }
+  .loop-row .t small { display: block; font-size: 11px; color: #777; margin-top: 2px; }
+  .loop-row .k { font-size: 12px; color: #aaa; }
+  .loop-row .c { font-size: 13px; color: #fff; font-weight: 600; }
+  .loop-related { display: flex; gap: 8px; flex-wrap: wrap; }
+  .loop-related a { font-size: 12px; color: #ccc; background: #1c1c1c; border: 1px solid #2c2c2c; border-radius: 20px; padding: 6px 12px; font-weight: 400; }
+  .loop-related a:hover { border-color: #f5a623; color: #f5a623; }
+
   @media (max-width: 900px) {
     .today, .board { grid-template-columns: 1fr; }
+    .paths.loops { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 640px) {
     body { padding: 0 16px 80px; }
     .lib-h1 { font-size: 26px; }
     .hero { grid-template-columns: 1fr; }
     .hero .thumb { aspect-ratio: 16/9; }
-    .paths { grid-template-columns: 1fr; }
+    .paths, .paths.loops { grid-template-columns: 1fr; }
+    .loop-row { grid-template-columns: 20px minmax(0, 1fr) auto; }
+    .loop-row .k, .loop-row .diff-dots { display: none; }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 18px 12px; }
     .filters .sep { display: none; }
     .search-row select { max-width: 110px; }
@@ -439,7 +482,7 @@
 
   <div class="lib-section"><h2>Library</h2><span class="lib-note" id="libCount"></span></div>
   <div class="search-row">
-    <input class="lib-search" id="libQ" placeholder="Search songs, artists, keys, styles…" autocomplete="off">
+    <input class="lib-search" id="libQ" placeholder="Search songs, artists, keys, styles, loops…" autocomplete="off">
     <select id="libSort">
       <option value="easiest">Easiest first</option>
       <option value="hardest">Hardest first</option>
@@ -448,12 +491,16 @@
       <option value="year">Year</option>
     </select>
   </div>
+  <div class="paths-head"><span class="paths-title">Paths</span><div class="seg" id="pathMode"></div></div>
   <div class="paths" id="paths"></div>
   <div class="filters" id="libFilters"></div>
   <div class="filters" id="libTags"></div>
   <div class="lib-count" id="libShown"></div>
   <div class="grid" id="libGrid"></div>
 </div>
+
+<!-- ══ Loop view: one chord loop across songs (#/loop/<id>) ══ -->
+<div class="view" id="loopView"></div>
 
 <!-- ══ Session view: one song's 5 steps ══ -->
 <div class="map-modal" id="mapModal" onclick="if (event.target === this) closeMap()"><div class="map-box" id="mapBox"></div></div>
@@ -469,6 +516,7 @@
     <span><strong id="hBpm"></strong> BPM</span>
     <span>Difficulty: <strong id="hDiff"></strong> <span class="diff-dots" id="hDiffDots"></span></span>
     <span><span id="hKeyLabel">Key</span>: <strong id="hKey"></strong></span>
+    <span id="hLoopWrap">Loop: <strong id="hLoop"></strong></span>
     <span id="hCapoWrap">Capo <strong id="hCapo"></strong></span>
   </div>
   <div class="auto-chip" id="hAuto" title="Researched automatically: chords, timing and videos have not been checked against the record yet">Auto-built · check chords and timing by ear</div>
@@ -808,7 +856,9 @@ const TRACKS = {
           ],
         }
       },
-      2: {
+      2: { title: "Free Fallin'", rating: { chords: 1, licks: 1, timing: 2 }, tags: ["rock", "beginner"], artist: "Tom Petty", year: 1989, bpm: 85, key: "F major", coming: true, backing: STUB },
+      3: { title: "Good Riddance (Time of Your Life)", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["90s", "fingerpicking"], artist: "Green Day", year: 1997, bpm: 80, key: "G major", coming: true, backing: STUB },
+      4: {
         title: "Knockin' on Heaven's Door", rating: { chords: 1, licks: 1, timing: 1 }, tags: ["power ballad", "80s"], artist: "Guns N' Roses", year: 1990, bpm: 64, key: "G major", defaultPitch: 1,
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,1,1, 1,0,0,0, 1,0,1,1] },
         warmup: { videoId: "CjM5fyXoV8w", label: "Strumming Patterns · YouTube", title: "Strumming Patterns", meta: "This song lives and dies on feel and rhythm · lock in your strum before you play a chord" },
@@ -862,10 +912,11 @@ const TRACKS = {
           ],
         }
       },
-      3: { title: "Smoke on the Water", rating: { chords: 1, licks: 2, timing: 1 }, tags: ["classic rock", "beginner"], artist: "Deep Purple", year: 1972, bpm: 112, key: "G minor", coming: true, backing: STUB },
-      4: { title: "With or Without You", rating: { chords: 1, licks: 1, timing: 2 }, tags: ["80s", "beginner"], artist: "U2", year: 1987, bpm: 80, key: "D major", coming: true, backing: STUB },
-      5: { title: "Free Fallin'", rating: { chords: 1, licks: 1, timing: 2 }, tags: ["rock", "beginner"], artist: "Tom Petty", year: 1989, bpm: 85, key: "F major", coming: true, backing: STUB },
-      6: {
+      5: { title: "Here I Go Again", rating: { chords: 1, licks: 2, timing: 1 }, tags: ["power ballad", "80s"], artist: "Whitesnake", year: 1987, bpm: 86, key: "C major", coming: true, backing: STUB },
+      6: { title: "With or Without You", rating: { chords: 1, licks: 1, timing: 2 }, tags: ["80s", "beginner"], artist: "U2", year: 1987, bpm: 80, key: "D major", coming: true, backing: STUB },
+      7: { title: "Wonderwall", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["90s", "beginner"], artist: "Oasis", year: 1995, bpm: 87, key: "F# minor", coming: true, backing: STUB },
+      8: { title: "Smoke on the Water", rating: { chords: 1, licks: 2, timing: 1 }, tags: ["classic rock", "beginner"], artist: "Deep Purple", year: 1972, bpm: 112, key: "G minor", coming: true, backing: STUB },
+      9: {
         title: "Summer of '69", rating: { chords: 1, licks: 2, timing: 2 }, tags: ["80s rock"], artist: "Bryan Adams", year: 1985, bpm: 144, key: "D major",
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,0,1, 0,1,0,0, 1,1,1,1] },
         warmup: { videoId: "vMt8T5Jqf10", label: "Strumming Exercise · YouTube", title: "Rhythm & Strumming", meta: "Summer of '69 is about driving energy · get the right hand loose before you hit those downstrokes" },
@@ -879,9 +930,6 @@ const TRACKS = {
           { label: "Chorus", prog: ["G","D","A"] },
         ]}
       },
-      7: { title: "Here I Go Again", rating: { chords: 1, licks: 2, timing: 1 }, tags: ["power ballad", "80s"], artist: "Whitesnake", year: 1987, bpm: 86, key: "C major", coming: true, backing: STUB },
-      8: { title: "Wonderwall", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["90s", "beginner"], artist: "Oasis", year: 1995, bpm: 87, key: "F# minor", coming: true, backing: STUB },
-      9: { title: "Good Riddance (Time of Your Life)", rating: { chords: 2, licks: 1, timing: 2 }, tags: ["90s", "fingerpicking"], artist: "Green Day", year: 1997, bpm: 80, key: "G major", coming: true, backing: STUB },
       10: {
         title: "Wish You Were Here", rating: { chords: 2, licks: 2, timing: 2 }, tags: ["classic rock", "fingerpicking"], artist: "Pink Floyd", year: 1975, bpm: 60, key: "G major",
         backing: { kick: [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,0,0], snare: [1,0,0,0, 1,0,0,1, 0,1,0,0, 1,1,1,1] },
@@ -1321,7 +1369,13 @@ function setInstrument(key) {
   const s = currentSession();
   renderInstrumentInfo(s);
   if (!s.coming) renderChordSection(s);
+  if (loopFamilies) {   // difficulty depends on the instrument: re-sort, keeping the picked song
+    const picked = loopPage.id && loopPick();
+    sortFamilySongs();
+    if (picked) loopPage.pick = getLoopFamilies()[loopPage.id].songs.indexOf(picked);
+  }
   renderLibrary();
+  if (loopPage.id) renderLoopPage();
 }
 
 // Barre chords gained (or lost) when the song's shapes are transposed for the instrument
@@ -1353,6 +1407,99 @@ function renderInstrumentInfo(s) {
     ? 'Guitarlele: shapes shown a 4th lower than the guitar lesson, so they sound in the original key · play through each section using the pattern above'
     : 'Learn the shapes · play through each section using the pattern above';
 }
+
+// ── Chord loops ────────────────────────────────────────
+// A loop is a section that cycles 2–4 chords, written as scale degrees of the song's key
+// (G D C in G major is I – V – IV), so the same loop is found across keys. Minor chords are
+// lower case, so a minor key's home chord is i. Rotations are one loop, written from the
+// home chord: D C G D C G in D major is I – ♭VII – IV.
+// The key comes from the session's `key`; a wrong key gives a wrong loop (check the auto-built songs).
+const DEGREES = ['I','♭II','II','♭III','III','IV','♭V','V','♭VI','VI','♭VII','VII'];
+const LOOP_NAMES = {
+  'I-IV': 'Two-chord sway', 'I-V': 'Home and away', 'i-bVII': 'Two-chord minor vamp', 'i-bVI': 'Minor sway',
+  'i-v': 'Minor pull', 'I-bVII': 'Rock vamp',
+  'I-V-IV': 'Three-chord singalong', 'I-IV-V': 'Three-chord classic', 'I-bVII-IV': 'The rock ♭VII',
+  'i-bVI-bVII': 'The minor climb', 'I-bVI-bVII': 'The big lift',
+  'I-IV-I-V': 'Back and forth', 'I-V-vi-IV': 'The pop four', 'I-vi-IV-V': 'The ’50s loop',
+  'I-vi-V-IV': 'Ballad loop', 'I-IV-bVII-IV': 'Rock turnaround', 'i-bVI-bIII-bVII': 'Minor four',
+  'i-bVII-bVI-bVII': 'Minor rock step',
+};
+const loopId = tokens => tokens.join('-').replace(/♭/g, 'b').replace(/°/g, 'o');
+
+function chordDegree(name, tonic) {
+  const m = String(name).match(/^([A-G][#b]?)([^\/]*)/);
+  if (!m || NOTE_IDX[m[1]] === undefined) return null;
+  const pc = (NOTE_IDX[m[1]] - tonic + 12) % 12, q = m[2];
+  const dim = /^(dim|°|m7b5)/.test(q), minor = dim || /^m(?!aj)/.test(q);
+  const d = DEGREES[pc];
+  return { token: (minor ? d.toLowerCase() : d) + (dim ? '°' : ''), order: pc * 3 + (dim ? 2 : minor ? 1 : 0) };
+}
+
+// The chord lists a song's chart is made of: sections + bars, the older grid, or structure rows
+function chartSections(ch) {
+  if (!ch) return [];
+  const times = k => Math.max(1, (ch.sequence || []).filter(x => x.key === k).length);
+  if (ch.sections) return Object.entries(ch.sections).map(([k, sec]) => ({ label: sec.label || k, chords: sec.bars.flat(), weight: sec.bars.length * times(k) }));
+  if (ch.grid) return ch.grid.map(sec => ({ label: sec.section, chords: sec.bars.flat(), weight: sec.bars.length }));
+  if (ch.structure) return ch.structure.map(row => ({ label: row.label, chords: row.prog, weight: row.prog.length }));
+  return [];
+}
+
+// One section → its loop, or null when it isn't a short cycle
+function sectionLoop(chords, tonic) {
+  const seq = [];
+  chords.forEach(c => {
+    const d = c && chordDegree(c, tonic);
+    if (d && (!seq.length || seq[seq.length - 1].token !== d.token)) seq.push({ ...d, chord: c });
+  });
+  if (seq.length > 2 && seq[0].token === seq[seq.length - 1].token) seq.pop();   // G D C G → G D C
+  let L = 1;
+  while (L < seq.length && !seq.every((x, i) => x.token === seq[i % L].token)) L++;
+  if (L < 2 || L > 4) return null;
+  const unit = seq.slice(0, L);
+  const rots = unit.map((_, i) => unit.slice(i).concat(unit.slice(0, i)));
+  const cmp = (a, b) => (a[0].order < 3 ? 0 : 1) - (b[0].order < 3 ? 0 : 1)   // home chord (degree I / i) first
+    || a.reduce((r, x, i) => r || x.order - b[i].order, 0);
+  const best = rots.sort(cmp)[0];
+  const tokens = best.map(x => x.token);
+  return { id: loopId(tokens), tokens, label: tokens.join(' – '), chords: best.map(x => x.chord) };
+}
+
+// A song's loops, most-played first: [{ id, tokens, label, chords, sections: [labels], weight }]
+const songLoopCache = new Map();
+function songLoops(s) {
+  if (songLoopCache.has(s)) return songLoopCache.get(s);
+  const k = (s.key || '').match(/^([A-G][#b]?)/);
+  const found = {};
+  if (k && s.chords) chartSections(s.chords).forEach(sec => {
+    const l = sectionLoop(sec.chords, NOTE_IDX[k[1]]);
+    if (!l) return;
+    const e = found[l.id] || (found[l.id] = { ...l, sections: [], weight: 0 });
+    if (!e.sections.includes(sec.label)) e.sections.push(sec.label);
+    e.weight += sec.weight;
+  });
+  const list = Object.values(found).sort((a, b) => b.weight - a.weight);
+  songLoopCache.set(s, list);
+  return list;
+}
+
+// Every loop found in two or more songs: { id: { id, tokens, label, name, songs: [{ song, loop }] } }
+let loopFamilies = null;
+function getLoopFamilies() {
+  if (loopFamilies) return loopFamilies;
+  const all = {};
+  SONGS.forEach(s => songLoops(s).forEach(l => {
+    const f = all[l.id] || (all[l.id] = { id: l.id, tokens: l.tokens, label: l.label, name: LOOP_NAMES[l.id] || '', songs: [] });
+    f.songs.push({ song: s, loop: l });
+  }));
+  loopFamilies = {};
+  Object.values(all).filter(f => f.songs.length > 1)
+    .sort((a, b) => b.songs.length - a.songs.length || a.tokens.length - b.tokens.length || a.label.localeCompare(b.label))
+    .forEach(f => { loopFamilies[f.id] = f; });
+  sortFamilySongs();
+  return loopFamilies;
+}
+function sortFamilySongs() { Object.values(loopFamilies).forEach(f => f.songs.sort((a, b) => SORTS.easiest(a.song, b.song))); }
 
 // ── Library helpers ────────────────────────────────────
 const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -1474,7 +1621,9 @@ function renderBoard() {
 }
 
 // ── Library: search and browse ─────────────────────────
-const lib = { q: '', status: 'all', level: 'all', tag: null, path: null, sort: 'easiest' };
+// mode: Paths shown as the difficulty tracks or as chord loops; path / loop = the one picked
+const lib = { q: '', status: 'all', level: 'all', tag: null, mode: 'tracks', path: null, loop: null, allLoops: false, sort: 'easiest' };
+const LOOPS_SHOWN = 8;
 const SWEET_SPOT = [2.0, 3.3];   // songs.md notes: Carlos's current sweet spot
 const LEVELS = {
   all: ['Any level', () => true],
@@ -1492,8 +1641,12 @@ const SORTS = {
 const fold = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 function matchesQuery(s, q) {
   if (!q) return true;
+  const loops = songLoops(s), raw = q.trim().replace(/♭/g, 'b');
+  // Loop notation is matched as typed: case is the major / minor distinction (i-bVII is not I-bVII)
+  if (raw && loops.some(l => l.id.includes(raw.replace(/\s*[–-]\s*/g, '-')))) return true;
   q = fold(q);
-  return [s.title, s.artist, s.key, keyShown(s), String(s.year || ''), ...(s.tags || [])].some(x => fold(x).includes(q));
+  return [s.title, s.artist, s.key, keyShown(s), String(s.year || ''), ...(s.tags || []),
+    ...loops.map(l => LOOP_NAMES[l.id] || '')].some(x => fold(x).includes(q));
 }
 function topTags(n) {
   const c = {};
@@ -1502,8 +1655,8 @@ function topTags(n) {
 }
 function setLib(k, v) { lib[k] = v; renderBrowse(); }
 
-function renderBrowse() {
-  document.getElementById('paths').innerHTML = Object.keys(TRACKS).map(k => {
+function trackCardsHtml() {
+  return Object.keys(TRACKS).map(k => {
     const songs = SONGS.filter(s => s.track === k);
     const ready = songs.filter(s => !s.coming).length;
     const played = songs.filter(s => Progress.state(s.id) === 'playable').length;
@@ -1512,8 +1665,41 @@ function renderBrowse() {
       <div class="meta">${songs.length} weeks · ${ready} ready · ${played} you can play</div>
       <div class="pbar"><span style="width:${ready / songs.length * 100}%"></span></div></button>`;
   }).join('');
+}
+const loopName = f => f.name || `${f.tokens.length}-chord loop`;
+// "Beginner 2 · Advanced 1 · Library 1"
+function loopWhere(f) {
+  const c = {};
+  f.songs.forEach(({ song }) => { const k = song.track ? TRACKS[song.track].label : 'Library'; c[k] = (c[k] || 0) + 1; });
+  return [...Object.values(TRACKS).map(t => t.label), 'Library'].filter(k => c[k]).map(k => `${k} ${c[k]}`).join(' · ');
+}
+function loopCardsHtml() {
+  const byId = getLoopFamilies(), fams = Object.values(byId);
+  const shown = lib.allLoops ? fams : fams.slice(0, LOOPS_SHOWN);
+  if (lib.loop && !shown.some(f => f.id === lib.loop)) shown.push(byId[lib.loop]);   // keep the picked one in view
+  return shown.map(f => {
+    const { song, loop } = f.songs[0];
+    return `<button class="path ${lib.loop === f.id ? 'on' : ''}" onclick="setLib('loop', lib.loop === '${f.id}' ? null : '${f.id}')">
+      <div class="loop-n">${f.label}</div>
+      <h3>${esc(loopName(f))}</h3>
+      <div class="meta">${esc(loop.chords.map(tx).join(' – '))} in ${esc(song.title)}</div>
+      <div class="loop-meta"><span class="pill">${f.songs.length} songs</span><span>${loopWhere(f)}</span></div></button>`;
+  }).join('') + (fams.length > LOOPS_SHOWN
+    ? `<button class="path more" onclick="setLib('allLoops', !lib.allLoops)">${lib.allLoops ? 'Fewer loops' : `All ${fams.length} loops`}</button>` : '');
+}
 
-  const base = SONGS.filter(s => (!lib.path || s.track === lib.path) && matchesQuery(s, lib.q));
+function renderBrowse() {
+  const byLoop = lib.mode === 'loops';
+  document.getElementById('pathMode').innerHTML = [['tracks', 'By difficulty'], ['loops', 'By chord loop']].map(([k, label]) =>
+    `<button class="seg-btn ${lib.mode === k ? 'on' : ''}" onclick="setLib('mode','${k}')">${label}</button>`).join('');
+  const pathsEl = document.getElementById('paths');
+  pathsEl.classList.toggle('loops', byLoop);
+  pathsEl.innerHTML = byLoop ? loopCardsHtml() : trackCardsHtml();
+
+  const fam = byLoop && lib.loop ? getLoopFamilies()[lib.loop] : null;
+  const famLoop = fam ? Object.fromEntries(fam.songs.map(x => [x.song.id, x.loop])) : null;
+  const path = byLoop ? null : lib.path;
+  const base = SONGS.filter(s => (!path || s.track === path) && (!famLoop || famLoop[s.id]) && matchesQuery(s, lib.q));
   const count = k => base.filter(s => k === 'all' || songStatus(s) === k).length;
   document.getElementById('libFilters').innerHTML =
     ['all', 'ready', 'queued', 'candidate'].map(k =>
@@ -1526,10 +1712,12 @@ function renderBrowse() {
 
   let list = base.filter(s => (lib.status === 'all' || songStatus(s) === lib.status) &&
     LEVELS[lib.level][1](diffOf(s)) && (!lib.tag || (s.tags || []).includes(lib.tag)));
-  list = lib.path && lib.sort === 'easiest' ? list.sort((a, b) => a.week - b.week) : list.sort(SORTS[lib.sort]);
+  list = path && lib.sort === 'easiest' ? list.sort((a, b) => a.week - b.week) : list.sort(SORTS[lib.sort]);
 
   document.getElementById('libCount').textContent = `${SONGS.length} songs · ${SONGS.filter(s => !s.coming).length} ready to practise`;
-  document.getElementById('libShown').textContent = `${list.length} song${list.length === 1 ? '' : 's'}${lib.path ? ` · ${TRACKS[lib.path].label} path in week order` : ''}`;
+  document.getElementById('libShown').innerHTML = `${list.length} song${list.length === 1 ? '' : 's'}` +
+    (path ? ` · ${TRACKS[path].label} path in week order` : '') +
+    (fam ? ` on the <strong>${fam.label}</strong> loop · <a href="#/loop/${fam.id}">About this loop →</a>` : '');
   document.getElementById('libGrid').innerHTML = list.length ? list.map(s => {
     const st = songStatus(s);
     return `<div class="song-card ${st}" onclick="openMap('${s.id}')">
@@ -1537,7 +1725,7 @@ function renderBrowse() {
         ${Progress.state(s.id) ? '' : `<button class="mini add" title="Add to Up next" onclick="event.stopPropagation();move('${s.id}','next')">+ Up next</button>`}</div>
       <h3>${esc(s.title)}</h3>
       <div class="by">${esc(s.artist)}${s.year ? ' · ' + s.year : ''}${s.track ? ` · ${TRACKS[s.track].label.slice(0, 3)} W${s.week}` : ''}</div>
-      <div class="row">${dotsHtml(diffOf(s))}<span class="pill">${keyLabel()} <strong>${keyShown(s)}</strong></span>${s.bpm ? `<span class="pill">${s.bpm} bpm</span>` : ''}</div>
+      <div class="row">${dotsHtml(diffOf(s))}<span class="pill">${keyLabel()} <strong>${keyShown(s)}</strong></span>${famLoop ? `<span class="pill">Loop <strong>${esc(famLoop[s.id].chords.map(tx).join(' '))}</strong></span>` : ''}${s.bpm ? `<span class="pill">${s.bpm} bpm</span>` : ''}</div>
     </div>`;
   }).join('') : '<div class="lib-empty">No songs match. Clear a filter.</div>';
 }
@@ -1568,8 +1756,114 @@ function renderStepDone() {
 }
 function toggleStep(i) { Progress.toggleStep(currentSong.id, i); renderStepDone(); }
 
+// ── Chord loops: song page line and loop page ──────────
+// Step 4 shows the song's loops as degrees + its chords; no links (moving between songs is the library's job)
+function loopLinesHtml(s) {
+  const loops = songLoops(s).slice(0, 3);
+  if (!loops.length) return '';
+  return `<div class="loop-lines">${loops.map(l => `<div class="loop-line"><span class="loop-k">Loop</span>
+    <span class="loop-steps">${l.tokens.map((t, i) => `<span class="loop-step"><b>${t}</b>${esc(tx(l.chords[i]))}</span>`).join('')}</span>
+    <span>${esc(l.sections.join(', '))}</span></div>`).join('')}</div>`;
+}
+
+// #/loop/<id>: the loop, a player, and every song that uses it, easiest first
+const loopPage = { id: null, pick: 0 };
+function loopPick() { const f = getLoopFamilies()[loopPage.id]; return f.songs[loopPage.pick] || f.songs[0]; }
+function pickLoopSong(i) { loopPage.pick = i; renderLoopPage(); }
+function renderLoopPage() {
+  const f = getLoopFamilies()[loopPage.id];
+  const pick = loopPick(), bpm = pick.song.bpm || 90;
+  const keys = new Set(f.songs.map(x => x.song.key)).size;
+  const set = new Set(f.tokens);
+  const related = Object.values(getLoopFamilies()).filter(o => o.id !== f.id &&
+    (o.tokens.every(t => set.has(t)) || f.tokens.every(t => o.tokens.includes(t))));
+  document.getElementById('loopView').innerHTML = `<div class="loop-page">
+    <header>
+      <div class="song-label">Chord loop</div>
+      <h1>${f.label}</h1>
+      <div class="artist">${esc(loopName(f))} · ${f.songs.length} songs in your library</div>
+    </header>
+    <div class="card" style="margin-bottom:36px">
+      <div class="card-title">How it moves</div>
+      <div class="loop-boxes">${f.tokens.map((t, i) => `<div class="loop-box${loopPlayer.on && loopPlayer.cur === i ? ' on' : ''}" data-i="${i}"><b>${t}</b><span>${esc(tx(pick.loop.chords[i]))}</span></div>`).join('')}</div>
+      <div class="lib-note">Numbers are steps of the key: I is the home chord, upper case is major, lower case minor. One chord per bar.</div>
+      <div class="ctrl-row" style="margin-top:14px;flex-wrap:wrap">
+        <button class="btn-play" id="loopPlayBtn" onclick="toggleLoopPlay()">${loopPlayer.on ? '■ Stop' : '▶ Play the loop'}</button>
+        <label class="loop-pick">As in <select onchange="pickLoopSong(+this.value)">${f.songs.map((x, i) =>
+          `<option value="${i}" ${x === pick ? 'selected' : ''}>${esc(keyShown(x.song))} · ${esc(x.song.title)}</option>`).join('')}</select></label>
+        <span class="speed-val">${bpm} BPM</span>
+      </div>
+    </div>
+    <div class="lib-section"><h2>Same loop, ${keys} key${keys === 1 ? '' : 's'}</h2><span class="lib-note">Easiest first</span></div>
+    <div class="loop-table">${f.songs.map(({ song, loop }, i) => `<button class="loop-row" onclick="openMap('${song.id}')">
+      <span class="n">${i + 1}</span>
+      <span class="t"><b>${esc(song.title)}</b><small>${esc(loop.sections.join(', '))} · ${song.track ? `${TRACKS[song.track].label} · Week ${song.week}` : 'Library'}</small></span>
+      <span class="k">${esc(keyShown(song))}</span>
+      <span class="c">${esc(loop.chords.map(tx).join(' – '))}</span>
+      ${dotsHtml(diffOf(song))}</button>`).join('')}</div>
+    ${related.length ? `<div class="lib-section"><h2>Related loops</h2></div>
+      <div class="loop-related">${related.map(o => `<a href="#/loop/${o.id}">${o.label}</a>`).join('')}</div>` : ''}
+  </div>`;
+}
+
+// Loop player: strums the picked song's chords, one per bar, four down-strums a bar.
+// Plays the guitar chord names on both instruments (the diagrams change, the sound doesn't), raised by the
+// song's capo so it sounds in the record's key.
+const OPEN_STRINGS = [40, 45, 50, 55, 59, 64];   // E2 A2 D3 G3 B3 E4 as MIDI notes
+const loopPlayer = { on: false, timer: null, raf: 0, next: 0, beat: 0, marks: [], cur: -1 };
+function chordNotes(name) {
+  const shape = CHORD_SHAPES[name] || CHORD_SHAPES[name.split('/')[0]];
+  if (shape) return shape.frets.map((f, i) => f < 0 ? null : OPEN_STRINGS[i] + f).filter(n => n !== null);
+  const m = name.match(/^([A-G][#b]?)(m(?!aj))?/);   // no diagram: a plain triad
+  const r = 40 + (NOTE_IDX[m[1]] - 4 + 12) % 12;
+  return [r, r + 7, r + 12, r + 12 + (m[2] ? 3 : 4), r + 19];
+}
+function strum(ctx, notes, t, vol, len) {
+  notes.forEach((n, i) => {
+    const at = t + i * 0.012;
+    const o = ctx.createOscillator(), lp = ctx.createBiquadFilter(), g = ctx.createGain();
+    o.type = 'sawtooth'; o.frequency.value = 440 * Math.pow(2, (n - 69) / 12);
+    lp.type = 'lowpass'; lp.frequency.setValueAtTime(2800, at); lp.frequency.exponentialRampToValueAtTime(500, at + len);
+    g.gain.setValueAtTime(0.0001, at); g.gain.exponentialRampToValueAtTime(vol, at + 0.006); g.gain.exponentialRampToValueAtTime(0.0001, at + len);
+    o.connect(lp).connect(g).connect(ctx.destination);
+    o.start(at); o.stop(at + len + 0.05);
+  });
+}
+function toggleLoopPlay() { loopPlayer.on ? stopLoopPlay() : startLoopPlay(); }
+function startLoopPlay() {
+  const ctx = getCtx();
+  stopBacking();
+  Object.assign(loopPlayer, { on: true, next: ctx.currentTime + 0.1, beat: 0, marks: [], cur: -1 });
+  loopPlayer.timer = setInterval(() => {
+    const { song, loop } = loopPick(), spb = 60 / (song.bpm || 90);
+    if (loopPlayer.next < ctx.currentTime) loopPlayer.next = ctx.currentTime + 0.05;   // throttled (background tab): skip missed beats, don't burst them
+    while (loopPlayer.next < ctx.currentTime + 0.15) {
+      const i = Math.floor(loopPlayer.beat / 4) % loop.chords.length, first = loopPlayer.beat % 4 === 0;
+      strum(ctx, chordNotes(loop.chords[i]).map(n => n + (song.capo || 0)), loopPlayer.next, first ? 0.07 : 0.045, Math.min(1.2, spb * 1.6));
+      if (first) loopPlayer.marks.push({ t: loopPlayer.next, i });
+      loopPlayer.next += spb; loopPlayer.beat++;
+    }
+  }, 25);
+  const paint = () => {
+    while (loopPlayer.marks.length && loopPlayer.marks[0].t <= ctx.currentTime) {
+      const { i } = loopPlayer.marks.shift(); loopPlayer.cur = i;
+      document.querySelectorAll('.loop-box').forEach(b => b.classList.toggle('on', +b.dataset.i === i));
+    }
+    loopPlayer.raf = requestAnimationFrame(paint);
+  };
+  paint();
+  const btn = document.getElementById('loopPlayBtn'); if (btn) btn.textContent = '■ Stop';
+}
+function stopLoopPlay() {
+  if (!loopPlayer.on) return;
+  clearInterval(loopPlayer.timer); cancelAnimationFrame(loopPlayer.raf);
+  loopPlayer.on = false;
+  document.querySelectorAll('.loop-box').forEach(b => b.classList.remove('on'));
+  const btn = document.getElementById('loopPlayBtn'); if (btn) btn.textContent = '▶ Play the loop';
+}
+
 // ── Views and routing ──────────────────────────────────
-// #/ = library, #/song/<id> = that song's session
+// #/ = library, #/song/<id> = that song's session, #/loop/<id> = a chord loop
 function showSong(s) {
   currentSong = s;
   localStorage.setItem('guitarSong', s.id);
@@ -1588,15 +1882,26 @@ function leaveSession() {
 function route() {
   const m = location.hash.match(/^#\/song\/([\w-]+)/);
   const s = m && SONG_BY_ID[m[1]];
-  document.getElementById('libraryView').style.display = s ? 'none' : '';
-  document.getElementById('sessionView').style.display = s ? '' : 'none';
-  document.getElementById('topbar').style.maxWidth = s ? '720px' : '1100px';
-  document.getElementById('backLink').style.display = s ? '' : 'none';
-  document.getElementById('brand').style.display = s ? 'none' : '';
+  const lm = !s && location.hash.match(/^#\/loop\/([\w-]+)/);
+  const fam = lm && getLoopFamilies()[lm[1]];
+  const view = s ? 'song' : fam ? 'loop' : 'library';
+  document.getElementById('libraryView').style.display = view === 'library' ? '' : 'none';
+  document.getElementById('sessionView').style.display = view === 'song' ? '' : 'none';
+  document.getElementById('loopView').style.display = view === 'loop' ? '' : 'none';
+  document.getElementById('topbar').style.maxWidth = view === 'library' ? '1100px' : '720px';
+  document.getElementById('backLink').style.display = view === 'library' ? 'none' : '';
+  document.getElementById('brand').style.display = view === 'library' ? '' : 'none';
+  if (view !== 'loop') { stopLoopPlay(); loopPage.id = null; }
   if (s) {
     if (s !== renderedSong) showSong(s);
     renderRepRow(); renderStepDone();
     document.title = s.title + ' · Guitar Practice';
+  } else if (fam) {
+    leaveSession();
+    if (loopPage.id !== fam.id) { stopLoopPlay(); Object.assign(loopPage, { id: fam.id, pick: 0 }); }
+    Object.assign(lib, { mode: 'loops', loop: fam.id });   // the library comes back on this loop
+    renderLoopPage();
+    document.title = fam.label + ' · Guitar Practice';
   } else {
     leaveSession(); renderLibrary();
     document.title = 'Guitar Practice';
@@ -1808,7 +2113,7 @@ function renderChordSection(s) {
   const colors = chordColors(data);
   diagEl.innerHTML = `<div class="chord-diagrams">${Object.keys(colors).map(name => {
     const shape = CHORD_SHAPES[name]; return shape ? buildChordSVG(name, shape) : '';
-  }).join('')}</div>`;
+  }).join('')}</div>${loopLinesHtml(s)}`;
   gridEl.innerHTML = songMapHtml(data, colors);
 }
 
@@ -1849,6 +2154,9 @@ function renderSession(s) {
   document.getElementById('hCapoWrap').style.display = s.capo ? '' : 'none';
   document.getElementById('hCapo').textContent = s.capo || '';
   document.getElementById('hAuto').style.display = s.auto ? '' : 'none';
+  const mainLoop = songLoops(s)[0];
+  document.getElementById('hLoopWrap').style.display = mainLoop ? '' : 'none';
+  document.getElementById('hLoop').textContent = mainLoop ? mainLoop.label : '';
   // No strumming pattern: hide that step and number the rest 1..4
   const steps = stepsFor(s);
   document.querySelectorAll('#stepsSection > .step').forEach((el, i) => {

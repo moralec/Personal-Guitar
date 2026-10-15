@@ -47,6 +47,15 @@ Decisions that constrain new code, corrections received, gotchas. Rewritten as s
 - A practice day is `part` when any step is marked done or a song is logged as played, and `full` when one song has all 5 steps done. Past days are never recomputed.
 - Only Every Rose and Knockin' have a full chord bar grid (`chords.sections`); the other 8 built songs have `chords.structure` only. A library that shows "what's built" has to distinguish these.
 
+## Chord loops (2026-10-15)
+
+- **Carlos's decision:** loops come in through the library (Paths → By chord loop, `#/loop/<id>`), not through the song page. The song page shows which loop it is and nothing else; a "same loop in other songs" panel was mocked and dropped because he doesn't want to move song to song from song pages.
+- Loops are computed, not stored: `chartSections()` handles `sections`, `grid` and `structure` charts. Rotations count as one loop, written from the home chord; a section only counts when it is one cycle of 2–4 degree changes. Families (`getLoopFamilies()`) are loops in ≥2 songs, sorted by song count; the library shows the top 8 and an "All N loops" card.
+- Degrees are relative to the tonic of the session's `key`; upper/lower case comes from each chord, not from the key's major/minor. So only a wrong tonic breaks a loop. Checked 2026-10-15: every chart contains its key's tonic chord. Three are labelled minor over major chords (Brain Stew, Back in Black, Sunshine of Your Love: blues-rock riffs); their loops are still right.
+- The loop player adds the song's `capo` so it sounds in the record's key (Free Fallin' plays F, shown as D shapes). Family song order is re-sorted on instrument change because difficulty is per instrument.
+- Loop player plays the guitar chord names (the record's key) via `CHORD_SHAPES` voicings, falling back to a triad; on guitarlele only the shown names change.
+- **Carlos's decision:** Beginner path reordered so each week adds one chord or loop: Every Rose, Free Fallin', Good Riddance, Knockin', Here I Go Again, With or Without You, Wonderwall, Smoke on the Water, Summer of '69, Wish You Were Here. Progress is keyed by slug, so nothing was lost; `whereLabel` and the Today card follow the new weeks.
+
 ## Pipeline (2026-10-14)
 
 - **Carlos's decision:** a song with no UG strumming pattern is still built; only the strumming step is hidden (`backing: null`, `stepsFor()`). A full practice day then means all 4 of its steps.
