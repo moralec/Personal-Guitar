@@ -1369,6 +1369,11 @@ function setInstrument(key) {
   const s = currentSession();
   renderInstrumentInfo(s);
   if (!s.coming) renderChordSection(s);
+  if (loopFamilies) {   // difficulty depends on the instrument: re-sort, keeping the picked song
+    const picked = loopPage.id && loopPick();
+    sortFamilySongs();
+    if (picked) loopPage.pick = getLoopFamilies()[loopPage.id].songs.indexOf(picked);
+  }
   renderLibrary();
   if (loopPage.id) renderLoopPage();
 }
@@ -1453,7 +1458,7 @@ function sectionLoop(chords, tonic) {
   if (L < 2 || L > 4) return null;
   const unit = seq.slice(0, L);
   const rots = unit.map((_, i) => unit.slice(i).concat(unit.slice(0, i)));
-  const cmp = (a, b) => (a[0].order % 3 === a[0].order ? 0 : 1) - (b[0].order % 3 === b[0].order ? 0 : 1)   // home chord first
+  const cmp = (a, b) => (a[0].order < 3 ? 0 : 1) - (b[0].order < 3 ? 0 : 1)   // home chord (degree I / i) first
     || a.reduce((r, x, i) => r || x.order - b[i].order, 0);
   const best = rots.sort(cmp)[0];
   const tokens = best.map(x => x.token);
@@ -1490,9 +1495,11 @@ function getLoopFamilies() {
   loopFamilies = {};
   Object.values(all).filter(f => f.songs.length > 1)
     .sort((a, b) => b.songs.length - a.songs.length || a.tokens.length - b.tokens.length || a.label.localeCompare(b.label))
-    .forEach(f => { f.songs.sort((a, b) => SORTS.easiest(a.song, b.song)); loopFamilies[f.id] = f; });
+    .forEach(f => { loopFamilies[f.id] = f; });
+  sortFamilySongs();
   return loopFamilies;
 }
+function sortFamilySongs() { Object.values(loopFamilies).forEach(f => f.songs.sort((a, b) => SORTS.easiest(a.song, b.song))); }
 
 // ── Library helpers ────────────────────────────────────
 const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -1634,9 +1641,12 @@ const SORTS = {
 const fold = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 function matchesQuery(s, q) {
   if (!q) return true;
+  const loops = songLoops(s), raw = q.trim().replace(/♭/g, 'b');
+  // Loop notation is matched as typed: case is the major / minor distinction (i-bVII is not I-bVII)
+  if (raw && loops.some(l => l.id.includes(raw.replace(/\s*[–-]\s*/g, '-')))) return true;
   q = fold(q);
   return [s.title, s.artist, s.key, keyShown(s), String(s.year || ''), ...(s.tags || []),
-    ...songLoops(s).flatMap(l => [l.label, l.id, LOOP_NAMES[l.id] || ''])].some(x => fold(x).includes(q));
+    ...loops.map(l => LOOP_NAMES[l.id] || '')].some(x => fold(x).includes(q));
 }
 function topTags(n) {
   const c = {};
@@ -1664,9 +1674,9 @@ function loopWhere(f) {
   return [...Object.values(TRACKS).map(t => t.label), 'Library'].filter(k => c[k]).map(k => `${k} ${c[k]}`).join(' · ');
 }
 function loopCardsHtml() {
-  const fams = Object.values(getLoopFamilies());
+  const byId = getLoopFamilies(), fams = Object.values(byId);
   const shown = lib.allLoops ? fams : fams.slice(0, LOOPS_SHOWN);
-  if (lib.loop && !shown.some(f => f.id === lib.loop)) shown.push(getLoopFamilies()[lib.loop]);   // keep the picked one in view
+  if (lib.loop && !shown.some(f => f.id === lib.loop)) shown.push(byId[lib.loop]);   // keep the picked one in view
   return shown.map(f => {
     const { song, loop } = f.songs[0];
     return `<button class="path ${lib.loop === f.id ? 'on' : ''}" onclick="setLib('loop', lib.loop === '${f.id}' ? null : '${f.id}')">
@@ -1775,7 +1785,7 @@ function renderLoopPage() {
     </header>
     <div class="card" style="margin-bottom:36px">
       <div class="card-title">How it moves</div>
-      <div class="loop-boxes">${f.tokens.map((t, i) => `<div class="loop-box" data-i="${i}"><b>${t}</b><span>${esc(tx(pick.loop.chords[i]))}</span></div>`).join('')}</div>
+      <div class="loop-boxes">${f.tokens.map((t, i) => `<div class="loop-box${loopPlayer.on && loopPlayer.cur === i ? ' on' : ''}" data-i="${i}"><b>${t}</b><span>${esc(tx(pick.loop.chords[i]))}</span></div>`).join('')}</div>
       <div class="lib-note">Numbers are steps of the key: I is the home chord, upper case is major, lower case minor. One chord per bar.</div>
       <div class="ctrl-row" style="margin-top:14px;flex-wrap:wrap">
         <button class="btn-play" id="loopPlayBtn" onclick="toggleLoopPlay()">${loopPlayer.on ? '■ Stop' : '▶ Play the loop'}</button>
@@ -1797,9 +1807,10 @@ function renderLoopPage() {
 }
 
 // Loop player: strums the picked song's chords, one per bar, four down-strums a bar.
-// Plays the guitar chord names (the record's key) on both instruments; the diagrams change, the sound doesn't.
+// Plays the guitar chord names on both instruments (the diagrams change, the sound doesn't), raised by the
+// song's capo so it sounds in the record's key.
 const OPEN_STRINGS = [40, 45, 50, 55, 59, 64];   // E2 A2 D3 G3 B3 E4 as MIDI notes
-const loopPlayer = { on: false, timer: null, raf: 0, next: 0, beat: 0, marks: [] };
+const loopPlayer = { on: false, timer: null, raf: 0, next: 0, beat: 0, marks: [], cur: -1 };
 function chordNotes(name) {
   const shape = CHORD_SHAPES[name] || CHORD_SHAPES[name.split('/')[0]];
   if (shape) return shape.frets.map((f, i) => f < 0 ? null : OPEN_STRINGS[i] + f).filter(n => n !== null);
@@ -1822,19 +1833,20 @@ function toggleLoopPlay() { loopPlayer.on ? stopLoopPlay() : startLoopPlay(); }
 function startLoopPlay() {
   const ctx = getCtx();
   stopBacking();
-  Object.assign(loopPlayer, { on: true, next: ctx.currentTime + 0.1, beat: 0, marks: [] });
+  Object.assign(loopPlayer, { on: true, next: ctx.currentTime + 0.1, beat: 0, marks: [], cur: -1 });
   loopPlayer.timer = setInterval(() => {
     const { song, loop } = loopPick(), spb = 60 / (song.bpm || 90);
+    if (loopPlayer.next < ctx.currentTime) loopPlayer.next = ctx.currentTime + 0.05;   // throttled (background tab): skip missed beats, don't burst them
     while (loopPlayer.next < ctx.currentTime + 0.15) {
       const i = Math.floor(loopPlayer.beat / 4) % loop.chords.length, first = loopPlayer.beat % 4 === 0;
-      strum(ctx, chordNotes(loop.chords[i]), loopPlayer.next, first ? 0.07 : 0.045, Math.min(1.2, spb * 1.6));
+      strum(ctx, chordNotes(loop.chords[i]).map(n => n + (song.capo || 0)), loopPlayer.next, first ? 0.07 : 0.045, Math.min(1.2, spb * 1.6));
       if (first) loopPlayer.marks.push({ t: loopPlayer.next, i });
       loopPlayer.next += spb; loopPlayer.beat++;
     }
   }, 25);
   const paint = () => {
     while (loopPlayer.marks.length && loopPlayer.marks[0].t <= ctx.currentTime) {
-      const { i } = loopPlayer.marks.shift();
+      const { i } = loopPlayer.marks.shift(); loopPlayer.cur = i;
       document.querySelectorAll('.loop-box').forEach(b => b.classList.toggle('on', +b.dataset.i === i));
     }
     loopPlayer.raf = requestAnimationFrame(paint);
