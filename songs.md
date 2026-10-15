@@ -17,14 +17,14 @@ Rating scale 1–5 per dimension (guitar part only):
 | Track | Week | Song | Artist | Score | Status |
 |-------|------|------|--------|:-----:|--------|
 | Beginner | 1 | Every Rose Has Its Thorn | Poison | 1.3 | ✅ Built |
-| Beginner | 2 | Knockin' on Heaven's Door | Guns N' Roses | 1.0 | ✅ Built |
-| Beginner | 3 | Smoke on the Water | Deep Purple | 1.3 | 🤖 Auto-built |
-| Beginner | 4 | With or Without You | U2 | 1.3 | 🤖 Auto-built |
-| Beginner | 5 | Free Fallin' | Tom Petty | 1.3 | 🤖 Auto-built |
-| Beginner | 6 | Summer of '69 | Bryan Adams | 1.7 | ✅ Built |
-| Beginner | 7 | Here I Go Again | Whitesnake | 1.7 | 🤖 Auto-built |
-| Beginner | 8 | Wonderwall | Oasis | 1.7 | 🤖 Auto-built |
-| Beginner | 9 | Good Riddance (Time of Your Life) | Green Day | 1.7 | 🤖 Auto-built |
+| Beginner | 2 | Free Fallin' | Tom Petty | 1.3 | 🤖 Auto-built |
+| Beginner | 3 | Good Riddance (Time of Your Life) | Green Day | 1.7 | 🤖 Auto-built |
+| Beginner | 4 | Knockin' on Heaven's Door | Guns N' Roses | 1.0 | ✅ Built |
+| Beginner | 5 | Here I Go Again | Whitesnake | 1.7 | 🤖 Auto-built |
+| Beginner | 6 | With or Without You | U2 | 1.3 | 🤖 Auto-built |
+| Beginner | 7 | Wonderwall | Oasis | 1.7 | 🤖 Auto-built |
+| Beginner | 8 | Smoke on the Water | Deep Purple | 1.3 | 🤖 Auto-built |
+| Beginner | 9 | Summer of '69 | Bryan Adams | 1.7 | ✅ Built |
 | Beginner | 10 | Wish You Were Here | Pink Floyd | 2.0 | ✅ Built |
 | Intermediate | 1 | Don't Stop Believin' | Journey | 2.0 | 🤖 Auto-built |
 | Intermediate | 2 | Patience | Guns N' Roses | 2.0 | 🤖 Auto-built |
@@ -141,6 +141,7 @@ Auto-built = researched by `pipeline/` (DeepSeek + Ultimate Guitar strumming dat
 
 - **Week** = already in the practice app as a session
 - Songs with no Week assigned are candidates for future weeks
+- Beginner week order (2026-10-15) follows chord loops, one new chord or loop a week (I–IV → I–IV–I–V → I–IV–V → I–V–IV …), not score; the minor-key Smoke on the Water moved to week 8
 - Score range: 1 (beginner) → 5 (advanced). Carlos's current sweet spot: **2.0–3.3**
 - Nothing Else Matters is already in Carlos's repertoire (knows it)
 - Rock en español (21 songs, tag `rock en español`; Calamaro's own songs plus Los Rodríguez and Los Abuelos de la Nada also tagged `calamaro`) added 2026-10-14. Keys come from LaCuerda / Ultimate Guitar chord charts; only Lamento boliviano's chart states its key, the rest are read from the progression. Ratings are estimates from the charts, not yet played. Copa rota's year is unknown (Calamaro's recent piano-tour repertoire; recording not identified). Devuélveme a mi chica has charts in B minor, C# minor and D minor; D minor is the most-voted.
