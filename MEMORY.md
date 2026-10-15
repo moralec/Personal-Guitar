@@ -31,6 +31,7 @@ Decisions that constrain new code, corrections received, gotchas. Rewritten as s
 - Always verify in the browser before reporting done; the Chrome extension cannot open `file://`, so serve on 7432 first. If the extension is not connected, headless Chrome works, but its window has a 500px minimum width: test phone layouts inside a 375px same-origin iframe.
 - After a deploy, a "nothing changed" report was a stale tab; Netlify serves `max-age=0, must-revalidate`, no service worker. Say "hard reload" before debugging.
 - Marty Music is the preferred lesson source.
+- **Spanish-language songs: Estudio Satori first** (Eliana De Piero, youtube.com/estudiosatori; Carlos, 2026-10-15) — but only her *guitar* tutorials; many of her videos are ukulele. Search `youtube.com/@estudiosatori/search?query=...`. `pipeline/prompt.md` says the same. YouTube oEmbed reports her older videos as "Eliana De Piero", so check.js WARNs on the channel name; harmless.
 - Carlos wants a clear data format to fill in (chord bars, backing patterns) rather than prose instructions.
 
 ## Palace archetype: dashboard-app (since 2026-09-16 14:35)

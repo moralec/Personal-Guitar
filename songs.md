@@ -82,6 +82,8 @@ Auto-built = researched by `pipeline/` (DeepSeek + Ultimate Guitar strumming dat
 | Te quiero igual | Andrés Calamaro | 1997 | G major | 2 | 1 | 2 | **1.7** | | rock en español, calamaro, 90s |
 | Estadio Azteca | Andrés Calamaro | 1997 | E minor | 2 | 1 | 2 | **1.7** | | rock en español, calamaro, 90s |
 | Copa rota | Andrés Calamaro | ? | E minor | 2 | 1 | 2 | **1.7** | | rock en español, calamaro, bolero |
+| Tuyo siempre | Andrés Calamaro | 2005 | E minor | 2 | 1 | 2 | **1.7** | | rock en español, calamaro |
+| Mi enfermedad | Los Rodríguez | 1991 | D major | 2 | 1 | 2 | **1.7** | | rock en español, calamaro, 90s |
 | Eres | Café Tacvba | 2003 | A minor | 2 | 1 | 2 | **1.7** | | rock en español, 00s, ballad |
 | Wish You Were Here | Pink Floyd | 1975 | G major | 2 | 2 | 2 | **2.0** | 3 | classic rock, fingerpicking |
 | Back in Black | AC/DC | 1980 | E minor | 2 | 2 | 2 | **2.0** | | classic rock, 80s |
@@ -93,6 +95,11 @@ Auto-built = researched by `pipeline/` (DeepSeek + Ultimate Guitar strumming dat
 | Home Sweet Home | Mötley Crüe | 1985 | C major | 2 | 2 | 2 | **2.0** | | power ballad, 80s |
 | House of the Rising Sun | The Animals | 1964 | A minor | 2 | 1 | 3 | **2.0** | | classic, arpeggio |
 | Tren al sur | Los Prisioneros | 1990 | A minor | 2 | 2 | 2 | **2.0** | | rock en español, 90s |
+| Vasos vacíos | Los Fabulosos Cadillacs | 1988 | G major | 1 | 2 | 3 | **2.0** | | rock en español, 80s, ska |
+| Rasguña las piedras | Sui Generis | 1973 | G major | 3 | 1 | 2 | **2.0** | | rock en español, 70s |
+| Rayando el sol | Maná | 1990 | G major | 2 | 2 | 2 | **2.0** | | rock en español, 90s |
+| El cantante | Andrés Calamaro | 2004 | G minor | 3 | 1 | 2 | **2.0** | | rock en español, calamaro, 00s |
+| El salmón | Andrés Calamaro | 2000 | A minor | 2 | 2 | 2 | **2.0** | | rock en español, calamaro, 00s |
 | You Give Love a Bad Name | Bon Jovi | 1986 | C minor | 2 | 3 | 2 | **2.3** | 4 | 80s rock |
 | Enter Sandman | Metallica | 1991 | E minor | 2 | 3 | 2 | **2.3** | | heavy metal, 90s |
 | More Than a Feeling | Boston | 1976 | D major | 2 | 3 | 2 | **2.3** | | classic rock |
@@ -112,6 +119,10 @@ Auto-built = researched by `pipeline/` (DeepSeek + Ultimate Guitar strumming dat
 | Demoliendo hoteles | Charly García | 1984 | C major | 3 | 2 | 2 | **2.3** | | rock en español, 80s |
 | Mariposa tecknicolor | Fito Páez | 1994 | B major | 3 | 2 | 2 | **2.3** | | rock en español, 90s |
 | Devuélveme a mi chica | Hombres G | 1985 | D minor | 3 | 2 | 2 | **2.3** | | rock en español, 80s |
+| Té para tres | Soda Stereo | 1990 | D major | 2 | 2 | 3 | **2.3** | | rock en español, 90s, ballad |
+| Rezo por vos | Charly García & Spinetta | 1986 | D major | 2 | 3 | 2 | **2.3** | | rock en español, 80s, riff |
+| Afuera | Caifanes | 1994 | B minor | 3 | 2 | 2 | **2.3** | | rock en español, 90s |
+| Inconsciente colectivo | Charly García | 1982 | G major | 4 | 2 | 2 | **2.7** | | rock en español, 80s |
 | More Than Words | Extreme | 1990 | G major | 3 | 2 | 3 | **2.7** | 5 | 80s, fingerpicking |
 | Money for Nothing | Dire Straits | 1985 | G minor | 2 | 4 | 2 | **2.7** | 6 | 80s, riff |
 | Message in a Bottle | The Police | 1979 | C# minor | 3 | 2 | 3 | **2.7** | 7 | new wave, arpeggio |
@@ -127,6 +138,7 @@ Auto-built = researched by `pipeline/` (DeepSeek + Ultimate Guitar strumming dat
 | Dust in the Wind | Kansas | 1977 | C major | 2 | 3 | 4 | **3.0** | | folk rock, fingerpicking |
 | Persiana americana | Soda Stereo | 1986 | D major | 3 | 3 | 3 | **3.0** | | rock en español, 80s |
 | Entre dos tierras | Héroes del Silencio | 1990 | B minor | 3 | 4 | 2 | **3.0** | | rock en español, 90s, riff |
+| Corazón espinado | Santana & Maná | 1999 | B minor | 3 | 3 | 3 | **3.0** | | rock en español, 90s, latin rock |
 | Hotel California | Eagles | 1977 | B minor | 3 | 4 | 3 | **3.3** | 9 | classic rock, arpeggio |
 | November Rain | Guns N' Roses | 1991 | G major | 3 | 4 | 3 | **3.3** | | power ballad, 80s |
 | Purple Rain | Prince | 1984 | Bb major | 3 | 4 | 3 | **3.3** | | 80s, soul, blues |
@@ -145,3 +157,6 @@ Auto-built = researched by `pipeline/` (DeepSeek + Ultimate Guitar strumming dat
 - Score range: 1 (beginner) → 5 (advanced). Carlos's current sweet spot: **2.0–3.3**
 - Nothing Else Matters is already in Carlos's repertoire (knows it)
 - Rock en español (21 songs, tag `rock en español`; Calamaro's own songs plus Los Rodríguez and Los Abuelos de la Nada also tagged `calamaro`) added 2026-10-14. Keys come from LaCuerda / Ultimate Guitar chord charts; only Lamento boliviano's chart states its key, the rest are read from the progression. Ratings are estimates from the charts, not yet played. Copa rota's year is unknown (Calamaro's recent piano-tour repertoire; recording not identified). Devuélveme a mi chica has charts in B minor, C# minor and D minor; D minor is the most-voted.
+- Tuyo siempre (Calamaro) added 2026-10-14 at Carlos's request. Year 2005 = first release found, the live album *El Regreso*; studio original not identified. Key and chords (Em Am D G B7 C F) from the Ultimate Guitar chart (4.8★, 76 votes), which has no strumming pattern.
+- 9 songs added 2026-10-15 from Estudio Satori's guitar tutorials (Carlos's pick): Té para tres, Vasos vacíos, Rezo por vos, Mi enfermedad, Corazón espinado, Rasguña las piedras, Inconsciente colectivo, Afuera, Rayando el sol. Years from es.wikipedia (Mi enfermedad: first released by Los Rodríguez on *Buena suerte*, 1991, written by Calamaro; Rezo por vos: Spinetta's *Privé* 1986, García's 1987; Vasos vacíos: *El ritmo mundial* 1988; Afuera: *El nervio del volcán* 1994). Keys read from the most-voted Ultimate Guitar chords version's shapes (Rezo por vos and Corazón espinado state D and Bm). Ratings are estimates from those charts, not yet played. Afuera has F#7 → Bm, the same V7 → i pull as B7 → Em one key up; Inconsciente colectivo's chart has B7 → Em7 (4 times) plus Cdim7, Bbmaj7, Abmaj7.
+- El cantante and El salmón (Calamaro) added 2026-10-15 at Carlos's request; Estudio Satori has no tutorial for either. El cantante is Rubén Blades's song (written for Héctor Lavoe), Calamaro's version the title track of *El cantante* (2004, es.wikipedia); El salmón the first single of *El salmón* (2000). Keys from the most-voted UG chords versions (9 and 17 votes): El cantante Gm A7 Cm D with Adim7/Eb7/Bb7 passing chords (D → Gm is the V → i pull); El salmón A5 G5 C5 D5 power chords, then G C Am E7 F. Neither has a UG strumming pattern. Ratings are estimates.

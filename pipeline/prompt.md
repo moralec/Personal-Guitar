@@ -19,7 +19,7 @@ Find and return:
    - Chord names in plain form, as the chart's shapes: G, Em, B7, Cadd9, D/F#, F#m, Bm7. No "N.C.", no "x2", no lyrics.
    - Keep the sequence in the order of the recording (intro first, outro last).
    - Do NOT copy any lyrics anywhere in the file.
-5. **lesson**: ONE YouTube full-song guitar lesson for this exact song. Prefer Marty Music; for Spanish-language songs a well-viewed Spanish tutorial is fine. Give "videoId" (the 11-character id), "channel", "title", "url". It must teach the song, not be the music video or a cover.
+5. **lesson**: ONE YouTube full-song guitar lesson for this exact song. Prefer Marty Music; for Spanish-language songs prefer Estudio Satori (Eliana De Piero, https://www.youtube.com/estudiosatori — search https://www.youtube.com/@estudiosatori/search?query=...) when it has a guitar (not ukulele) tutorial of the song, otherwise a well-viewed Spanish tutorial. Give "videoId" (the 11-character id), "channel", "title", "url". It must teach the song, not be the music video or a cover.
 6. **warmup**: ONE YouTube video for a 5-minute warmup of the hardest technique in THIS song. Decide first what that is — e.g. a specific chord change (like G→B7, or a barre chord like F#m), barre chords in general, palm muting, fingerpicking/arpeggios, a pentatonic riff, 16th-note strumming. Only use a generic strumming workout if strumming really is the hardest part. Give "videoId", "channel", "title", "url", "focus" (short title, e.g. "B7 chord changes") and "why" (one sentence linking it to this song).
 7. **notes**: anything uncertain or guessed. Be honest; a guessed value marked as guessed is fine, an invented one is not.
 
