@@ -65,6 +65,8 @@ Decisions that constrain new code, corrections received, gotchas. Rewritten as s
 - DeepSeek (opencode-go) is good at finding real lesson videos (oEmbed-verified) and chord charts, honest in `notes`, weak at inventing strum patterns (it missed muted strums on Flaca) — that is why strumming comes from the script. One agent drifted into other songs' output files and wrote nothing; outputs were verified title-for-title afterwards. Give each agent its own folder next time.
 - Pay-per-use `opencode/` provider cost ~$0.11–0.13 per song in the test; Carlos's runs go on `opencode-go/`.
 - Key in a BUILT entry is the chart's shape key, with `capo` shown as a chip; `defaultPitch: 1` for songs the chart marks as tuned down a semitone (GN'R etc.).
+- **Hand-fixing an auto-built song:** edit `pipeline/out/<slug>.json`, re-run `node pipeline/check.js pipeline/out/<slug>.json index.html pipeline/strum/<slug>.json > pipeline/out/<slug>.check.txt`, then `node pipeline/assemble.js` (only that song's BUILT line should change in the diff). Editing the BUILT line directly is undone by the next assemble. (2026-10-16, Tuyo siempre)
+- **The chart's key can differ from the lesson's.** Tuyo siempre was charted in E minor from UG, but the Satori lesson (and LaCuerda's second version) play it in A minor; Carlos spotted it from the video's chord boxes. A different key is not just a transposition: the A-minor chart also had E→E7 and a B7–F–E pre-chorus the Em chart had garbled. When a lesson is set, check its chords against the chart. LaCuerda pages put the chart in a `<pre>`, readable with curl. (2026-10-16)
 
 ## Gotchas
 

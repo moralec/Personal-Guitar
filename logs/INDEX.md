@@ -7,3 +7,4 @@
 - [2026-10-14](2026-10-14-song-map-popup.md) — Library click opens a song-map pop-up (title, artist, order strip, section grids, Start practice); step 4 and the pop-up share songMapHtml
 - [2026-10-15](2026-10-15-chord-loops.md) — Chord loops: songs grouped by shared progression (degrees of the key); Paths by chord loop, `#/loop/<id>` page with a loop player, loop label on the song page; Beginner path reordered by loop
 - [2026-10-15](2026-10-15-estudio-satori-lessons.md) — Estudio Satori lessons for 6 rock en español songs (incl. Tuyo siempre, now assembled); pipeline prompt prefers Satori; 11 new songs (9 from her channel + El cantante, El salmón), 8 built at deploy
+- [2026-10-16](2026-10-16-tuyo-siempre-key.md) — Tuyo siempre moved from E minor to A minor to match the Satori lesson (LaCuerda Am chart; E→E7, B7–F–E pre-chorus); hand-fix route for auto-built songs recorded in MEMORY
