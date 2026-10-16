@@ -27,3 +27,7 @@ Full channel list (143 videos, 69 guitar tutorials) pulled via YouTube's browse 
 Pipeline (3 herdr workers): 8 passed with Satori lessons and were assembled (BUILT 77). Vasos vacíos, El cantante, El salmón still building at deploy time; they show as "Coming soon" until assembled.
 
 **Found, not fixed:** `strum-from-ug.js --search` folds the artist without decoding HTML entities, so "Charly García" never matched UG's "Charly Garc&iacute;a" for Inconsciente colectivo ("no public chords versions"). Both of its Charly García charts checked by URL have no pattern, so nothing lost here — but other accented artists may have missed patterns the same way.
+
+## 2026-10-16 — last three built and deployed
+
+Vasos vacíos (Satori lesson), El cantante and El salmón passed and were assembled (BUILT 80). El salmón's lesson is Clases de Guitarra Facundo. El cantante has no Calamaro-specific tutorial with real views (best found: 94 views), so it keeps Mauro Martinez's 491K-view tutorial, which teaches Héctor Lavoe's recording — same song, key not checked against Calamaro's. Added `Adim7` (x01212) and its guitarlele counterpart `Edim7` (0x2323) to `CHORD_SHAPES`; El cantante's check had warned the diagram was missing.
