@@ -31,3 +31,11 @@ Pipeline (3 herdr workers): 8 passed with Satori lessons and were assembled (BUI
 ## 2026-10-16 — last three built and deployed
 
 Vasos vacíos (Satori lesson), El cantante and El salmón passed and were assembled (BUILT 80). El salmón's lesson is Clases de Guitarra Facundo. El cantante has no Calamaro-specific tutorial with real views (best found: 94 views), so it keeps Mauro Martinez's 491K-view tutorial, which teaches Héctor Lavoe's recording — same song, key not checked against Calamaro's. Added `Adim7` (x01212) and its guitarlele counterpart `Edim7` (0x2323) to `CHORD_SHAPES`; El cantante's check had warned the diagram was missing.
+
+## 2026-10-16 — library filters instead of path cards; starred songs
+
+Carlos: the Paths cards sat awkwardly and were really just filters; also drop the status chips (all 90 songs are Ready) and add favourites. Done:
+- Removed the path/loop cards and the By difficulty / By chord loop switch (from the chord-loops session, 199ae55). Path and Loop are now chip rows with counts, combinable with each other, level, tags and search; Loop shows 8 then "All N loops". `loopWhere` and the card CSS deleted; `loopName` kept (loop page uses it).
+- Removed the All / Ready / Queued / Candidate chips; cards keep their status badge.
+- `Progress.data.starred[id] = time`; ☆/★ on each song card (bottom-left of the thumbnail) and at the start of the song page's repertoire row; "★ Starred n" chip filters. Per browser, like the rest of guitarProgress.
+Verified by driving headless Chrome over CDP: star two songs → chip shows 2, filter lists exactly those, stars survive reload, unstar on the song page works, no exceptions; at 390px no element is wider than the viewport.

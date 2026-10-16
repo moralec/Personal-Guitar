@@ -355,14 +355,6 @@
   .lib-search::placeholder { color: #444; }
   .search-row { display: flex; gap: 10px; margin-bottom: 18px; }
   .search-row select { background: #141414; border: 1px solid #222; border-radius: 10px; color: #aaa; font-size: 13px; padding: 0 12px; outline: none; }
-  .paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 18px; }
-  .path { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 14px 16px; cursor: pointer; text-align: left; color: inherit; font-family: inherit; transition: border-color .15s; }
-  .path:hover { border-color: #444; }
-  .path.on { border-color: #f5a623; }
-  .path h3 { font-size: 15px; color: #fff; font-weight: 700; }
-  .path .meta { font-size: 12px; color: #666; margin-top: 3px; }
-  .path .pbar { height: 4px; background: #222; border-radius: 2px; margin-top: 10px; overflow: hidden; }
-  .path .pbar span { display: block; height: 100%; background: #f5a623; }
   .filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
   .filters .sep { width: 1px; height: 20px; background: #2a2a2a; margin: 0 4px; }
   .chip { display: inline-flex; align-items: center; gap: 6px; background: #141414; border: 1px solid #2a2a2a; border-radius: 20px; color: #777; font-size: 12px; font-weight: 600; padding: 6px 12px; cursor: pointer; transition: all .15s; white-space: nowrap; font-family: inherit; }
@@ -370,6 +362,11 @@
   .chip.on { background: #f5a623; border-color: #f5a623; color: #000; }
   .chip .n { font-weight: 400; opacity: .6; }
   .chip.tag { font-weight: 400; }
+  .chip.more { font-weight: 400; border-style: dashed; }
+  .filters .lbl { width: 40px; font-size: 10px; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: 1px; }
+  .star { background: none; border: none; color: #555; font-size: 18px; line-height: 1; cursor: pointer; padding: 2px 4px; font-family: inherit; }
+  .star:hover { color: #f5a623; }
+  .star.on { color: #f5a623; }
   .lib-count { font-size: 12px; color: #666; margin: 14px 0; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 22px 16px; }
   .song-card { cursor: pointer; position: relative; }
@@ -382,21 +379,13 @@
   .song-card .by { font-size: 12px; color: #666; margin-top: 2px; }
   .song-card .row { display: flex; align-items: center; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
   .song-card .add { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.7); border-color: #444; color: #ddd; }
+  .song-card .star { position: absolute; left: 6px; bottom: 6px; background: rgba(0,0,0,.6); border-radius: 6px; color: #aaa; }
+  .song-card .star.on { color: #f5a623; }
   .pill { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: #888; background: #1c1c1c; border: 1px solid #2a2a2a; border-radius: 5px; padding: 2px 7px; white-space: nowrap; }
   .pill strong { color: #f5a623; font-weight: 600; }
   .lib-empty { padding: 50px 20px; text-align: center; color: #444; font-size: 14px; border: 1px dashed #222; border-radius: 12px; grid-column: 1 / -1; }
 
-  /* Chord loops: library paths, loop page, song page line */
-  .paths-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
-  .paths-title { font-size: 13px; font-weight: 700; color: #fff; }
-  .seg { display: inline-flex; gap: 2px; background: #141414; border: 1px solid #1e1e1e; border-radius: 8px; padding: 3px; }
-  .seg-btn { background: transparent; border: none; border-radius: 6px; color: #777; font-size: 12px; font-weight: 600; padding: 6px 12px; cursor: pointer; font-family: inherit; }
-  .seg-btn:hover { color: #bbb; }
-  .seg-btn.on { background: #2a2a2a; color: #f5a623; }
-  .paths.loops { grid-template-columns: repeat(4, 1fr); }
-  .path .loop-n { font-size: 19px; font-weight: 800; color: #f5a623; letter-spacing: -.3px; margin-bottom: 5px; }
-  .path .loop-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 10px; font-size: 11px; color: #777; }
-  .path.more { display: flex; align-items: center; justify-content: center; color: #999; font-size: 13px; font-weight: 600; border-style: dashed; }
+  /* Chord loops: loop page, song page line */
   .lib-count a, .loop-page a { color: #f5a623; text-decoration: none; font-weight: 600; }
   .loop-lines { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; padding-top: 14px; border-top: 1px solid #1e1e1e; }
   .loop-line { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 12px; color: #777; }
@@ -428,14 +417,12 @@
 
   @media (max-width: 900px) {
     .today, .board { grid-template-columns: 1fr; }
-    .paths.loops { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 640px) {
     body { padding: 0 16px 80px; }
     .lib-h1 { font-size: 26px; }
     .hero { grid-template-columns: 1fr; }
     .hero .thumb { aspect-ratio: 16/9; }
-    .paths, .paths.loops { grid-template-columns: 1fr; }
     .loop-row { grid-template-columns: 20px minmax(0, 1fr) auto; }
     .loop-row .k, .loop-row .diff-dots { display: none; }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 18px 12px; }
@@ -491,9 +478,9 @@
       <option value="year">Year</option>
     </select>
   </div>
-  <div class="paths-head"><span class="paths-title">Paths</span><div class="seg" id="pathMode"></div></div>
-  <div class="paths" id="paths"></div>
   <div class="filters" id="libFilters"></div>
+  <div class="filters" id="libPaths"></div>
+  <div class="filters" id="libLoops"></div>
   <div class="filters" id="libTags"></div>
   <div class="lib-count" id="libShown"></div>
   <div class="grid" id="libGrid"></div>
@@ -1242,6 +1229,7 @@ function currentSession() { return currentSong; }
 //   songs[id] = { state: 'next' | 'learning' | 'playable' | null, added, lastPlayed, steps: { date, done: [step…] } }
 //   days[YYYY-MM-DD] = 'part' | 'full'   (full = all 5 steps of one song that day)
 //   goal = repertoire target
+//   starred[id] = time starred (favourites, independent of the repertoire state)
 // Kept behind this one object so it can move off the browser later.
 const LEARNING_LIMIT = 2;
 const today = () => new Date().toLocaleDateString('en-CA');
@@ -1255,6 +1243,7 @@ const Progress = {
     this.data.songs = this.data.songs || {};
     this.data.days  = this.data.days  || {};
     this.data.goal  = this.data.goal  || 10;
+    this.data.starred = this.data.starred || {};
   },
   save() { try { localStorage.setItem('guitarProgress', JSON.stringify(this.data)); } catch (e) {} },
   // First run: Nothing Else Matters is already known (songs.md); the week in progress becomes Learning
@@ -1272,6 +1261,8 @@ const Progress = {
     return { songs, days: {}, goal: 10 };
   },
   state(id) { const e = this.data.songs[id]; return (e && e.state) || null; },
+  starred(id) { return !!this.data.starred[id]; },
+  toggleStar(id) { if (this.data.starred[id]) delete this.data.starred[id]; else this.data.starred[id] = Date.now(); this.save(); },
   list(state) {
     return SONGS.filter(s => this.state(s.id) === state).sort((a, b) => this.data.songs[a.id].added - this.data.songs[b.id].added);
   },
@@ -1547,6 +1538,12 @@ function thumbHtml(s) {
   const initials = s.title.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).slice(0, 3).map(w => w[0]).join('');
   return `<div class="thumb" style="background:linear-gradient(135deg,hsl(${h} 35% 18%),hsl(${(h + 40) % 360} 30% 9%))"><div class="art">${initials}</div></div>`;
 }
+// Favourite toggle: on song cards and the song page's repertoire row
+function starHtml(id) {
+  const on = Progress.starred(id);
+  return `<button class="star ${on ? 'on' : ''}" title="${on ? 'Unstar' : 'Star this song'}" onclick="event.stopPropagation();toggleStar('${id}')">${on ? '★' : '☆'}</button>`;
+}
+function toggleStar(id) { Progress.toggleStar(id); renderBrowse(); if (currentSong && currentSong.id === id) renderRepRow(); }
 function repTagHtml(id) {
   const st = Progress.state(id);
   return st === 'playable' ? '<span class="tag-rep playable">✓ Can play</span>'
@@ -1647,8 +1644,8 @@ function renderBoard() {
 }
 
 // ── Library: search and browse ─────────────────────────
-// mode: Paths shown as the difficulty tracks or as chord loops; path / loop = the one picked
-const lib = { q: '', status: 'all', level: 'all', tag: null, mode: 'tracks', path: null, loop: null, allLoops: false, sort: 'easiest' };
+// path / loop = the track or chord loop picked; starred = only starred songs
+const lib = { q: '', level: 'all', tag: null, path: null, loop: null, starred: false, allLoops: false, sort: 'easiest' };
 const LOOPS_SHOWN = 8;
 const SWEET_SPOT = [2.0, 3.3];   // songs.md notes: Carlos's current sweet spot
 const LEVELS = {
@@ -1681,63 +1678,30 @@ function topTags(n) {
 }
 function setLib(k, v) { lib[k] = v; renderBrowse(); }
 
-function trackCardsHtml() {
-  return Object.keys(TRACKS).map(k => {
-    const songs = SONGS.filter(s => s.track === k);
-    const ready = songs.filter(s => !s.coming).length;
-    const played = songs.filter(s => Progress.state(s.id) === 'playable').length;
-    return `<button class="path ${lib.path === k ? 'on' : ''}" onclick="setLib('path', lib.path === '${k}' ? null : '${k}')">
-      <h3>${TRACKS[k].label} path</h3>
-      <div class="meta">${songs.length} weeks · ${ready} ready · ${played} you can play</div>
-      <div class="pbar"><span style="width:${ready / songs.length * 100}%"></span></div></button>`;
-  }).join('');
-}
 const loopName = f => f.name || `${f.tokens.length}-chord loop`;
-// "Beginner 2 · Advanced 1 · Library 1"
-function loopWhere(f) {
-  const c = {};
-  f.songs.forEach(({ song }) => { const k = song.track ? TRACKS[song.track].label : 'Library'; c[k] = (c[k] || 0) + 1; });
-  return [...Object.values(TRACKS).map(t => t.label), 'Library'].filter(k => c[k]).map(k => `${k} ${c[k]}`).join(' · ');
-}
-function loopCardsHtml() {
-  const byId = getLoopFamilies(), fams = Object.values(byId);
-  const shown = lib.allLoops ? fams : fams.slice(0, LOOPS_SHOWN);
-  if (lib.loop && !shown.some(f => f.id === lib.loop)) shown.push(byId[lib.loop]);   // keep the picked one in view
-  return shown.map(f => {
-    const { song, loop } = f.songs[0];
-    return `<button class="path ${lib.loop === f.id ? 'on' : ''}" onclick="setLib('loop', lib.loop === '${f.id}' ? null : '${f.id}')">
-      <div class="loop-n">${f.label}</div>
-      <h3>${esc(loopName(f))}</h3>
-      <div class="meta">${esc(loop.chords.map(tx).join(' – '))} in ${esc(song.title)}</div>
-      <div class="loop-meta"><span class="pill">${f.songs.length} songs</span><span>${loopWhere(f)}</span></div></button>`;
-  }).join('') + (fams.length > LOOPS_SHOWN
-    ? `<button class="path more" onclick="setLib('allLoops', !lib.allLoops)">${lib.allLoops ? 'Fewer loops' : `All ${fams.length} loops`}</button>` : '');
-}
+const chip = (on, onclick, label, n, cls = '') =>
+  `<button class="chip ${cls} ${on ? 'on' : ''}" onclick="${onclick}">${label}${n === undefined ? '' : ` <span class="n">${n}</span>`}</button>`;
 
 function renderBrowse() {
-  const byLoop = lib.mode === 'loops';
-  document.getElementById('pathMode').innerHTML = [['tracks', 'By difficulty'], ['loops', 'By chord loop']].map(([k, label]) =>
-    `<button class="seg-btn ${lib.mode === k ? 'on' : ''}" onclick="setLib('mode','${k}')">${label}</button>`).join('');
-  const pathsEl = document.getElementById('paths');
-  pathsEl.classList.toggle('loops', byLoop);
-  pathsEl.innerHTML = byLoop ? loopCardsHtml() : trackCardsHtml();
-
-  const fam = byLoop && lib.loop ? getLoopFamilies()[lib.loop] : null;
+  const fams = getLoopFamilies(), fam = lib.loop ? fams[lib.loop] : null;
   const famLoop = fam ? Object.fromEntries(fam.songs.map(x => [x.song.id, x.loop])) : null;
-  const path = byLoop ? null : lib.path;
-  const base = SONGS.filter(s => (!path || s.track === path) && (!famLoop || famLoop[s.id]) && matchesQuery(s, lib.q));
-  const count = k => base.filter(s => k === 'all' || songStatus(s) === k).length;
+  const path = lib.path;
+  const nStarred = SONGS.filter(s => Progress.starred(s.id)).length;
   document.getElementById('libFilters').innerHTML =
-    ['all', 'ready', 'queued', 'candidate'].map(k =>
-      `<button class="chip ${lib.status === k ? 'on' : ''}" onclick="setLib('status','${k}')">${k === 'all' ? 'All' : STATUS_LABEL[k]} <span class="n">${count(k)}</span></button>`).join('') +
-    '<span class="sep"></span>' +
-    Object.entries(LEVELS).map(([k, [label]]) =>
-      `<button class="chip ${lib.level === k ? 'on' : ''}" onclick="setLib('level','${k}')">${label}</button>`).join('');
+    chip(lib.starred, "setLib('starred', !lib.starred)", '★ Starred', nStarred) + '<span class="sep"></span>' +
+    Object.entries(LEVELS).map(([k, [label]]) => chip(lib.level === k, `setLib('level','${k}')`, label)).join('');
+  document.getElementById('libPaths').innerHTML = '<span class="lbl">Path</span>' + Object.keys(TRACKS).map(k =>
+    chip(path === k, `setLib('path', lib.path === '${k}' ? null : '${k}')`, TRACKS[k].label, SONGS.filter(s => s.track === k).length)).join('');
+  const all = Object.values(fams), shown = lib.allLoops ? all : all.slice(0, LOOPS_SHOWN);
+  if (fam && !shown.includes(fam)) shown.push(fam);   // keep the picked one in view
+  document.getElementById('libLoops').innerHTML = '<span class="lbl">Loop</span>' + shown.map(f =>
+    chip(lib.loop === f.id, `setLib('loop', lib.loop === '${f.id}' ? null : '${f.id}')`, `<span title="${esc(loopName(f))}">${f.label}</span>`, f.songs.length)).join('') +
+    (all.length > LOOPS_SHOWN ? chip(false, "setLib('allLoops', !lib.allLoops)", lib.allLoops ? 'Fewer loops' : `All ${all.length} loops`, undefined, 'more') : '');
   document.getElementById('libTags').innerHTML = topTags(10).map(t =>
-    `<button class="chip tag ${lib.tag === t ? 'on' : ''}" onclick="setLib('tag', lib.tag === '${t}' ? null : '${t}')">#${esc(t)}</button>`).join('');
+    chip(lib.tag === t, `setLib('tag', lib.tag === '${t}' ? null : '${t}')`, '#' + esc(t), undefined, 'tag')).join('');
 
-  let list = base.filter(s => (lib.status === 'all' || songStatus(s) === lib.status) &&
-    LEVELS[lib.level][1](diffOf(s)) && (!lib.tag || (s.tags || []).includes(lib.tag)));
+  let list = SONGS.filter(s => (!path || s.track === path) && (!famLoop || famLoop[s.id]) && matchesQuery(s, lib.q) &&
+    (!lib.starred || Progress.starred(s.id)) && LEVELS[lib.level][1](diffOf(s)) && (!lib.tag || (s.tags || []).includes(lib.tag)));
   list = path && lib.sort === 'easiest' ? list.sort((a, b) => a.week - b.week) : list.sort(SORTS[lib.sort]);
 
   document.getElementById('libCount').textContent = `${SONGS.length} songs · ${SONGS.filter(s => !s.coming).length} ready to practise`;
@@ -1748,7 +1712,8 @@ function renderBrowse() {
     const st = songStatus(s);
     return `<div class="song-card ${st}" onclick="openMap('${s.id}')">
       <div style="position:relative">${thumbHtml(s)}<div class="badges"><span class="tag-status ${st}">${STATUS_LABEL[st]}</span>${repTagHtml(s.id)}</div>
-        ${Progress.state(s.id) ? '' : `<button class="mini add" title="Add to Up next" onclick="event.stopPropagation();move('${s.id}','next')">+ Up next</button>`}</div>
+        ${Progress.state(s.id) ? '' : `<button class="mini add" title="Add to Up next" onclick="event.stopPropagation();move('${s.id}','next')">+ Up next</button>`}
+        ${starHtml(s.id)}</div>
       <h3>${esc(s.title)}</h3>
       <div class="by">${esc(s.artist)}${s.year ? ' · ' + s.year : ''}${s.track ? ` · ${TRACKS[s.track].label.slice(0, 3)} W${s.week}` : ''}</div>
       <div class="row">${dotsHtml(diffOf(s))}<span class="pill">${keyLabel()} <strong>${keyShown(s)}</strong></span>${famLoop ? `<span class="pill">Loop <strong>${esc(famLoop[s.id].chords.map(tx).join(' '))}</strong></span>` : ''}${s.bpm ? `<span class="pill">${s.bpm} bpm</span>` : ''}</div>
@@ -1769,7 +1734,7 @@ function renderRepRow() {
     : st === 'next' ? `${learnBtn}<button class="lib-btn sm ghost" onclick="move('${s.id}',null)">Remove</button>`
     : st === 'learning' ? `<button class="lib-btn sm" onclick="move('${s.id}','playable')">I can play it end to end ✓</button><button class="lib-btn sm ghost" onclick="move('${s.id}','next')">Park</button>`
     : `<button class="lib-btn sm ghost" ${Progress.data.songs[s.id].lastPlayed === today() ? 'disabled' : ''} onclick="playedToday('${s.id}');renderRepRow()">Played it today</button>`;
-  document.getElementById('repRow').innerHTML = `<span>${label}</span>${buttons}`;
+  document.getElementById('repRow').innerHTML = `${starHtml(s.id)}<span>${label}</span>${buttons}`;
 }
 function renderStepDone() {
   const done = Progress.stepsToday(currentSong.id);
