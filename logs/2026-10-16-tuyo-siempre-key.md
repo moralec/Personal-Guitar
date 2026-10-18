@@ -6,3 +6,5 @@ Carlos: the lesson video plays Am Dm G C / E7 F, and the app had the song in E m
 - Edited `pipeline/out/tuyo-siempre.json` (key, chords, chart_url → LaCuerda Am, warmup text, a HAND FIX note), re-ran check.js (all PASS; lesson channel WARN is the known Eliana De Piero name) and assemble.js: only the tuyo-siempre BUILT line changed. `CANDIDATES` key and songs.md row/note → A minor.
 - Guitar chords: Am Dm G C E E7 F B7. Guitarlele: Em Am D G B B7 C F#7, all with diagrams. Loop label unchanged (i – iv – ♭VII – ♭III).
 - **Verified** in headless Chrome (extension not connected), file:// `#/song/tuyo-siempre`: Key A minor, step 3 diagrams, song map bars. Not played by ear: the B7 in the pre-chorus is from LaCuerda, not from Carlos's video list.
+- **Deployed** 2026-10-18: 63c62ce pushed to `main`; the live site serves `"key":"A minor"` for tuyo-siempre (checked with curl, not in a browser).
+- Nothing else touched this session; INBOX had no open messages. No BACKLOG change.
