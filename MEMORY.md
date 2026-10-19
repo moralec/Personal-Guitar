@@ -71,6 +71,8 @@ Decisions that constrain new code, corrections received, gotchas. Rewritten as s
 
 ## Gotchas
 
+- **Print sheet (2026-10-19):** Carlos wanted one A4 landscape page that folds in half, guitar one side and guitarlele the other. The sheet is built on `beforeprint` (so Cmd+P works too) and shown only under `body.print-song`. `songMapHtml` appends alpha digits to chord colours, so print ink must be 6-digit hex (`#000000`; `#111` + `18` is invalid). `@page { size: A4 landscape }` can't be scoped, so every print from the app is landscape. Fit: CSS `zoom` measured with `getBoundingClientRect`, re-measured because shrinking reflows the chips. Headless Chrome `--print-to-pdf` fires beforeprint, so it is the test: one page, `sips` the PDF to PNG to look.
+
 - Web Audio: `source.stop()` fires `onended` just like a natural end. Any restart-while-playing (speed, pitch, markers, Pause) therefore reset the player and orphaned a looping source that Stop could not reach. `stopSrc()` now detaches the handler first and `playGen` guards the async `startSrc()`. Test the pitch-at-Original path as well as the SoundTouch one; the built songs default to +1, so the plain path is easy to miss. (2026-09-16, log: stop-buttons)
 
 - `logs/` and every committed file are deployed by Netlify — the repo root is the publish directory.

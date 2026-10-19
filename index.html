@@ -429,6 +429,29 @@
     .filters .sep { display: none; }
     .search-row select { max-width: 110px; }
   }
+
+  /* ── Print sheet: A4 landscape, guitar half | guitarlele half, fold down the middle ── */
+  .print-btn { margin-left: auto; }
+  #printSheet { display: none; width: 297mm; height: 210mm; overflow: hidden; background: #fff; color: #111; }
+  #printSheet.measuring { display: flex; position: fixed; left: -400mm; top: 0; }
+  .print-half { width: 50%; height: 100%; box-sizing: border-box; padding: 10mm 12mm; overflow: hidden; }
+  .print-half + .print-half { border-left: 1px dashed #aaa; }
+  .print-inst { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #666; }
+  #printSheet h2 { font-size: 22px; margin: 4px 0 2px; }
+  .print-meta { font-size: 12px; color: #444; margin-bottom: 12px; }
+  #printSheet .chord-diagrams { gap: 6px; }
+  #printSheet svg line[stroke="#2a2a2a"] { stroke: #999; }
+  #printSheet svg [fill="#f5a623"], #printSheet svg text { fill: #111; }
+  #printSheet .song-order-title, #printSheet .chord-section-header { color: #111 !important; }
+  #printSheet .song-chip, #printSheet .section-badge { color: #333 !important; background: none !important; border-color: #999 !important; }
+  #printSheet .chord-section-block { margin: 0; padding: 0; }
+  #printSheet .bar-repeat { color: #111; }
+  @page { size: A4 landscape; margin: 0; }
+  @media print {
+    body.print-song { background: #fff; padding: 0; }
+    body.print-song > :not(#printSheet) { display: none !important; }
+    body.print-song #printSheet { display: flex; }
+  }
 </style>
 </head>
 <body>
@@ -491,6 +514,7 @@
 
 <!-- ══ Session view: one song's 5 steps ══ -->
 <div class="map-modal" id="mapModal" onclick="if (event.target === this) closeMap()"><div class="map-box" id="mapBox"></div></div>
+<div id="printSheet"></div>
 
 <div class="view" id="sessionView">
 
@@ -1343,24 +1367,27 @@ function transposeChord(name, semis) {
 function tx(name) { return transposeChord(name, INSTRUMENTS[instrument].offset); }
 
 // Return a copy of a session's chord data with every chord name transposed for the instrument
-function chordsForInstrument(data) {
-  if (!data || !INSTRUMENTS[instrument].offset) return data;
-  const mapBars = bars => bars.map(bar => bar.map(tx));
+// (the toggled one unless `inst` is given: the print sheet renders both)
+function chordsForInstrument(data, inst = instrument) {
+  const off = INSTRUMENTS[inst].offset;
+  if (!data || !off) return data;
+  const t = name => transposeChord(name, off);
+  const mapBars = bars => bars.map(bar => bar.map(t));
   if (data.sections) {
     const sections = {};
     Object.entries(data.sections).forEach(([k, sec]) => { sections[k] = { ...sec, bars: mapBars(sec.bars) }; });
     return { ...data, sections };
   }
   if (data.grid) return { ...data, grid: data.grid.map(sec => ({ ...sec, bars: mapBars(sec.bars) })) };
-  if (data.structure) return { ...data, structure: data.structure.map(row => ({ ...row, prog: row.prog.map(tx) })) };
+  if (data.structure) return { ...data, structure: data.structure.map(row => ({ ...row, prog: row.prog.map(t) })) };
   return data;
 }
 
 // Key string like "G major" → "D major" for the instrument
-function keyForInstrument(key) {
+function keyForInstrument(key, inst = instrument) {
   const m = (key || '').match(/^([A-G][#b]?)(.*)$/);
   if (!m) return key;
-  const off = INSTRUMENTS[instrument].offset;
+  const off = INSTRUMENTS[inst].offset;
   const pc = (NOTE_IDX[m[1]] + off + 120) % 12;
   const minor = /minor|\bm\b/i.test(m[2]);
   return spellRoot(pc, minor ? "m" : "", "") + m[2];
@@ -1735,7 +1762,8 @@ function renderRepRow() {
     : st === 'next' ? `${learnBtn}<button class="lib-btn sm ghost" onclick="move('${s.id}',null)">Remove</button>`
     : st === 'learning' ? `<button class="lib-btn sm" onclick="move('${s.id}','playable')">I can play it end to end ✓</button><button class="lib-btn sm ghost" onclick="move('${s.id}','next')">Park</button>`
     : `<button class="lib-btn sm ghost" ${Progress.data.songs[s.id].lastPlayed === today() ? 'disabled' : ''} onclick="playedToday('${s.id}');renderRepRow()">Played it today</button>`;
-  document.getElementById('repRow').innerHTML = `${starHtml(s.id)}<span>${label}</span>${buttons}`;
+  const printBtn = s.chords ? '<button class="lib-btn sm ghost print-btn" onclick="window.print()" title="A4 landscape: guitar on one half, guitarlele on the other, fold down the middle">🖨 Print chords</button>' : '';
+  document.getElementById('repRow').innerHTML = `${starHtml(s.id)}<span>${label}</span>${buttons}${printBtn}`;
 }
 function renderStepDone() {
   const done = Progress.stepsToday(currentSong.id);
@@ -2130,6 +2158,56 @@ function closeMap() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMap(); });
+
+// ── Print sheet ────────────────────────────────────────
+// One A4 landscape page per song: guitar on the left half, guitarlele on the right, so it folds in two.
+// Built on beforeprint, so the Print button and Cmd+P on a song page both get it.
+const PRINT_INK = '#000000';   // every chord in one ink; songMapHtml appends alpha digits, so 6-digit hex
+function printHalfHtml(s, inst) {
+  const data = chordsForInstrument(s.chords, inst);
+  const colors = chordColors(data);
+  Object.keys(colors).forEach(c => { colors[c] = PRINT_INK; });
+  const key = inst === 'guitar' ? s.key : keyForInstrument(s.key, inst);
+  const meta = [s.artist, key && `${inst === 'guitar' ? 'Key' : 'Shapes'} ${key}`, s.bpm && `${s.bpm} BPM`, s.capo && `Capo ${s.capo}`]
+    .filter(Boolean).map(esc).join(' · ');
+  const diagrams = Object.keys(colors).map(n => CHORD_SHAPES[n] ? buildChordSVG(n, CHORD_SHAPES[n]) : '').join('');
+  return `<div class="print-half"><div class="print-fit">
+    <div class="print-inst">${INSTRUMENTS[inst].label}</div>
+    <h2>${esc(s.title)}</h2><div class="print-meta">${meta}</div>
+    <div class="chord-diagrams">${diagrams}</div>
+    ${songMapHtml(data, colors)}
+  </div></div>`;
+}
+// Long songs: shrink both halves by the same factor so each fits its half page.
+// Shrinking reflows the content (chips wrap less), so re-measure until the fit settles.
+const PRINT_FIT = { passes: 4, tolerance: 0.01 };
+function fitPrintSheet(sheet) {
+  sheet.classList.add('measuring');
+  const halves = [...sheet.querySelectorAll('.print-half')];
+  const setZoom = z => halves.forEach(h => { h.firstElementChild.style.zoom = z < 1 ? z.toFixed(3) : ''; });
+  const room = h => { const cs = getComputedStyle(h); return h.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom); };
+  const fitRatio = () => Math.min(...halves.map(h => room(h) / h.firstElementChild.getBoundingClientRect().height));
+  let scale = 1;
+  setZoom(scale);
+  for (let pass = 0; pass < PRINT_FIT.passes; pass++) {
+    const ratio = fitRatio();
+    if (ratio >= 1 && (scale === 1 || ratio < 1 + PRINT_FIT.tolerance * 2)) break;   // fits, with little to gain
+    scale = Math.min(1, scale * ratio * (1 - PRINT_FIT.tolerance));
+    setZoom(scale);
+  }
+  const last = fitRatio();   // the last pass may have grown past the page: never leave it overflowing
+  if (last < 1) setZoom(scale * last * (1 - PRINT_FIT.tolerance));
+  sheet.classList.remove('measuring');
+}
+window.addEventListener('beforeprint', () => {
+  const s = currentSong, onSong = document.getElementById('sessionView').style.display !== 'none';
+  if (!onSong || !s.chords) return;
+  const sheet = document.getElementById('printSheet');
+  sheet.innerHTML = Object.keys(INSTRUMENTS).map(inst => printHalfHtml(s, inst)).join('');
+  fitPrintSheet(sheet);
+  document.body.classList.add('print-song');
+});
+window.addEventListener('afterprint', () => document.body.classList.remove('print-song'));
 
 // ── Session rendering ──────────────────────────────────
 function renderSession(s) {
