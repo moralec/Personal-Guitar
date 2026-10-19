@@ -24,6 +24,8 @@ Three tracks (Beginner, Intermediate, Advanced) × 10 weeks, plus `CANDIDATES` (
 
 Header toggle **Guitar / Guitarlele** transposes steps 4 and 5 a 4th down (see `MEMORY.md`). The header shows BPM, Difficulty (songs.md score, Chords adjusted for the instrument) and one key chip: `Key` on guitar, `Shapes` on guitarlele.
 
+**Print chords** (button on the song page, or Cmd+P there) prints one A4 landscape sheet: guitar half on the left, guitarlele half on the right, each with diagrams and the song map, to fold in two. Built on `beforeprint` from `chordsForInstrument(chords, inst)`; long songs shrink to fit.
+
 ## Building songs automatically (`pipeline/`)
 
 All 68 non-hand-built songs were researched by the pipeline on 2026-10-14 and live in the generated `BUILT` block of `index.html` (merged over the TRACKS stub or CANDIDATES entry with the same id; they show an "Auto-built · check by ear" chip).
