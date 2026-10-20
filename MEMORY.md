@@ -68,6 +68,7 @@ Decisions that constrain new code, corrections received, gotchas. Rewritten as s
 - **Hand-fixing an auto-built song:** edit `pipeline/out/<slug>.json`, re-run `node pipeline/check.js pipeline/out/<slug>.json index.html pipeline/strum/<slug>.json > pipeline/out/<slug>.check.txt`, then `node pipeline/assemble.js` (only that song's BUILT line should change in the diff). Editing the BUILT line directly is undone by the next assemble. (2026-10-16, Tuyo siempre)
 - **The chart's key can differ from the lesson's.** Tuyo siempre was charted in E minor from UG, but the Satori lesson (and LaCuerda's second version) play it in A minor; Carlos spotted it from the video's chord boxes. A different key is not just a transposition: the A-minor chart also had E→E7 and a B7–F–E pre-chorus the Em chart had garbled. When a lesson is set, check its chords against the chart. LaCuerda pages put the chart in a `<pre>`, readable with curl. (2026-10-16)
   - **Superseded 2026-10-19 (Carlos, by ear from the lesson):** the B7–F–E pre-chorus and E→E7 above were wrong too. There is no plain E and no B7: the V chord is E7 throughout, the turnaround is F–E7, the pre-chorus is Dm–G · C–F · Dm · E7, and the lesson plays F as **Fmaj7** (xx3210). Intro = verse = chorus = interlude. A chart site's chords are a starting point; Carlos's ear on the lesson wins.
+  - **2026-10-20:** back to a plain **F**, not Fmaj7 (Carlos's choice; the Fmaj7 diagram stays in `CHORD_SHAPES`). Outro = the verse with its last line (F–E7 · Am) three times, ending on the full Am.
 
 ## Gotchas
 
